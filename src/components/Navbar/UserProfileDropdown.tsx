@@ -1,4 +1,3 @@
-
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
@@ -26,7 +25,7 @@ export default function UserProfileDropdown() {
     setAnchorEl(null);
   };
   const handleLogout = () => {
-    // Logout tıklandığında clearToken fonksiyonunu çağır
+    // Clear auth token when user clicks logout.
     clearToken();
     handleClose();
     window.location.reload();
@@ -34,7 +33,7 @@ export default function UserProfileDropdown() {
   return (
     <React.Fragment>
       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
-        <Tooltip title="Kullanıcı Ayarları">
+        <Tooltip title="User settings">
           <IconButton
             onClick={handleClick}
             size="small"
@@ -85,13 +84,13 @@ export default function UserProfileDropdown() {
         <MenuItem onClick={handleClose}>
           <Avatar /> 
             <Link to='/signup' style={{color:'#44494c', textDecoration:"none"}}>
-                Üye Ol
+                Sign Up
             </Link>
         </MenuItem>
         <MenuItem onClick={handleClose}>
           <Avatar />
           <Link to={`/updateCustomer/${decodedToken?.id}`} style={{color:'#44494c', textDecoration:"none"}}>
-              Hesabım
+              My Account
           </Link>
         </MenuItem>
         <Divider />
@@ -100,7 +99,7 @@ export default function UserProfileDropdown() {
             <PersonAdd fontSize="small" />
           </ListItemIcon>
           <Link to={`/allMyRentals/${decodedToken?.id}`} style={{color:'#44494c', textDecoration:"none"}}>
-              Kiralama Geçmişim
+              Rental History
           </Link>
         </MenuItem>
         <MenuItem onClick={handleClose}>
@@ -113,7 +112,7 @@ export default function UserProfileDropdown() {
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>
-          Çıkış Yap
+          Logout
         </MenuItem>
       </Menu>
     </React.Fragment>

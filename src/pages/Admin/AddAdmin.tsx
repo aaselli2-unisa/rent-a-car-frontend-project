@@ -26,26 +26,26 @@ const AddAdmin = (props: Props) => {
 
   const validationSchema = Yup.object().shape({
     name: Yup.string()
-      .matches(/^[a-zA-ZğüşıöçĞÜŞİÖÇ\s]+$/, 'İsim sadece harflerden oluşmalıdır')
-      .required('İsim giriniz'),
+      .matches(/^[a-zA-Z\s]+$/, 'Name can only contain letters')
+      .required('Enter name'),
     surname: Yup.string()
-      .matches(/^[a-zA-ZğüşıöçĞÜŞİÖÇ\s]+$/, 'Soyisim sadece harflerden oluşmalıdır')
-      .required('Soyisim giriniz'),
-    emailAddress: Yup.string().required('Mail Adresi Giriniz'),
-    password: Yup.string().required('Şifre Giriniz')
+      .matches(/^[a-zA-Z\s]+$/, 'Surname can only contain letters')
+      .required('Enter surname'),
+    emailAddress: Yup.string().required('Enter email address'),
+    password: Yup.string().required('Enter password')
     .matches(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-      'Şifre en az 8 karakter uzunluğunda olmalı, en az bir büyük harf, bir küçük harf, bir rakam ve bir özel karakter içermelidir'),
+      'Password must be at least 8 characters long and include an uppercase letter, a lowercase letter, a number, and a special character'),
     phoneNumber: Yup.string()
-      .matches(/^[0-9]+$/, 'Telefon numarası sadece sayılardan oluşmalıdır')
-      .min(10, 'Telefon numarası 10 hane olmalıdır')
-      .max(10, 'Telefon numarası 10 hane olmalıdır')
-      .required('Telefon numarası giriniz'),
+      .matches(/^[0-9]+$/, 'Phone number can only contain digits')
+      .min(10, 'Phone number must be 10 digits')
+      .max(10, 'Phone number must be 10 digits')
+      .required('Enter phone number'),
     salary: Yup.number()
-      .min(0, 'Maaş en az 0 olmalıdır')
-      .required('Maaş giriniz'),
-    imagePath: Yup.string().required('Fotoğraf Giriniz'),
-    authority: Yup.string().required('Yetki Giriniz'),
+      .min(0, 'Salary must be at least 0')
+      .required('Enter salary'),
+    imagePath: Yup.string().required('Enter photo'),
+    authority: Yup.string().required('Enter authority'),
   })
   const initialValues = {
     name:'',
@@ -71,39 +71,39 @@ const AddAdmin = (props: Props) => {
     <SideBar>
       <div className="container-card">
       <div className="form">
-        <h2 className='h2-card'>Admin Ekleme</h2>
+        <h2 className='h2-card'>Add Admin</h2>
           <Form>
             <div className="row-add-employee">
               <div id='select-block' className="col-md-6" style={{marginTop:'110px'}}>
                 <div className="mb-2">
                   <FormikInput
                     name="name"
-                    label="İsim"
-                    placeHolder="İsim Giriniz."
-                    type='text' 
+                    label="Name"
+                    placeHolder="Enter name."
+                    type='text'
                   />
                 </div>
                 <div className="mb-2">
                   <FormikInput
                     name="surname"
-                    label="Soyisim"
-                    placeHolder="İsim Giriniz."
+                    label="Surname"
+                    placeHolder="Enter surname."
                     type='text'
                   />
                 </div>
                 <div className="mb-2">
                   <FormikInput
                     name="emailAddress"
-                    label="Mail Adresi"
-                    placeHolder="Mail Adresi Giriniz."
+                    label="Email Address"
+                    placeHolder="Enter email address."
                     type='text'
                   />
                 </div>
                 <div className="mb-2">
                   <FormikInput
                     name="password"
-                    label="Şifre Giriniz"
-                    placeHolder="Şifre Giriniz."
+                    label="Password"
+                    placeHolder="Enter password."
                     type='text'
                   />
                 </div>
@@ -112,35 +112,35 @@ const AddAdmin = (props: Props) => {
                 <div className="mb-2">
                   <FormikInput
                     name="phoneNumber"
-                    label="Telefon Numarası"
-                    placeHolder="Telefon Numarası Giriniz."
+                    label="Phone Number"
+                    placeHolder="Enter phone number."
                     type='text'
                   />
                 </div>
                 <div className="mb-2">
                   <FormikInput
                     name="salary"
-                    label="Maaş "
-                    placeHolder="Maaş Giriniz."
+                    label="Salary"
+                    placeHolder="Enter salary."
                     type='number'
                   />
                 </div>
                 <div className="mb-2">
                   <FormikInput
                     name="imagePath"
-                    label="Resim "
-                    placeHolder="Resim Giriniz."
+                    label="Image"
+                    placeHolder="Enter image."
                     type='text'
                   />
                 </div>
                 <div className="mb-2">
                   <FormikInput
                     name="authority"
-                    label="Yetki"
-                    placeHolder="Yetki Giriniz."
+                    label="Authority"
+                    placeHolder="Enter authority."
                   />
                 </div>
-              <Button style={{marginTop:'30px', backgroundColor: "rgb(140,24,24)", color:"white", width:"200px" , borderRadius:"10px" }} type='submit'>Ekle</Button>
+              <Button style={{marginTop:'30px', backgroundColor: "rgb(140,24,24)", color:"white", width:"200px" , borderRadius:"10px" }} type='submit'>Add</Button>
               </div>
             </div>
         </Form>

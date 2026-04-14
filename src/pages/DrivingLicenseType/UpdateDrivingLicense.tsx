@@ -41,14 +41,14 @@ const UpdateDrivingLicenseType = () => {
 
   const validationSchema = Yup.object().shape({
     name: Yup.string()
-      .matches(/^[A-Z]{1,3}$/, "Geçersiz ehliyet tipi")
-      .required("Ehliyet tipi gerekli"),
+      .matches(/^[A-Z]{1,3}$/, "Invalid driving license type")
+      .required("Driving license type is required"),
     description: Yup.string()
-      .max(30, "En fazla 30 karakter girebilirsiniz")
-      .required("Açıklama gerekli"),
+      .max(30, "You can enter at most 30 characters")
+      .required("Description is required"),
     licenseLevel: Yup.number()
-      .min(0, "Lisans seviyesi en az 0 olmalıdır")
-      .required("Lisans seviyesi gerekli"),
+      .min(0, "License level must be at least 0")
+      .required("License level is required"),
   });
 
   const initialValues = {
@@ -61,12 +61,12 @@ const UpdateDrivingLicenseType = () => {
   const handleUpdateDrivingLicenseType = async (values: any) => {
     try {
       const response = await dispatch(updateDrivingLicenseType(values));
-      // İşlem başarılı olduğunda
-      setSuccessMessage("İşlem başarıyla tamamlandı");
+      // On successful operation
+      setSuccessMessage("Operation completed successfully");
     } catch (error) {
       console.error("Error updating shift type: ", error);
-      // Hata durumunda
-      setErrorMessage("İşlem sırasında bir hata oluştu");
+      // In case of error
+      setErrorMessage("An error occurred during the operation");
     }
   };
 
@@ -75,7 +75,7 @@ const UpdateDrivingLicenseType = () => {
     <SideBar>
     <div className="container-card">
       <div className="form">
-        <h2 className="h2-card">Ehliyet Tipi Güncelle</h2>
+        <h2 className="h2-card">Update Driving License Type</h2>
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
@@ -94,24 +94,24 @@ const UpdateDrivingLicenseType = () => {
                   <div className="mb-2">
                     <FormikInput
                       name="name"
-                      label="Ehliyet Tipi"
-                      placeHolder="Ehliyet Tipi Giriniz."
+                      label="Driving License Type"
+                      placeHolder="Enter driving license type."
                       type="text"
                     />
                   </div>
                   <div className="mb-2">
                     <FormikInput
                       name="description"
-                      label="Açıklama"
-                      placeHolder="Açıklama Giriniz."
+                      label="Description"
+                      placeHolder="Enter description."
                       type="text"
                     />
                   </div>
                   <div className="mb-2">
                     <FormikInput
                       name="licenseLevel"
-                      label="Seviye "
-                      placeHolder="Seviye Giriniz."
+                      label="Level"
+                      placeHolder="Enter level."
                       type="number"
                     />
                   </div>
@@ -126,7 +126,7 @@ const UpdateDrivingLicenseType = () => {
                     }}
                     type="submit"
                   >
-                    Güncelle
+                    Update
                   </Button>
                 </div>
               </div>

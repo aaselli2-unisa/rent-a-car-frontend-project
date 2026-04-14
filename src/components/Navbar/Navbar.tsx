@@ -40,7 +40,7 @@ const Navbar = () => {
          
             <li className='nav-item'>
               <Link to='/' className='nav-links'>
-                Ana Sayfa
+                Home
               </Link>
             </li>
           {decodedToken?.role?.some(role => role === 'ADMIN') && (
@@ -52,25 +52,25 @@ const Navbar = () => {
           )}
           <li className='nav-item'>
             <Link to='/about' className='nav-links'>
-              Hakkımızda
+              About Us
             </Link>
           </li>
           <li className='nav-item'>
             <Link to='/contact' className='nav-links'>
-              İletişim
+              Contact Us
             </Link>
           </li>
           {!decodedToken?.id && (
           <li className='nav-item nav-item-right'>
             <Link to='/login' className='nav-links nav-links-btn'>
-              Giriş Yap
+              Login
             </Link>
           </li>
           )}
           {!decodedToken?.id && (
             <li className='nav-item nav-item-right'>
               <Link to='/signup' className='nav-links nav-links-btn'>
-                Üye Ol
+                Sign Up
               </Link>
             </li>
           )}

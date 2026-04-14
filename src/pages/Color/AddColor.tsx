@@ -22,19 +22,19 @@ const AddColor = (props: Props) => {
   const handleAddColor= (values: any) => {
     try{
       dispatch(addColor(values));
-      setSuccessMessage("İşlem başarıyla tamamlandı");
+      setSuccessMessage("Operation completed successfully");
     } catch (error) {
       console.error("Error updating color: ", error);
-      // Hata durumunda
-      setErrorMessage("İşlem sırasında bir hata oluştu");
+      // In case of error
+      setErrorMessage("An error occurred during the operation");
     }
      
   };
   const validationSchema = Yup.object().shape({
     colorEntityName: Yup.string()
-      .min(2, "Renk en az 2 karakter olmalıdır")
-      .matches(/^[a-zA-ZğüşıöçĞÜŞİÖÇ\s]+$/, "Renk sadece harflerden oluşmalıdır")
-      .required("Renk Giriniz"),
+      .min(2, "Color must be at least 2 characters")
+      .matches(/^[a-zA-Z\s]+$/, "Color can only contain letters")
+      .required("Enter color"),
   });
   const initialValues = {
     colorEntityName: "",
@@ -50,18 +50,18 @@ const AddColor = (props: Props) => {
     <SideBar>
       <div className="container-card">
       <div className="form">
-        <h2 className="h2-card">Renk Ekleme</h2>
+        <h2 className="h2-card">Add Color</h2>
         <Form>
           <div className="row">
             <div id="select-block" className="col-md-6" style={{marginTop:'110px'}}>
               <div className="mb-2">
                 <FormikInput
                   name="colorEntityName"
-                  label="Renk "
-                  placeHolder="Renk Giriniz."
+                  label="Color"
+                  placeHolder="Enter color."
                   type="text"
                 />
-                 <Button style={{marginTop:'30px', backgroundColor: "rgb(140,24,24)", color:"white", width:"200px" , borderRadius:"10px", marginLeft:"140px" }} type='submit'>Ekle</Button>
+                 <Button style={{marginTop:'30px', backgroundColor: "rgb(140,24,24)", color:"white", width:"200px" , borderRadius:"10px", marginLeft:"140px" }} type='submit'>Add</Button>
               </div>
             </div>
           </div>

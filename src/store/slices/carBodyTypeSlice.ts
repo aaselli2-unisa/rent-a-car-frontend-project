@@ -39,7 +39,7 @@ export const addCarBodyType = createAsyncThunk(
   async (newCarBodyTypeData: AddCarBodyTypeModel, thunkAPI) => {
     try {
       const addedCarBodyType = await carBodyTypeService.add(newCarBodyTypeData);
-      // Burada eklenen car bodey typeı geri dönebilirsiniz
+      // You can return the added car body type here
       console.log(addedCarBodyType);
 
       return addedCarBodyType.data;
@@ -126,7 +126,7 @@ const carBodyTypeSlice = createSlice({
       state.carBodyTypes.push(action.payload);
     });
     builder.addCase(addCarBodyType.rejected, (state,action) => { 
-      state.error = action.error.message || "Bir hata oluştu.";
+      state.error = action.error.message || "An error occurred.";
     });
 
     /*-----------------------------------------------------------------*/
@@ -137,7 +137,7 @@ const carBodyTypeSlice = createSlice({
       state.carBodyTypes = [];
     });
     builder.addCase(updateCarBodyType.rejected, (state,action) => {
-      state.error = action.error.message || "Bir hata oluştu.";
+      state.error = action.error.message || "An error occurred.";
      });
 
     /*-----------------------------------------------------------------*/

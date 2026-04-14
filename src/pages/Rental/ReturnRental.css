@@ -4,37 +4,37 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Sayfanın tamamını kaplar */
+    height: 100vh; /* Covers the full page */
   }
   
   .return-rental-form {
-    max-width: 90%; /* Formun en fazla genişliği */
-    overflow-x: auto; /* Yatay kaydırma çubuğunu görüntüler */
-    text-align: center; /* Input alanlarını ortalar */
+    max-width: 90%; /* Maximum form width */
+    overflow-x: auto; /* Shows horizontal scrollbar when needed */
+    text-align: center; /* Centers input fields */
   }
   
 
    label {
-    display: block; /* Labelı blok eleman yapar */
-    margin-bottom: 5px; /* Label ile input arasına boşluk ekler */
+    display: block; /* Makes label a block element */
+    margin-bottom: 5px; /* Adds spacing between label and input */
     color: aliceblue;
   }
   
    input {
-    width: 40%; /* Input alanlarını genişletir */
-    padding: 8px 10px; /* Input alanlarının iç boşluğunu ayarlar */
-    font-size: 14px; /* Yazı tipi boyutunu ayarlar */
+    width: 40%; /* Expands input fields */
+    padding: 8px 10px; /* Sets input inner spacing */
+    font-size: 14px; /* Sets font size */
     background-color: #121212;
     color: aliceblue;
     border-radius: 20px;
   }
   
   .return-rental-action {
-    margin-top: 20px; /* Butonlar ile diğer içerik arasına boşluk ekler */
+    margin-top: 20px; /* Adds spacing above buttons */
   }
   
   .return-rental-action button {
-    margin-right: 10px; /* Butonlar arasına boşluk ekler */
+    margin-right: 10px; /* Adds spacing between buttons */
   }
 
   .return-button{

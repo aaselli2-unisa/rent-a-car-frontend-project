@@ -32,7 +32,7 @@ const DeleteDiscountCode = (props: Props) => {
         <div id='select-block' className="col-md-6">
   
           <div className="mb-2">
-            <label htmlFor="selectDiscountCode">İndirim Kuponu Seç</label>
+            <label htmlFor="selectDiscountCode">Select Discount Coupon</label>
             <select className="form-select" id="discountCodeSelect" value={selectedDiscountCode || ''} onChange={handleDiscountCodeChange}>
               <option value="" disabled>
   

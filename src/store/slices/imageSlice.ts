@@ -23,7 +23,7 @@ export const addCarImages = createAsyncThunk(
         (error.response.data.response.errorCode === 1 ||
           error.response.data.response.details[0])
       ) {
-        throw "Resim boyutu maximum boyutu aşmıştır.Daha küçük boyutlu bir resim yükleyiniz.";
+        throw "The image size exceeds the maximum limit. Please upload a smaller image.";
       }
     }
   }
@@ -47,7 +47,7 @@ export const addUserImages = createAsyncThunk(
         (error.response.data.response.errorCode === 1 ||
           error.response.data.response.details[0])
       ) {
-        throw "Resim boyutu maximum boyutu aşmıştır.Daha küçük boyutlu bir resim yükleyiniz.";
+        throw "The image size exceeds the maximum limit. Please upload a smaller image.";
       }
     }
   }
@@ -71,7 +71,7 @@ export const addBrandImages = createAsyncThunk(
         (error.response.data.response.errorCode === 1 ||
           error.response.data.response.details[0])
       ) {
-        throw "Resim boyutu maximum boyutu aşmıştır.Daha küçük boyutlu bir resim yükleyiniz.";
+        throw "The image size exceeds the maximum limit. Please upload a smaller image.";
       }
     }
   }
@@ -88,7 +88,7 @@ const imageSlice = createSlice({
       state.images.push(action.payload);
     });
     builder.addCase(addCarImages.rejected, (state, action) => {
-      state.error = action.error.message || "Bir hata oluştu.";
+      state.error = action.error.message || "An error occurred.";
     });
 
     builder.addCase(addUserImages.pending, (state) => {});
@@ -97,7 +97,7 @@ const imageSlice = createSlice({
       state.images.push(action.payload);
     });
     builder.addCase(addUserImages.rejected, (state, action) => {
-      state.error = action.error.message || "Bir hata oluştu.";
+      state.error = action.error.message || "An error occurred.";
     });
 
     builder.addCase(addBrandImages.pending, (state) => {});
@@ -106,7 +106,7 @@ const imageSlice = createSlice({
       state.images.push(action.payload);
     });
     builder.addCase(addBrandImages.rejected, (state, action) => {
-      state.error = action.error.message || "Bir hata oluştu.";
+      state.error = action.error.message || "An error occurred.";
     });
   },
 });

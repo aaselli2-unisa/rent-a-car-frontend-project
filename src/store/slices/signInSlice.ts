@@ -1,4 +1,3 @@
-
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { SignInModel } from "../../models/Requests/SignIn/SignInModel";
 import SignInService, { ErrorResponse } from "../../services/signInService";
@@ -20,8 +19,8 @@ export const addSignIn = createAsyncThunk(
           const addedSignIn = await service.add(addSignInData);
           const token = addedSignIn.data.response.token;
           localStorage.setItem("token", token);
-          return addedSignIn.data.response; // Response'u doğrudan döndürüyoruz
-      } 
+          return addedSignIn.data.response; // Return the response directly
+      }
       catch (error: any) {
        
         if (error && error.response && (error.response.data.response.errorCode === 1 || error.response.data.response.errorCode === 1001)) {
@@ -66,7 +65,7 @@ const signInSlice = createSlice({
       });
       builder.addCase(addSignIn.rejected, (state, action) => {
       
-        state.error = action.error.message || "Bir hata oluştu.";
+        state.error = action.error.message || "An error occurred.";
       });
 
       builder.addCase(isUserTrue.pending, (state) => {});
@@ -74,7 +73,7 @@ const signInSlice = createSlice({
         state.signIn.push(action.payload);
       });
       builder.addCase(isUserTrue.rejected, (state, action) => {
-        state.error = action.error.message || "Bir hata oluştu.";
+        state.error = action.error.message || "An error occurred.";
       });
     },
   });

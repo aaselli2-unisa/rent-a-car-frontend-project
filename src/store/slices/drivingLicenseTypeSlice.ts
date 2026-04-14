@@ -9,7 +9,17 @@ export const fetchDrivingLicenseTypes = createAsyncThunk(
     async (_, thunkAPI) => {
         try {
             const allDrivingLicenseTypes = await drivingLicenseTypeService.getAll();
-            return allDrivingLicenseTypes.data.response;
+            const responseData = allDrivingLicenseTypes.data?.response;
+
+            if (Array.isArray(responseData)) {
+                return responseData;
+            }
+
+            if (Array.isArray((responseData as any)?.items)) {
+                return (responseData as any).items;
+            }
+
+            return [];
 
         } catch (error) {
             console.error("Error fetching allDrivingLicenseTypes:", error);
@@ -88,15 +98,22 @@ export const deleteDrivingLicenseType = createAsyncThunk(
 
 const drivingLicenseTypeSlice = createSlice({
     name: "drivingLicenseType",
-    initialState: { drivingLicenseTypes: [] as any[], error: null as string | null},
+    initialState: { drivingLicenseTypes: [] as any[], error: null as string | null, isLoading: false },
     reducers: {},
     extraReducers: (builder) => {
 
-        builder.addCase(fetchDrivingLicenseTypes.pending, (state) => { });
-        builder.addCase(fetchDrivingLicenseTypes.fulfilled, (state, action) => {
-            state.drivingLicenseTypes = action.payload;
+        builder.addCase(fetchDrivingLicenseTypes.pending, (state) => {
+            state.isLoading = true;
+            state.error = null;
         });
-        builder.addCase(fetchDrivingLicenseTypes.rejected, (state) => { });
+        builder.addCase(fetchDrivingLicenseTypes.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.drivingLicenseTypes = Array.isArray(action.payload) ? action.payload : [];
+        });
+        builder.addCase(fetchDrivingLicenseTypes.rejected, (state, action) => {
+            state.isLoading = false;
+            state.error = action.error.message || "Could not load driving license types.";
+        });
 
         /*-----------------*/
 
@@ -114,7 +131,7 @@ const drivingLicenseTypeSlice = createSlice({
             state.drivingLicenseTypes.push(action.payload);
         });
         builder.addCase(addDrivingLicenseType.rejected, (state, action) => { 
-            state.error = action.error.message || "Bir hata oluştu.";
+            state.error = action.error.message || "An error occurred.";
         });
 
         /*-----------------*/
@@ -125,7 +142,7 @@ const drivingLicenseTypeSlice = createSlice({
             state.drivingLicenseTypes = [];
         });
         builder.addCase(updateDrivingLicenseType.rejected, (state, action) => {
-            state.error = action.error.message || "Bir hata oluştu.";
+            state.error = action.error.message || "An error occurred.";
          });
 
         /*-----------------*/

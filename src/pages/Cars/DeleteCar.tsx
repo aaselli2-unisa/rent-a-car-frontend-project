@@ -37,7 +37,7 @@ const DeleteCar = (props: Props) => {
         >
           <div id="select-block" className="col-md-6">
             <div className="mb-2">
-              <label htmlFor="selectCar">Araç Seç</label>
+              <label htmlFor="selectCar">Select Car</label>
               <select
                 className="form-select"
                 id="carSelect"

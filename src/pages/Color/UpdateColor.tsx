@@ -43,9 +43,9 @@ const UpdateColor = () => {
 
   const validationSchema = Yup.object().shape({
     name: Yup.string()
-      .required("Renk giriniz.")
-      .min(2, 'Renk en az 2 karakter olmalıdır')
-      .matches(/^[a-zA-ZğüşıöçĞÜŞİÖÇ\s]+$/, 'Renk sadece harflerden oluşmalıdır')
+      .required("Enter color.")
+      .min(2, 'Color must be at least 2 characters')
+      .matches(/^[a-zA-Z\s]+$/, 'Color can only contain letters')
   });
 
   const initialValues = {
@@ -56,12 +56,12 @@ const UpdateColor = () => {
   const handleUpdateColor = async (values: any) => {
     try {
       const response = await dispatch(updateColor(values));
-      // İşlem başarılı olduğunda
-      setSuccessMessage("İşlem başarıyla tamamlandı");
+      // On successful operation
+      setSuccessMessage("Operation completed successfully");
     } catch (error) {
       console.error("Error updating color: ", error);
-      // Hata durumunda
-      setErrorMessage("İşlem sırasında bir hata oluştu");
+      // In case of error
+      setErrorMessage("An error occurred during the operation");
     }
   };
   
@@ -70,7 +70,7 @@ const UpdateColor = () => {
     <SideBar>
     <div className="container-card">
       <div className="form">
-        <h2 className="h2-card">Renk Güncelle</h2>
+        <h2 className="h2-card">Update Color</h2>
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
@@ -91,8 +91,8 @@ const UpdateColor = () => {
                   <div className="mb-2">
                     <FormikInput
                       name="name"
-                      label="Renk"
-                      placeHolder="Renk Giriniz."
+                      label="Color"
+                      placeHolder="Enter color."
                       type="text"
                     />
                   </div>
@@ -107,7 +107,7 @@ const UpdateColor = () => {
                     }}
                     type="submit"
                   >
-                    Güncelle
+                    Update
                   </Button>
                 </div>
               </div>

@@ -47,9 +47,9 @@ const UpdateVehicleStatus = () => {
 
   const validationSchema = Yup.object().shape({
     name: Yup.string()
-      .required("Araç durumu giriniz.")
-      .min(2, 'Araç durumu en az 2 karakter olmalıdır')
-      .matches(/^[a-zA-ZğüşıöçĞÜŞİÖÇ\s]+$/, 'Araç durumu sadece harflerden oluşmalıdır'),
+      .required("Enter vehicle status.")
+      .min(2, 'Vehicle status must be at least 2 characters')
+      .matches(/^[a-zA-Z\s]+$/, 'Vehicle status can only contain letters'),
   });
 
   const initialValues = {
@@ -60,11 +60,11 @@ const UpdateVehicleStatus = () => {
   const handleUpdateVehicleStatus = async (values: any) => {
     try {
     const response = await dispatch(updateVehicleStatus(values))
-    setSuccessMessage("İşlem başarıyla tamamlandı");
+    setSuccessMessage("Operation completed successfully");
     } catch (error) {
       console.error("Error updating shift type: ", error);
-      // Hata durumunda
-      setErrorMessage("İşlem sırasında bir hata oluştu");
+      // In case of error
+      setErrorMessage("An error occurred during the operation");
     }
   };
 
@@ -72,7 +72,7 @@ const UpdateVehicleStatus = () => {
     <SideBar>
     <div className="container-card">
       <div className="form">
-        <h2 className="h2-card">Araç Durumu Güncelle</h2>
+        <h2 className="h2-card">Update Vehicle Status</h2>
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
@@ -92,8 +92,8 @@ const UpdateVehicleStatus = () => {
                   <div className="mb-2">
                     <FormikInput
                       name="name"
-                      label="Araç Durumu"
-                      placeHolder="Araç Durumu Giriniz."
+                      label="Vehicle Status"
+                      placeHolder="Enter vehicle status."
                       type="text"
                     />
                   </div>
@@ -108,7 +108,7 @@ const UpdateVehicleStatus = () => {
                     }}
                     type="submit"
                   >
-                    Güncelle
+                    Update
                   </Button>
                 </div>
               </div>

@@ -51,10 +51,10 @@ const Login: React.FC = () => {
       );
       navigate('/');
     } catch (error) {
-      // Giriş işlemi başarısız olduğunda hatayı yakala
-      console.error("Giriş işlemi başarısız oldu: ", error);
-      // Hata mesajını ayarla
-      setErrorMessage("Giriş işlemi başarısız oldu. Lütfen bilgilerinizi kontrol edin.");
+      // Catch errors when login fails
+      console.error("Login failed: ", error);
+      // Set error message
+      setErrorMessage("Login failed. Please check your credentials.");
     }
   };
 
@@ -62,12 +62,12 @@ const Login: React.FC = () => {
 
   const validationSchema = Yup.object().shape({
     email: Yup.string()
-      .email("Geçerli bir e-posta adresi giriniz")
-      .required("E-posta adresi boş geçilemez"),
-    password: Yup.string().required("Şifre boş geçilemez"),
+      .email("Enter a valid email address")
+      .required("Email address is required"),
+    password: Yup.string().required("Password is required"),
     /* .matches(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-      'Şifre en az 8 karakter uzunluğunda olmalı, en az bir büyük harf, bir küçük harf, bir rakam ve bir özel karakter içermelidir'
+      'Password must be at least 8 characters long and include an uppercase letter, a lowercase letter, a number, and a special character'
     ), */
   });
 
@@ -83,7 +83,7 @@ const Login: React.FC = () => {
           <Container maxWidth="sm">
             <Grid container spacing={2}>
               <Grid item xs={12}>
-                <h2 className="h2-card">Giriş Yap</h2>
+                <h2 className="h2-card">Login</h2>
                 <Formik
                   initialValues={initialValues}
                   validationSchema={validationSchema}
@@ -96,7 +96,7 @@ const Login: React.FC = () => {
                     <Form>
                       <Autocomplete
                         label=""
-                        placeholder="Email adresiniz"
+                        placeholder="Your email address"
                         value={values.email}
                         onChange={(value) =>
                           setFieldValue("email", value || "")
@@ -120,7 +120,7 @@ const Login: React.FC = () => {
                         }) => (
                           <div>
                             <PasswordInput
-                              placeholder="Şifre"
+                              placeholder="Password"
                               label=""
                               value={field.value}
                               onChange={(event) => {
@@ -139,7 +139,7 @@ const Login: React.FC = () => {
                         )}
                       </Field>
                       <button type="submit" className="button3">
-                        Giriş Yap
+                        Login
                       </button>
                     </Form>
                   )}

@@ -24,7 +24,7 @@ const AddEmployee = (props: Props) => {
   const [file, setFile] = useState<File | undefined>();
   const handleAddEmployee = async (values: any) => {
     if (typeof file === "undefined") {
-      setImageError("Lütfen bir resim seçiniz");
+      setImageError("Please select an image");
       return;
     }
 
@@ -40,43 +40,43 @@ const AddEmployee = (props: Props) => {
         const userImageEntityId = imageResponse.payload;
         const updatedValues = { ...values, userImageEntityId };
         const response = await dispatch(addEmployee(updatedValues));
-        setSuccessMessage("İşlem başarıyla tamamlandı");
+        setSuccessMessage("Operation completed successfully");
       }
     } catch (error) {
       console.error("Error : ", error);
-      // Hata durumunda
-      setErrorMessage("İşlem sırasında bir hata oluştu");
+      // In case of error
+      setErrorMessage("An error occurred during the operation");
     }
     window.location.href = "/adminPanel/employees";
   };
   const validationSchema = Yup.object().shape({
     name: Yup.string()
       .matches(
-        /^[a-zA-ZğüşıöçĞÜŞİÖÇ\s]+$/,
-        "İsim sadece harflerden oluşmalıdır"
+        /^[a-zA-Z\s]+$/,
+        "Name can only contain letters"
       )
-      .required("İsim giriniz"),
+      .required("Enter name"),
     surname: Yup.string()
       .matches(
-        /^[a-zA-ZğüşıöçĞÜŞİÖÇ\s]+$/,
-        "Soyisim sadece harflerden oluşmalıdır"
+        /^[a-zA-Z\s]+$/,
+        "Surname can only contain letters"
       )
-      .required("Soyisim giriniz"),
-    emailAddress: Yup.string().required("Mail Adresi Giriniz"),
+      .required("Enter surname"),
+    emailAddress: Yup.string().required("Enter email address"),
     password: Yup.string()
-      .required("Şifre Giriniz")
+      .required("Enter password")
       .matches(
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-        "Şifre en az 8 karakter uzunluğunda olmalı, en az bir büyük harf, bir küçük harf, bir rakam ve bir özel karakter içermelidir"
+        "Password must be at least 8 characters long and include an uppercase letter, a lowercase letter, a number, and a special character"
       ),
     phoneNumber: Yup.string()
-      .matches(/^[0-9]+$/, "Telefon numarası sadece sayılardan oluşmalıdır")
-      .min(10, "Telefon numarası 10 hane olmalıdır")
-      .max(10, "Telefon numarası 10 hane olmalıdır")
-      .required("Telefon numarası giriniz"),
+      .matches(/^[0-9]+$/, "Phone number can only contain digits")
+      .min(10, "Phone number must be 10 digits")
+      .max(10, "Phone number must be 10 digits")
+      .required("Enter phone number"),
     salary: Yup.number()
-      .min(0, "Maaş en az 0 olmalıdır")
-      .required("Maaş giriniz"),
+      .min(0, "Salary must be at least 0")
+      .required("Enter salary"),
   });
   const initialValues = {
     name: "",
@@ -95,8 +95,8 @@ const AddEmployee = (props: Props) => {
       setFile(target.files[0]);
       setImageError("");
     } else {
-      // Eğer resim seçilmediyse hata mesajını ayarla
-      setImageError("Lütfen bir resim seçiniz");
+      // Set an error message if image is not selected
+      setImageError("Please select an image");
     }
   };
   return (
@@ -111,7 +111,7 @@ const AddEmployee = (props: Props) => {
       <SideBar>
         <div className="container-card">
           <div className="form">
-            <h2 className="h2-card">Çalışan Ekleme</h2>
+            <h2 className="h2-card">Add Employee</h2>
             <Form>
               <div className="row-add-employee">
                 <div
@@ -122,32 +122,32 @@ const AddEmployee = (props: Props) => {
                   <div className="mb-2">
                     <FormikInput
                       name="name"
-                      label="İsim "
-                      placeHolder="İsim Giriniz."
+                      label="Name"
+                      placeHolder="Enter name."
                       type="text"
                     />
                   </div>
                   <div className="mb-2">
                     <FormikInput
                       name="surname"
-                      label="Soyisim "
-                      placeHolder="İsim Giriniz."
+                      label="Surname"
+                      placeHolder="Enter surname."
                       type="text"
                     />
                   </div>
                   <div className="mb-2">
                     <FormikInput
                       name="emailAddress"
-                      label="Mail Adresi "
-                      placeHolder="Mail Adresi Giriniz."
+                      label="Email Address"
+                      placeHolder="Enter email address."
                       type="text"
                     />
                   </div>
                   <div className="mb-2">
                     <FormikInput
                       name="password"
-                      label="Şifre "
-                      placeHolder="Şifre Giriniz."
+                      label="Password"
+                      placeHolder="Enter password."
                       type="text"
                     />
                   </div>
@@ -160,16 +160,16 @@ const AddEmployee = (props: Props) => {
                   <div className="mb-2">
                     <FormikInput
                       name="phoneNumber"
-                      label="Telefon Numarası "
-                      placeHolder="Telefon Numarası Giriniz."
+                      label="Phone Number"
+                      placeHolder="Enter phone number."
                       type="text"
                     />
                   </div>
                   <div className="mb-2">
                     <FormikInput
                       name="salary"
-                      label="Maaş "
-                      placeHolder="Maaş Giriniz."
+                      label="Salary"
+                      placeHolder="Enter salary."
                       type="number"
                     />
                   </div>
@@ -189,7 +189,7 @@ const AddEmployee = (props: Props) => {
                     }}
                     type="submit"
                   >
-                    Ekle
+                    Add
                   </Button>
                 </div>
               </div>

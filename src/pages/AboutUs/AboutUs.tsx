@@ -11,12 +11,12 @@ const AboutUs = (props: Props) => {
          <div className="form">
         <div className="rent-a-car-page">
             <div className='hakkimizda'>
-                <h2 className='h2-card'>HAKKIMIZDA</h2> <br />
-                <p>ExtendRent, şehrinizin güvenilir ve samimi araç kiralama hizmeti sağlayıcısıdır. 2022 yılından beri sektörde liderliği ve müşteri memnuniyetini ön planda tutan yaklaşımıyla hizmet veren firmamız, müşterilerimize rahat ve konforlu bir seyahat deneyimi sunmayı amaçlamaktadır.
+                <h2 className='h2-card'>ABOUT US</h2> <br />
+                <p>ExtendRent is your city's reliable and friendly car rental service provider. Since 2022, our company has focused on leadership in the sector and customer satisfaction, aiming to offer customers a comfortable and convenient travel experience.
 
-                    Müşterilerimizin ihtiyaçlarını anlamak ve onlara en uygun araçları sunmak için çaba gösteriyoruz. Geniş araç filomuz ve uygun fiyat politikamızla müşterilerimizin her türlü talebini karşılamak için buradayız.
+                    We work hard to understand our customers' needs and offer the most suitable vehicles. With our wide vehicle fleet and fair pricing policy, we are here to meet all customer demands.
 
-                    Ekibimizdeki deneyimli ve uzman personelimiz, her adımda müşterilerimize yardımcı olmak ve onların seyahatlerini sorunsuz hale getirmek için çalışıyor. Müşteri memnuniyetini en üst düzeyde tutarak, ExtendRent olarak müşterilerimize güvenilir, kaliteli ve ekonomik bir araç kiralama deneyimi sunuyoruz.
+                    Our experienced and expert team supports customers at every step to make their journeys smooth. By keeping customer satisfaction at the highest level, ExtendRent provides a reliable, high-quality, and affordable car rental experience.
 </p>
             </div> 
             <div className="row">
@@ -24,23 +24,23 @@ const AboutUs = (props: Props) => {
                     <img className='carImage car1' src={musteri} alt='car-image' />
                 </div>
                 <div className="right-column">
-                    <h4>MİSYONUMUZ</h4>
+                    <h4>OUR MISSION</h4>
                     <p>
-                        Misyonumuz, müşterilerimize güvenilir, uygun fiyatlı ve kaliteli araç kiralama hizmetleri sunarak seyahatlerini kolaylaştırmak ve memnuniyetlerini en üst düzeye çıkarmaktır. Küçük bir aile şirketi olarak, her müşterimizi özel hissettirmek ve ihtiyaçlarına özenle yanıt vermek en önemli önceliğimizdir. </p> <br />
+                        Our mission is to make travel easier and maximize customer satisfaction by providing reliable, affordable, and high-quality car rental services. As a small family business, our top priority is to make every customer feel valued and respond to their needs with care. </p> <br />
 
-                    <h4>VİZYONUMUZ</h4>
+                    <h4>OUR VISION</h4>
                     <p>
-                        Vizyonumuz, Rent A Car olarak müşterilerimizin seyahat deneyimlerini iyileştirmek ve onlara en iyi hizmeti sunmak için sürekli olarak çaba göstermektir. Tek şubemizle başladık, ancak gelecekte daha fazla şube açarak daha geniş bir müşteri kitlesine ulaşmayı hedefliyoruz. Sektördeki yeniliklere açık olup, teknolojiyi kullanarak hizmet kalitemizi artırmak istiyoruz.
+                        Our vision as a Rent A Car company is to continuously improve our customers' travel experience and provide the best service. We started with one branch, but in the future we aim to reach a wider customer base by opening more branches. We stay open to innovation and want to improve service quality by using technology.
                     </p>
                 </div>
             </div>
             <div className="row">
                 <div className="left-column">
-                    <h4>DEĞERLERİMİZ</h4>
-                    <p>Müşteri Memnuniyeti: Her zaman müşterilerimizin memnuniyetini ön planda tutuyoruz.
-                        Güvenilirlik: Müşterilerimize güvenilir ve dürüst hizmet sunmaya özen gösteriyoruz.
-                        Esneklik: Müşterilerimizin taleplerine esnek bir şekilde yanıt veriyoruz ve onların ihtiyaçlarına uygun çözümler sunuyoruz.
-                        Toplumsal Sorumluluk: Topluma ve çevreye duyarlı bir şekilde faaliyet göstermeyi ve yerel topluluklara destek olmayı önemsiyoruz.
+                    <h4>OUR VALUES</h4>
+                    <p>Customer Satisfaction: We always prioritize customer satisfaction.
+                        Reliability: We are committed to providing reliable and honest service.
+                        Flexibility: We respond to customer requests flexibly and offer solutions tailored to their needs.
+                        Social Responsibility: We care about operating with social and environmental awareness and supporting local communities.
                         </p>
                 </div>
                 <div className="right-column right1">

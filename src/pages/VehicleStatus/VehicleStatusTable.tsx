@@ -113,7 +113,7 @@ const VehicleStatusTable: React.FC = () => {
                 case 'changePage':
                     changePage(tableState.page, tableState.sortOrder);
                     break;
-                case 'changeRowsPerPage': // Yeni sayfa sayısını işlemek için case eklendi
+                case 'changeRowsPerPage': // Added case to handle new page size
                     changeRowsPerPage(tableState.rowsPerPage, tableState.page);
                     break;
                 case 'sort':
@@ -150,7 +150,7 @@ const VehicleStatusTable: React.FC = () => {
 
     return (
         <div className="container-card">
-        <h2 className="h2-card">ARAÇ DURUMU</h2>
+        <h2 className="h2-card">VEHICLE STATUS</h2>
         <div className="form">
             <MUIDataTable
                 title={
@@ -180,7 +180,7 @@ const VehicleStatusTable: React.FC = () => {
                     },
                     {
                         name: "name",
-                        label: "ARAÇ DURUMU",
+                        label: "VEHICLE STATUS",
                         options: {
                             customHeadRender: (columnMeta: MUIDataTableColumn) => (
                                 <th style={{ textAlign: "center", borderBottom: "1px solid rgba(224, 224, 224, 1)" }}>{columnMeta.label}</th>
@@ -192,7 +192,7 @@ const VehicleStatusTable: React.FC = () => {
                     },
                     {
                         name: "deleted",
-                        label: "SİLİNEN",
+                        label: "DELETED",
                         options: {
                             customHeadRender: (columnMeta: MUIDataTableColumn) => (
                                 <th style={{ textAlign: "center", borderBottom: "1px solid rgba(224, 224, 224, 1)" }}>{columnMeta.label}</th>

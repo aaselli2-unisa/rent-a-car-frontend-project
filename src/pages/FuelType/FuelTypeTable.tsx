@@ -154,7 +154,7 @@ const FuelTypeTable: React.FC = () => {
 
   return (
     <div className="container-card">
-    <h2 className="h2-card"> YAKIT TİPİ</h2>
+    <h2 className="h2-card"> FUEL TYPE</h2>
     <div className="form">
       <MUIDataTable
         title={
@@ -184,7 +184,7 @@ const FuelTypeTable: React.FC = () => {
           },
           {
             name: "name",
-            label: "YAKIT TİPİ",
+            label: "FUEL TYPE",
             options: {
               customHeadRender: (columnMeta: MUIDataTableColumn) => (
                 <th style={{ textAlign: "center",borderBottom:"1px solid rgba(224, 224, 224, 1)" }}>{columnMeta.label}</th>
@@ -196,7 +196,7 @@ const FuelTypeTable: React.FC = () => {
           },
           {
             name: "deleted",
-            label: "SİLİNEN",
+            label: "DELETED",
             options: {
                 customHeadRender: (columnMeta: MUIDataTableColumn) => (
                     <th style={{ textAlign: "center", borderBottom: "1px solid rgba(224, 224, 224, 1)" }}>{columnMeta.label}</th>

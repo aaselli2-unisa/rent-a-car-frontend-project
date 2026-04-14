@@ -13,7 +13,7 @@ export const fetchCustomers = createAsyncThunk(
       return allCustomers.data.response;
     } catch (error) {
       console.error("Error fetching customers:", error);
-      throw new Error("İşlem sırasında bir hata oluştu");
+      throw new Error("An error occurred during the operation");
     }
   }
 );
@@ -27,7 +27,7 @@ export const getByIdCustomer = createAsyncThunk(
 
     } catch (error) {
       console.error("Error adding getByIded:", error);
-      throw new Error("İşlem sırasında bir hata oluştu");
+      throw new Error("An error occurred during the operation");
     }
   }
 );
@@ -41,7 +41,7 @@ export const getCustomerCountByStatus = createAsyncThunk(
 
     } catch (error) {
       console.error("Error adding getByCounted:", error);
-      throw new Error("İşlem sırasında bir hata oluştu");
+      throw new Error("An error occurred during the operation");
     }
   }
 );
@@ -55,7 +55,7 @@ export const getCustomerCountIsDeleted = createAsyncThunk(
 
     } catch (error) {
       console.error("Error adding getCountIsDeleted:", error);
-      throw new Error("İşlem sırasında bir hata oluştu");
+      throw new Error("An error occurred during the operation");
     }
   }
 );
@@ -69,7 +69,7 @@ export const getRentalsByCustomer = createAsyncThunk(
 
     } catch (error) {
       console.error("Error adding getByBrandIded:", error);
-      throw new Error("İşlem sırasında bir hata oluştu");
+      throw new Error("An error occurred during the operation");
     }
   }
 );
@@ -82,9 +82,31 @@ export const addCustomer = createAsyncThunk(
     try {
       const addedCustomer = await customerService.add(addCustomerData);
       return addedCustomer.data;
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error adding customer:", error);
-      throw new Error("İşlem sırasında bir hata oluştu");
+      const statusCode = error?.response?.status;
+
+      if (statusCode === 401) {
+        try {
+          const signedUpCustomer = await customerService.signUp(addCustomerData);
+          return signedUpCustomer.data;
+        } catch (signUpError: any) {
+          const signUpDetails = signUpError?.response?.data?.response?.details;
+          const signUpMessage = Array.isArray(signUpDetails) && signUpDetails.length > 0
+            ? String(signUpDetails[0])
+            : signUpError?.response?.data?.response?.message || "Registrazione non riuscita su auth/signup.";
+          return thunkAPI.rejectWithValue(signUpMessage);
+        }
+      }
+
+      const details = error?.response?.data?.response?.details;
+      const message = Array.isArray(details) && details.length > 0
+        ? String(details[0])
+        : error?.response?.data?.response?.message ||
+          (!error?.response
+            ? "Nessuna risposta dal server. Controlla backend/CORS e riprova."
+            : "Registrazione non riuscita. Riprova.");
+      return thunkAPI.rejectWithValue(message);
     }
   }
 );
@@ -104,7 +126,7 @@ export const updateCustomer = createAsyncThunk(
       }
     } catch (error) {
       console.error("Error updating customer", error);
-      throw new Error("İşlem sırasında bir hata oluştu");
+      throw new Error("An error occurred during the operation");
     }
   }
 )
@@ -119,7 +141,7 @@ export const deleteCustomer = createAsyncThunk(
       };
     } catch (error) {
       console.error("Error deleting customer:", error);
-      throw new Error("İşlem sırasında bir hata oluştu");
+      throw new Error("An error occurred during the operation");
     }
   }
 );

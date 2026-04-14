@@ -1,4 +1,3 @@
-
 import { GetByDateCarModel } from '../../models/Responses/Car/GetByDateCarModel';
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import CarService from "../../services/carService"
@@ -22,7 +21,7 @@ export const fetchCars = createAsyncThunk(
             return allCars.data.response;
         } catch (error) {
             console.error("Error fetching cars:", error);
-            throw error; // Hata durumunu iletmek önemlidir
+            throw error; // It is important to propagate the error state
         }
     });
 export const getByDateCars = createAsyncThunk(
@@ -33,7 +32,7 @@ export const getByDateCars = createAsyncThunk(
             return filtredCars.data.response;
         } catch (error) {
             console.error("Error fetching cars:", error);
-            throw error; // Hata durumunu iletmek önemlidir
+            throw error; // It is important to propagate the error state
         }
     });
 export const getByAllFilteredCars = createAsyncThunk(
@@ -170,7 +169,7 @@ const carSlice = createSlice(
                 })
                 .addCase(getByAllFilteredCars.rejected, (state,action) => { 
                     state.cars = [];
-                    state.error = action.error.message || "Bir hata oluştu.";
+                    state.error = action.error.message || "An error occurred.";
                 })
                 .addCase(addCar.pending, (state) => { })
                 .addCase(addCar.fulfilled, (state, action) => {

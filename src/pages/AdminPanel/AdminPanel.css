@@ -34,7 +34,7 @@
     margin-top: 300px;
   }
   
-  /* AdminPanel içindeki Colors bileşeninin stilleri */
+  /* Styles for the Colors component inside AdminPanel */
   .colors-container {
     display: flex;
     flex-direction: column;

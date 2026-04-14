@@ -25,21 +25,21 @@ const AddShiftType = (props: Props) => {
   const handleAddShiftType = (values: any) => {
     try {
     dispatch(addShiftType(values));
-    setSuccessMessage("İşlem başarıyla tamamlandı");
+    setSuccessMessage("Operation completed successfully");
     } catch (error) {
       console.error("Error updating shift type: ", error);
-      // Hata durumunda
-      setErrorMessage("İşlem sırasında bir hata oluştu");
+      // In case of error
+      setErrorMessage("An error occurred during the operation");
     }
   };
   const validationSchema = Yup.object().shape({
     name: Yup.string()
-      .min(2, "Vites Tipi en az 2 karakter olmalıdır")
+      .min(2, "Shift type must be at least 2 characters")
       .matches(
-        /^[a-zA-ZğüşıöçĞÜŞİÖÇ\s]+$/,
-        "Vites Tipi sadece harflerden oluşmalıdır"
+        /^[a-zA-Z\s]+$/,
+        "Shift type can only contain letters"
       )
-      .required("Vites Tipi Giriniz"),
+      .required("Enter shift type"),
   });
   const initialValues = {
     name: "",
@@ -56,18 +56,18 @@ const AddShiftType = (props: Props) => {
       <SideBar>
         <div className="container-card">
           <div className="form">
-            <h2 className="h2-card">Vites Tipi Ekleme</h2>
+            <h2 className="h2-card">Add Shift Type</h2>
             <Form>
               <div className="row-add-carModel">
                 <div id="select-block" className="col-md-6" style={{ marginTop: '110px' }}>
                   <div className="mb-2">
                     <FormikInput
                       name="name"
-                      label="Vites Tipi "
-                      placeHolder="Vites Tipi Giriniz."
+                      label="Shift Type"
+                      placeHolder="Enter shift type."
                       type="text"
                     />
-                    <Button style={{ marginTop: '30px', backgroundColor: "rgb(140,24,24)", color: "white", width: "200px", borderRadius: "10px", marginLeft: "140px" }} type='submit'>Ekle</Button>
+                    <Button style={{ marginTop: '30px', backgroundColor: "rgb(140,24,24)", color: "white", width: "200px", borderRadius: "10px", marginLeft: "140px" }} type='submit'>Add</Button>
                   </div>
                 </div>
               </div>

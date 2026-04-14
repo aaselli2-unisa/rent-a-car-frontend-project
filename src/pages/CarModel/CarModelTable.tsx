@@ -65,14 +65,14 @@ const CarModelTable: React.FC = () => {
         setPage(page);
         setIsLoading(false);
     };
-    const changeRowsPerPage = (rowsPerPage: number, page: number) => { // Satır sayısını değiştiren fonksiyonu ekledik
+    const changeRowsPerPage = (rowsPerPage: number, page: number) => { // Added function to change row count
         setRowsPerPage(rowsPerPage);
         setPage(page);
     };
 
     const sort = (page: number, sortOrder: { name: string; direction: "asc" | "desc" }) => {
         setIsLoading(true);
-        // Tıklanan sütuna göre sıralama işlemini belirle
+        // Determine sorting based on clicked column
         let columnName: string = "";
         switch (sortOrder.name) {
             case "id":
@@ -88,30 +88,30 @@ const CarModelTable: React.FC = () => {
                 break;
         }
 
-        // Sıralama işlemleri burada yapılacak
-        // Örnek bir sıralama işlemi:
+        // Sorting operations are performed here
+        // Example sorting logic:
         const sortedData = carModelState.carModel.slice().sort((a: any, b: any) => {
             if (sortOrder.direction === "asc") {
-                // Sıralama işlemini doğrudan dizge karşılaştırma operatörleriyle gerçekleştir
+                // Sort directly with string comparison operators
                 return a[columnName] > b[columnName] ? 1 : -1;
             } else {
-                // Sıralama işlemini doğrudan dizge karşılaştırma operatörleriyle gerçekleştir
+                // Sort directly with string comparison operators
                 return b[columnName] > a[columnName] ? 1 : -1;
             }
         });
 
-        // Sıralanmış verileri güncelle
+        // Update sorted data
         setData(sortedData.map((carModel: any) => [carModel.id, carModel.name, carModel.brandEntityName]));
-        // isLoading durumunu false olarak ayarla
+        // Set isLoading to false
         console.log(carModelState.brandEntityName);
         
         setIsLoading(false);
     };
     const handleRowSelectionChange = (currentRowsSelected: any[]) => {
         if (currentRowsSelected.length > 0) {
-            const selectedRow = data[currentRowsSelected[0].index]; // Seçilen ilk satırın verilerini al
-            const selectedId = selectedRow[0]; // ID, ilk sütunda olduğu varsayılarak alındı
-            //console.log("Seçilen satır ID'si: ", selectedId);
+            const selectedRow = data[currentRowsSelected[0].index]; // Get selected row data
+            const selectedId = selectedRow[0]; // ID is assumed to be in the first column
+            //console.log("Selected row ID: ", selectedId);
             //dispatch(deleteBrand({ brandId: selectedId }))
         }
     };
@@ -139,7 +139,7 @@ const CarModelTable: React.FC = () => {
                 case 'changePage':
                     changePage(tableState.page, tableState.sortOrder);
                     break;
-                case 'changeRowsPerPage': // Yeni sayfa sayısını işlemek için case eklendi
+                case 'changeRowsPerPage': // Added case to handle new page size
                     changeRowsPerPage(tableState.rowsPerPage, tableState.page);
                     break;
                 case 'sort':
@@ -220,7 +220,7 @@ const CarModelTable: React.FC = () => {
                     },
                     {
                         name: "brandEntityName",
-                        label: "MARKA",
+                        label: "BRAND",
                         options: {
                             customHeadRender: (columnMeta: MUIDataTableColumn) => (
                                 <th style={{ textAlign: "center", borderBottom: "1px solid rgba(224, 224, 224, 1)" }}>{columnMeta.label}</th>

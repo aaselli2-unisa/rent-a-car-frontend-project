@@ -10,49 +10,49 @@ const PastRentalDetail = () => {
   const { id } = useParams();
   const rentalId = parseInt(id || '');
   
-  // Redux store'dan veriyi al
+  // Get data from Redux store
   const rentalResponse = useAppSelector((state: RootState) => state.rental.getByIdRental);
 
-  // useEffect kullanarak veriyi alın
+  // Fetch data with useEffect
   useEffect(() => {
     if (rentalId) {
       dispatch(getByIdRental({ id: rentalId }));
     } 
   }, [dispatch, rentalId]);
 
-  // Eğer rentalResponse henüz gelmemişse veya boşsa, yükleniyor mesajını göster
+  // Show loading message if rentalResponse is not ready or empty
   if (!rentalResponse || rentalResponse.length === 0) {
-    return <div>Yükleniyor...</div>;
+    return <div>Loading...</div>;
   }
 
-  // rentalResponse dizisinin ilk öğesini alın
+  // Get first item from rentalResponse array
   const rentalData = rentalResponse[0].response;
 
-  // rentalData nesnesinden gelen verileri kullanarak arayüzü oluştur
+  // Build UI using data from rentalData object
   return (
     <div className="container-card">
       <div className="form">
-        <h2 className="h2-card">Kiralama Geçmiş Detaylarım</h2>
+        <h2 className="h2-card">My Rental History Details</h2>
         <ul>
           <li>
             <strong>ID:</strong> {rentalData.id}<br/>
-            <strong>Müşteri Adı:</strong> {rentalData.customerEntityName} {rentalData.customerEntitySurname}<br/>
-            <strong>Marka:</strong> {rentalData.carEntityBrandEntityName}<br/>
+            <strong>Customer Name:</strong> {rentalData.customerEntityName} {rentalData.customerEntitySurname}<br/>
+            <strong>Brand:</strong> {rentalData.carEntityBrandEntityName}<br/>
             <strong>Model:</strong> {rentalData.carEntityModelEntityName}<br/>
-            <strong>Renk:</strong> {rentalData.carEntityColorEntityName}<br/>
-            <strong>Kasa Tipi:</strong> {rentalData.carBodyTypeEntityName}<br/>
-            <strong>Yıl:</strong> {rentalData.carEntityYear}<br/>
-            <strong>Kiralama Ücreti:</strong> {rentalData.carEntityRentalPrice}<br/>
-            <strong>Araç Plakası:</strong> {rentalData.carEntityLicensePlate}<br/>
-            <strong>Başlangıç Tarihi:</strong> {rentalData.startDate.toString()}<br/>
-            <strong>Bitiş Tarihi:</strong> {rentalData.endDate.toString()}<br/>
-            <strong>İade Tarihi:</strong> {rentalData.returnDate.toString()}<br/>
-            <strong>Ödeme Tutarı:</strong> {rentalData.paymentDetailsEntityAmount}<br/>
-            <strong>Ödeme Tipi:</strong> {rentalData.paymentDetailsEntityPaymentTypeEntityPaymentTypeName}<br/>
-            <strong>Kiralama Durumu:</strong> {rentalData.rentalStatusEntityName}<br/>
-            <strong>İndirim Kodu:</strong> {rentalData.discountEntityDiscountCode}<br/>
-            <strong>Aktif:</strong> {rentalData.active ? 'Evet' : 'Hayır'}<br/>
-            <strong>Silinmiş:</strong> {rentalData.deleted ? 'Evet' : 'Hayır'}<br/>
+            <strong>Color:</strong> {rentalData.carEntityColorEntityName}<br/>
+            <strong>Body Type:</strong> {rentalData.carBodyTypeEntityName}<br/>
+            <strong>Year:</strong> {rentalData.carEntityYear}<br/>
+            <strong>Rental Price:</strong> {rentalData.carEntityRentalPrice}<br/>
+            <strong>License Plate:</strong> {rentalData.carEntityLicensePlate}<br/>
+            <strong>Start Date:</strong> {rentalData.startDate.toString()}<br/>
+            <strong>End Date:</strong> {rentalData.endDate.toString()}<br/>
+            <strong>Return Date:</strong> {rentalData.returnDate.toString()}<br/>
+            <strong>Payment Amount:</strong> {rentalData.paymentDetailsEntityAmount}<br/>
+            <strong>Payment Type:</strong> {rentalData.paymentDetailsEntityPaymentTypeEntityPaymentTypeName}<br/>
+            <strong>Rental Status:</strong> {rentalData.rentalStatusEntityName}<br/>
+            <strong>Discount Code:</strong> {rentalData.discountEntityDiscountCode}<br/>
+            <strong>Active:</strong> {rentalData.active ? 'Yes' : 'No'}<br/>
+            <strong>Deleted:</strong> {rentalData.deleted ? 'Yes' : 'No'}<br/>
           </li>
         </ul>
       </div>

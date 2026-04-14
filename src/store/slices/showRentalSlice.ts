@@ -21,10 +21,10 @@ import { AddRentalModel } from "../../models/Requests/Rental/AddRentalModel";
   /* export const addShowRental = createAsyncThunk('showRental/addShowRental', async (rentalData: ShowRentalModel, { dispatch }) => {
     try {
       const service: ShowRentalService = new ShowRentalService();
-      const response = await service.add(rentalData); // api.addShowRental ile gerçek API çağrısını yapın
+      const response = await service.add(rentalData); // Make the real API call with api.addShowRental
       return response.data;
     } catch (error) {
-      // Hata yönetimi burada
+      // Handle errors here
       console.error('Error adding show rental:', error);
       throw error;
     }

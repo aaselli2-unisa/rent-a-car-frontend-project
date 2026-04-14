@@ -78,7 +78,7 @@ const vehicleStatusSlice = createSlice({
             state.vehicleStatuses = [];
         });
         builder.addCase(updateVehicleStatus.rejected, (state, action) => { 
-            state.error = action.error.message || "Bir hata oluştu.";
+            state.error = action.error.message || "An error occurred.";
         });
 
         /*----------------*/

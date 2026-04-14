@@ -12,7 +12,7 @@ export const fetchAdmins = createAsyncThunk(
         return allAdmins.data.response;
       } catch (error) {
         console.error("Error fetching admins:", error);
-        throw new Error("İşlem sırasında bir hata oluştu");
+        throw new Error("An error occurred during the operation");
       }
     }
   );
@@ -26,7 +26,7 @@ export const fetchAdmins = createAsyncThunk(
 
         } catch (error) {
             console.error("Error adding getByIded:", error);
-            throw new Error("İşlem sırasında bir hata oluştu");
+            throw new Error("An error occurred during the operation");
         }
     }
 );
@@ -40,7 +40,7 @@ export const getAdminCountIsDeleted = createAsyncThunk(
 
         } catch (error) {
             console.error("Error adding getCountIsDeleted:", error);
-            throw new Error("İşlem sırasında bir hata oluştu");
+            throw new Error("An error occurred during the operation");
         }
     }
 );
@@ -94,7 +94,7 @@ export const deleteAdmin = createAsyncThunk(
         };
       } catch (error) {
         console.error("Error deleting admin:", error);
-        throw new Error("İşlem sırasında bir hata oluştu");
+        throw new Error("An error occurred during the operation");
       }
     }
   );
@@ -113,7 +113,7 @@ const adminSlice = createSlice({
             state.admins.push(action.payload);
         })
         builder.addCase(addAdmin.rejected, (state, action) => {
-            state.error = action.error.message || "Bir hata oluştu.";
+            state.error = action.error.message || "An error occurred.";
         })
 
         /*-----------------------------------------------------------------*/
@@ -151,7 +151,7 @@ const adminSlice = createSlice({
             state.admins = [];
         });
         builder.addCase(updateAdmin.rejected, (state, action) => {
-            state.error = action.error.message || "Bir hata oluştu.";
+            state.error = action.error.message || "An error occurred.";
         });
 
         /*-----------------------------------------------------------------*/

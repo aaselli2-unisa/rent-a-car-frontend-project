@@ -43,8 +43,8 @@ const UpdatePaymentDetails = (props: Props) => {
 
   const validationSchema = Yup.object().shape({
     amount: Yup.number()
-      .required("Ödeme tutarı boş geçilemez.")
-    
+      .required("Payment amount is required.")
+
   });
 
   const initialValues = {
@@ -55,11 +55,11 @@ const UpdatePaymentDetails = (props: Props) => {
   const handleUpdatePaymentDetails = async (values: any) => {
     try {
       const response = await dispatch(updatePaymentDetails(values))
-      setSuccessMessage("İşlem başarıyla tamamlandı");
+      setSuccessMessage("Operation completed successfully");
     } catch (error) {
       console.error("Error updating shift type: ", error);
-      // Hata durumunda
-      setErrorMessage("İşlem sırasında bir hata oluştu");
+      // In case of error
+      setErrorMessage("An error occurred during the operation");
     }
   };
 
@@ -67,7 +67,7 @@ const UpdatePaymentDetails = (props: Props) => {
     <SideBar>
       <div className="container-card">
         <div className="form">
-          <h2 className="h2-card">Fatura Güncelle</h2>
+          <h2 className="h2-card">Update Invoice</h2>
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
@@ -87,8 +87,8 @@ const UpdatePaymentDetails = (props: Props) => {
                   <div className="mb-2">
                     <FormikInput
                       name="amount"
-                      label="Ödeme Tutarı"
-                      placeHolder="Ödeme Tutarı Giriniz."
+                      label="Payment Amount"
+                      placeHolder="Enter payment amount."
                       type="number"
                     />
                   </div>
@@ -103,7 +103,7 @@ const UpdatePaymentDetails = (props: Props) => {
                     }}
                     type="submit"
                   >
-                    Güncelle
+                    Update
                   </Button>
                 </div>
               </div>

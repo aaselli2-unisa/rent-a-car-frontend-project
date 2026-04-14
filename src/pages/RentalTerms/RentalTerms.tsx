@@ -4,7 +4,7 @@ const RentalTerms = () => {
   return (
     <div className="container-card">
       <div className="form">
-        <h2 className="h2-card">Kiralama Koşulları</h2>
+        <h2 className="h2-card">Rental Terms</h2>
         <div id="accordion">
           <div className="cardAccord">
             <div className="cardAccord-header" id="headingOne">
@@ -16,7 +16,7 @@ const RentalTerms = () => {
                   aria-expanded="true"
                   aria-controls="collapseOne"
                 >
-                  Çerez Politikası
+                  Cookie Policy
                 </button>
               </h5>
             </div>
@@ -29,30 +29,19 @@ const RentalTerms = () => {
             >
               <div className="card-body-accord">
                 
-                  ExtendRent, web sitesi kullanıcılarına daha iyi bir deneyim
-                  sunabilmek için çerezleri kullanmaktadır. Çerezler, web
-                  sitesinin doğru bir şekilde çalışmasını sağlamak, kullanıcı
-                  oturumlarını yönetmek, siteyi güvenli hale getirmek ve
-                  kullanıcı tercihlerini hatırlamak için kullanılır. Hangi
-                  Çerezler Kullanılıyor? Zorunlu Çerezler: Bu çerezler, web
-                  sitesinin temel işlevselliği için gereklidir. Kullanıcıların
-                  hesaplarına giriş yapabilmeleri ve diğer temel işlevleri
-                  gerçekleştirebilmeleri için kullanılırlar. Performans
-                  Çerezleri: Bu çerezler, web sitesinin performansını ölçmek ve
-                  iyileştirmek için kullanılır. Hangi sayfaların en çok ziyaret
-                  edildiğini anlamak ve siteye gelen trafiği izlemek için
-                  kullanılırlar. Reklam Çerezleri: Bu çerezler, kullanıcıların
-                  ilgi alanlarına göre reklamları kişiselleştirmek için
-                  kullanılır. Bu çerezler, kullanıcıların daha önce ziyaret
-                  ettikleri sayfalara dayalı olarak ilgili reklamları
-                  görüntülemelerini sağlar. Çerezleri Nasıl Kontrol Edebilirim?
-                  Kullanıcılar, tarayıcı ayarlarını değiştirerek çerez
-                  kullanımını kontrol edebilirler. Tarayıcı ayarlarınızı
-                  değiştirerek çerezleri engelleyebilir veya istediğiniz zaman
-                  silme seçeneğine sahip olabilirsiniz. Ancak, bazı çerezlerin
-                  devre dışı bırakılması, web sitesinin bazı özelliklerinin
-                  düzgün çalışmamasına neden olabilir.
-          
+                  ExtendRent uses cookies to provide a better website experience.
+                  Cookies help the website function correctly, manage user
+                  sessions, improve security, and remember user preferences.
+                  Types of cookies we use include essential cookies, performance
+                  cookies, and advertising cookies. Essential cookies are needed
+                  for core functionality such as sign-in and key site features.
+                  Performance cookies help us understand page traffic and improve
+                  service quality. Advertising cookies are used to personalize
+                  ads based on user interests and previous visits. You can manage
+                  cookie preferences from your browser settings, block cookies,
+                  or delete them at any time. Please note that disabling some
+                  cookies may affect the proper functioning of certain features.
+
               </div>
             </div>
           </div>
@@ -66,7 +55,7 @@ const RentalTerms = () => {
                   aria-expanded="false"
                   aria-controls="collapseTwo"
                 >
-                  Kiralama Koşulları
+                  Rental Terms
                 </button>
               </h5>
             </div>
@@ -77,40 +66,30 @@ const RentalTerms = () => {
               data-parent="#accordion"
             >
               <div className="card-body-accord">
-                Hoş geldiniz! ExtendRent, kullanıcılarına araç kiralama
-                hizmetleri sunan bir platformdur. Lütfen aşağıdaki kullanım
-                koşullarını dikkatlice okuyun. ExtendRent'i kullanarak,
-                aşağıdaki koşulları kabul etmiş olursunuz. Hesap Oluşturma ve
-                Güvenlik: ExtendRent'i kullanmak için bir hesap
-                oluşturmalısınız. Hesap bilgilerinizin güvenliğinden siz
-                sorumlusunuz. Şifrenizi güvenli tutun ve başkalarıyla
-                paylaşmayın. ExtendRent, hesabınızın yetkisiz kullanımı
-                nedeniyle oluşabilecek kayıplardan sorumlu değildir.
-                Rezervasyonlar: Araç rezervasyonları, belirtilen kurallar ve
-                ücretlendirme politikaları çerçevesinde yapılmalıdır.
-                Rezervasyonlar, kullanıcılar arasında önceden belirlenmiş
-                politikalar doğrultusunda değiştirilebilir veya iptal
-                edilebilir. Araç Kiralama: Araç kiralama sürecinde, aracın
-                durumu ve belgelerle ilgili doğru ve güncel bilgileri sağlamak
-                kullanıcının sorumluluğundadır. Kullanıcılar, araçları
-                kiralarken tüm yerel trafik ve park kurallarına uymakla
-                yükümlüdür. Ücretlendirme ve Ödemeler: Kiralama ücretleri,
-                rezervasyon sırasında belirtilen ücretlendirme politikalarına
-                göre belirlenir. Ödemeler, ExtendRent üzerinden güvenli bir
-                şekilde gerçekleştirilmelidir. İptal ve İade Politikası:
-                Rezervasyon iptal ve iade politikaları, rezervasyon sırasında
-                belirtilen koşullara göre uygulanır. İhlal ve Sorumluluklar:
-                ExtendRent'i kötüye kullanmak, diğer kullanıcıların hakkına
-                zarar vermek veya platforma zarar vermek yasaktır. Kullanıcılar,
-                ExtendRent'i yasalara uygun bir şekilde kullanmakla yükümlüdür.
-                Gizlilik Politikası: Kullanıcıların kişisel bilgileri ExtendRent
-                Gizlilik Politikası'na tabidir. Değişiklikler ve Güncellemeler:
-                ExtendRent, kullanım koşullarını güncelleme hakkını saklı tutar.
-                Güncellemeler, kullanıcılara bildirilecektir. ExtendRent'i
-                kullanarak bu kullanım koşullarını kabul etmiş sayılırsınız.
-                Lütfen düzenli olarak bu koşulları kontrol edin, çünkü
-                değişiklikler kullanıcılara bildirildikten sonra da yürürlüğe
-                girecektir. Teşekkür ederiz ve güvenli sürüşler dileriz!
+                Welcome to ExtendRent, a platform that provides car rental
+                services. Please read these terms carefully. By using ExtendRent,
+                you agree to the following conditions. Account creation and
+                security: You must create an account to use ExtendRent, and you
+                are responsible for protecting your account credentials. Do not
+                share your password. ExtendRent is not responsible for losses
+                caused by unauthorized account access. Reservations: Vehicle
+                reservations must follow the rules and pricing policies shown
+                during booking. Reservations may be modified or canceled
+                according to the applicable policy. Vehicle rental: During the
+                rental process, users are responsible for providing accurate and
+                up-to-date information about documents and rental details. Users
+                must comply with local traffic and parking rules. Pricing and
+                payments: Rental fees are determined by the pricing policy shown
+                at reservation time, and payments must be completed securely
+                through ExtendRent. Cancellation and refunds: These are applied
+                according to the conditions specified during reservation.
+                Violations and responsibilities: Misusing ExtendRent, harming
+                other users, or damaging the platform is prohibited. Users must
+                comply with all applicable laws. Privacy policy: Personal data is
+                processed according to the ExtendRent Privacy Policy. Changes and
+                updates: ExtendRent reserves the right to update these terms, and
+                updates will be communicated to users. Please review this page
+                regularly. Thank you, and drive safely.
               </div>
             </div>
           </div>
@@ -124,8 +103,7 @@ const RentalTerms = () => {
                   aria-expanded="false"
                   aria-controls="collapseThree"
                 >
-                  Kişisel Verilerin Korunması ve İşlenmesine İlişkin Aydınlatma
-                  Metni
+                  Personal Data Protection and Processing Notice
                 </button>
               </h5>
             </div>
@@ -136,37 +114,24 @@ const RentalTerms = () => {
               data-parent="#accordion"
             >
               <div className="card-body-accord">
-                Sayın Müşterimiz, Rent a Car hizmetlerimizi kullanarak bize
-                kişisel verilerinizi sağladığınız için teşekkür ederiz. Müşteri
-                gizliliği ve veri güvenliği, bizim için en üst düzeyde önem
-                taşımaktadır. Bu nedenle, kişisel verilerinizi koruma ve işleme
-                politikalarımızı sizinle paylaşmak istiyoruz. Kişisel Veri
-                Toplama Rent a Car hizmetlerimizi kullanırken, aşağıdaki kişisel
-                verileri toplayabiliriz: Adınız ve Soyadınız İletişim
-                Bilgileriniz (Telefon numarası, e-posta adresi vb.) Kimlik
-                Bilgileri (Kimlik belgesi numarası, sürücü belgesi numarası vb.)
-                Kiralama Süresi ve Detayları Ödeme Bilgileri Kişisel Veri
-                Kullanımı Topladığımız kişisel verileri aşağıdaki amaçlar
-                doğrultusunda kullanabiliriz: Kiralama işlemlerini
-                gerçekleştirmek ve hizmet sunmak Müşteri hizmetlerini sağlamak
-                ve destek vermek Hizmetlerimizi iyileştirmek ve geliştirmek
-                Yasal gereksinimlere uyum sağlamak Kişisel Veri Paylaşımı ve
-                Aktarımı Kişisel verilerinizi üçüncü taraflarla paylaşmamız veya
-                aktarmamız gerektiğinde, bunu yalnızca yasal gereksinimler
-                doğrultusunda ve sizin onayınızla yaparız. Kişisel Veri
-                Güvenliği Kişisel verilerinizi korumak için uygun güvenlik
-                önlemlerini alırız ve veri güvenliği konusunda endüstri
-                standartlarını takip ederiz. Kişisel Veri Saklama Kişisel
-                verilerinizi sadece gerekli olduğu sürece saklarız ve yasal
-                saklama süreleri dışında verilerinizi sileriz veya
-                anonimleştiririz. Haklarınız Kişisel verilerinizle ilgili olarak
-                sahip olduğunuz haklarınızı kullanma hakkına sahipsiniz. Bu
-                haklarınız arasında veriye erişim, düzeltme, silme ve işleme
-                itiraz etme gibi haklar bulunmaktadır. İletişim Kişisel
-                verilerinizle ilgili herhangi bir sorunuz veya endişeniz varsa,
-                lütfen bizimle iletişime geçmekten çekinmeyin. İletişim
-                bilgilerimiz web sitemizde bulunmaktadır. Saygılarımızla,
-                [ExtendRent]
+                Dear Customer, thank you for using our rent-a-car services and
+                for sharing your personal data with us. Customer privacy and data
+                security are top priorities for ExtendRent. We collect personal
+                data such as name and surname, contact details (phone and email),
+                identity and driving license details, rental period and booking
+                details, and payment information. We use this data to process
+                rentals, provide customer support, improve our services, and
+                comply with legal obligations. We may share or transfer personal
+                data with third parties only when legally required and, where
+                necessary, with your consent. We apply appropriate technical and
+                organizational security measures and follow industry standards to
+                protect your data. Personal data is retained only as long as
+                needed for the purposes described and legal retention obligations,
+                then deleted or anonymized. You have rights regarding your data,
+                including access, correction, deletion, and objection to
+                processing. If you have questions or concerns about your personal
+                data, please contact us using the contact information available on
+                our website. Sincerely, ExtendRent.
               </div>
             </div>
           </div>

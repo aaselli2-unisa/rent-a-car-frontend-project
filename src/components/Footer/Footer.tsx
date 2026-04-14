@@ -11,35 +11,35 @@ const Footer: React.FC<FooterProps> = () => {
       <div className="container">
 
         <div className="footer-col">
-          <h4>Kurumsal</h4>
+          <h4>Company</h4>
           <ul>
             <li><Link to='/about' className='nav-links'>
-              Hakkımızda
+              About Us
             </Link></li>
             <li><Link to='/contact' className='nav-links'>
-              İletişim
+              Contact Us
             </Link></li>
             <li><Link to='/contact' className='nav-links'>
-              İnsan Kaynakları
+              Careers
             </Link></li>
           </ul>
         </div>
         <div className="footer-col">
-          <h4>Gizlilik Politikası</h4>
+          <h4>Privacy and Policy</h4>
           <ul>
             <li><Link to='/rentalTerm' className='nav-links'>
-              Çerez Politikası
+              Cookie Policy
             </Link></li>
             <li><Link to='/rentalTerm' className='nav-links'>
-              Kiralama Koşulları
+              Rental Terms
             </Link></li>
             <li><Link to='/rentalTerm' className='nav-links'>
-              KVKK Aydınlatma Metni
+              Privacy Policy
             </Link></li>
           </ul>
         </div>
         <div className="footer-col">
-          <h4>Bizi Takip Edin</h4>
+          <h4>Follow Us</h4>
           <div className="social-links">
             <a href="#"><i className="fa fa-facebook"></i></a>
             <a href="#"><i className="fa fa-twitter"></i></a>

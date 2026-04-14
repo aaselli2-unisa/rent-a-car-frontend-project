@@ -111,7 +111,7 @@ export const fetchCarModels = createAsyncThunk(
         state.carModel.push(action.payload);
       });
       builder.addCase(addCarModel.rejected, (state,action) => {
-        state.error = action.error.message || "Bir hata oluştu.";
+        state.error = action.error.message || "An error occurred.";
       });
 
       builder.addCase(getByIdCarModels.pending, (state) => { });
@@ -127,7 +127,7 @@ export const fetchCarModels = createAsyncThunk(
         state.carModel = [];
       });
       builder.addCase(updateCarModel.rejected, (state,action) => {
-        state.error = action.error.message || "Bir hata oluştu.";
+        state.error = action.error.message || "An error occurred.";
       });
 
       builder.addCase(fetchCarModels.pending, (state) => {});
@@ -147,7 +147,7 @@ export const fetchCarModels = createAsyncThunk(
 
       builder.addCase(deleteCarModel.pending, (state) => {});
       builder.addCase(deleteCarModel.fulfilled, (state, action) => {
-        // Silinen araba modelini state'den kaldır
+        // Remove the deleted car model from state
         const deletedCarModelId = action.payload.deletedCarModelId;
         state.carModel = state.carModel.filter(carModel => carModel.id !== deletedCarModelId);
       });

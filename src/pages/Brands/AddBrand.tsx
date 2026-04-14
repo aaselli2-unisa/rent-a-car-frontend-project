@@ -22,7 +22,7 @@ const AddBrand = (props: Props) => {
   const [imageError, setImageError] = useState("");
   const handleAddBrand = async (values: any) => {
     if (typeof file === "undefined") {
-      setImageError("Lütfen bir resim seçiniz");
+      setImageError("Please select an image");
       return;
     }
 
@@ -38,12 +38,12 @@ const AddBrand = (props: Props) => {
         const brandImageEntityId = imageResponse.payload;
         const updatedValues = { ...values, brandImageEntityId };
         const response = await dispatch(addBrand(updatedValues));
-        setSuccessMessage("İşlem başarıyla tamamlandı");
+        setSuccessMessage("Operation completed successfully");
       }
     } catch (error) {
       console.error("Error : ", error);
-      // Hata durumunda
-      setErrorMessage("İşlem sırasında bir hata oluştu");
+      // In case of error
+      setErrorMessage("An error occurred during the operation");
     }
     window.location.href = "/adminPanel/brands";
   };
@@ -56,18 +56,18 @@ const AddBrand = (props: Props) => {
       setFile(target.files[0]);
       setImageError("");
     } else {
-      // Eğer resim seçilmediyse hata mesajını ayarla
-      setImageError("Lütfen bir resim seçiniz");
+      // If no image is selected, set the error message
+      setImageError("Please select an image");
     }
   };
   const validationSchema = Yup.object().shape({
     name: Yup.string()
-      .min(2, "Marka en az 2 karakter olmalıdır")
+      .min(2, "Brand must be at least 2 characters")
       .matches(
-        /^[a-zA-ZğüşıöçĞÜŞİÖÇ\s]+$/,
-        "Marka sadece harflerden oluşmalıdır"
+        /^[a-zA-Z\s]+$/,
+        "Brand can only contain letters"
       )
-      .required("Marka Giriniz"),
+      .required("Enter brand"),
   });
 
   return (
@@ -82,7 +82,7 @@ const AddBrand = (props: Props) => {
       <SideBar>
         <div className="container-card">
           <div className="form">
-            <h2 className="h2-card">Marka Ekleme</h2>
+            <h2 className="h2-card">Add Brand</h2>
             <Form>
               <div className="row-add-brand">
                 <div
@@ -93,8 +93,8 @@ const AddBrand = (props: Props) => {
                   <div className="mb-2">
                     <FormikInput
                       name="name"
-                      label="Marka "
-                      placeHolder="Marka Giriniz."
+                      label="Brand"
+                      placeHolder="Enter brand."
                       type="text"
                     />
                   </div>
@@ -113,7 +113,7 @@ const AddBrand = (props: Props) => {
                     }}
                     type="submit"
                   >
-                    Ekle
+                    Add
                   </Button>
                 </div>
               </div>

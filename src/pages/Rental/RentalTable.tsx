@@ -66,8 +66,8 @@ const RentalTable: React.FC = () => {
                 rental.rentalStatusEntityName,
                 <IconButton onClick={() => handleUpdate(rental.id)}><EditIcon /></IconButton>,
                 <IconButton onClick={() => handleDelete(rental.id)}><DeleteIcon /></IconButton>,
-                <Button type="button" style={{backgroundColor:'rgba(140, 25, 25)'}} onClick={() => handleStartUpdate(rental.id)}>Başlat</Button>,
-                <Button type="button" style={{backgroundColor:'rgba(140, 25, 25)'}} onClick={() => handleReturnUpdate(rental.id)}>Bitir</Button>,
+                <Button type="button" style={{backgroundColor:'rgba(140, 25, 25)'}} onClick={() => handleStartUpdate(rental.id)}>Start</Button>,
+                <Button type="button" style={{backgroundColor:'rgba(140, 25, 25)'}} onClick={() => handleReturnUpdate(rental.id)}>Finish</Button>,
             ]);
 
             setData(tableData);
@@ -101,14 +101,14 @@ const RentalTable: React.FC = () => {
         setPage(page);
         setIsLoading(false);
     };
-    const changeRowsPerPage = (rowsPerPage: number, page: number) => { // Satır sayısını değiştiren fonksiyonu ekledik
+    const changeRowsPerPage = (rowsPerPage: number, page: number) => { // Added function to change row count
         setRowsPerPage(rowsPerPage);
         setPage(page);
     };
 
     const sort = (page: number, sortOrder: { name: string; direction: "asc" | "desc" }) => {
         setIsLoading(true);
-        // Tıklanan sütuna göre sıralama işlemini belirle
+        // Determine sorting based on the clicked column
         let columnName: string = "";
         switch (sortOrder.name) {
             case "id":
@@ -164,7 +164,7 @@ const RentalTable: React.FC = () => {
             }
         });
 
-        // Sıralanmış verileri güncelle
+        // Update sorted data
         setData(sortedData.map((rental: any) => [
             rental.id,
             rental.customerEntityName,
@@ -179,16 +179,16 @@ const RentalTable: React.FC = () => {
             rental.paymentDetailsEntityAmount,
             rental.paymentDetailsEntityPaymentTypeEntityPaymentTypeName,
             rental.rentalStatusEntityName]));
-        // isLoading durumunu false olarak ayarla
+        // Set isLoading to false
         console.log(rentalState);
 
         setIsLoading(false);
     };
     const handleRowSelectionChange = (currentRowsSelected: any[]) => {
         if (currentRowsSelected.length > 0) {
-            const selectedRow = data[currentRowsSelected[0].index]; // Seçilen ilk satırın verilerini al
-            const selectedId = selectedRow[0]; // ID, ilk sütunda olduğu varsayılarak alındı
-            //console.log("Seçilen satır ID'si: ", selectedId);
+            const selectedRow = data[currentRowsSelected[0].index]; // Get selected row data
+            const selectedId = selectedRow[0]; // ID is assumed to be in first column
+            //console.log("Selected row ID: ", selectedId);
             //dispatch(deleteBrand({ brandId: selectedId }))
         }
     };
@@ -229,7 +229,7 @@ const RentalTable: React.FC = () => {
                 case 'changePage':
                     changePage(tableState.page, tableState.sortOrder);
                     break;
-                case 'changeRowsPerPage': // Yeni sayfa sayısını işlemek için case eklendi
+                case 'changeRowsPerPage': // Added case to handle new page size
                     changeRowsPerPage(tableState.rowsPerPage, tableState.page);
                     break;
                 case 'sort':
@@ -320,7 +320,7 @@ const RentalTable: React.FC = () => {
     return (
         <div className="container-card">
         <div className="form">
-        <h2 className="h2-card">KİRALAMA</h2>
+        <h2 className="h2-card">RENTAL</h2>
             <MUIDataTable
                 title={
                     <Typography variant="h6">
@@ -349,7 +349,7 @@ const RentalTable: React.FC = () => {
                     },
                     {
                         name: "customerEntityName",
-                        label: "AD",
+                        label: "NAME",
                         options: {
                             customHeadRender: (columnMeta: MUIDataTableColumn) => (
                                 <th style={{ textAlign: "center", borderBottom: "1px solid rgba(224, 224, 224, 1)" }}>{columnMeta.label}</th>
@@ -361,7 +361,7 @@ const RentalTable: React.FC = () => {
                     },
                     {
                         name: "customerEntitySurname",
-                        label: "SOYAD",
+                        label: "SURNAME",
                         options: {
                             customHeadRender: (columnMeta: MUIDataTableColumn) => (
                                 <th style={{ textAlign: "center", borderBottom: "1px solid rgba(224, 224, 224, 1)" }}>{columnMeta.label}</th>
@@ -373,7 +373,7 @@ const RentalTable: React.FC = () => {
                     },
                     {
                         name: "carEntityBrandEntityName",
-                        label: "MARKA",
+                        label: "BRAND",
                         options: {
                             customHeadRender: (columnMeta: MUIDataTableColumn) => (
                                 <th style={{ textAlign: "center", borderBottom: "1px solid rgba(224, 224, 224, 1)" }}>{columnMeta.label}</th>
@@ -397,7 +397,7 @@ const RentalTable: React.FC = () => {
                     },
                     {
                         name: "carEntityRentalPrice",
-                        label: "FİYAT",
+                        label: "PRICE",
                         options: {
                             customHeadRender: (columnMeta: MUIDataTableColumn) => (
                                 <th style={{ textAlign: "center", borderBottom: "1px solid rgba(224, 224, 224, 1)" }}>{columnMeta.label}</th>
@@ -409,7 +409,7 @@ const RentalTable: React.FC = () => {
                     },
                     {
                         name: "carEntityLicensePlate",
-                        label: "PLAKA",
+                        label: "LICENSE PLATE",
                         options: {
                             customHeadRender: (columnMeta: MUIDataTableColumn) => (
                                 <th style={{ textAlign: "center", borderBottom: "1px solid rgba(224, 224, 224, 1)" }}>{columnMeta.label}</th>
@@ -421,7 +421,7 @@ const RentalTable: React.FC = () => {
                     },
                     {
                         name: "startDate",
-                        label: "BAŞL. TRH",
+                        label: "START DATE",
                         options: {
                             customHeadRender: (columnMeta: MUIDataTableColumn) => (
                                 <th style={{ textAlign: "center", borderBottom: "1px solid rgba(224, 224, 224, 1)" }}>{columnMeta.label}</th>
@@ -433,7 +433,7 @@ const RentalTable: React.FC = () => {
                     },
                     {
                         name: "endDate",
-                        label: "BTŞ TRH",
+                        label: "END DATE",
                         options: {
                             customHeadRender: (columnMeta: MUIDataTableColumn) => (
                                 <th style={{ textAlign: "center", borderBottom: "1px solid rgba(224, 224, 224, 1)" }}>{columnMeta.label}</th>
@@ -445,7 +445,7 @@ const RentalTable: React.FC = () => {
                     },
                     {
                         name: "returnDate",
-                        label: "DNŞ TRH",
+                        label: "RETURN DATE",
                         options: {
                             customHeadRender: (columnMeta: MUIDataTableColumn) => (
                                 <th style={{ textAlign: "center", borderBottom: "1px solid rgba(224, 224, 224, 1)" }}>{columnMeta.label}</th>
@@ -457,7 +457,7 @@ const RentalTable: React.FC = () => {
                     },
                     {
                         name: "paymentDetailsEntityAmount",
-                        label: "TOPLAM TUTAR",
+                        label: "TOTAL AMOUNT",
                         options: {
                             customHeadRender: (columnMeta: MUIDataTableColumn) => (
                                 <th style={{ textAlign: "center", borderBottom: "1px solid rgba(224, 224, 224, 1)" }}>{columnMeta.label}</th>
@@ -469,7 +469,7 @@ const RentalTable: React.FC = () => {
                     },
                     {
                         name: "paymentDetailsEntityPaymentTypeEntityPaymentTypeName",
-                        label: "ÖDEME TİPİ",
+                        label: "PAYMENT TYPE",
                         options: {
                             customHeadRender: (columnMeta: MUIDataTableColumn) => (
                                 <th style={{ textAlign: "center", borderBottom: "1px solid rgba(224, 224, 224, 1)" }}>{columnMeta.label}</th>
@@ -481,7 +481,7 @@ const RentalTable: React.FC = () => {
                     },
                     {
                         name: "rentalStatusEntityName",
-                        label: "KİRALAMA DURUMU",
+                        label: "RENTAL STATUS",
                         options: {
                             customHeadRender: (columnMeta: MUIDataTableColumn) => (
                                 <th style={{ textAlign: "center", borderBottom: "1px solid rgba(224, 224, 224, 1)" }}>{columnMeta.label}</th>
@@ -524,7 +524,7 @@ const RentalTable: React.FC = () => {
                     },
                     {
                         name: "StartRental",
-                        label: "Kiralamayı Başlat",
+                        label: "Start Rental",
                         options: {
                             filter: false,
                             customHeadRender: (columnMeta: MUIDataTableColumn) => (
@@ -539,7 +539,7 @@ const RentalTable: React.FC = () => {
                     },
                     {
                         name: "EndRental",
-                        label: "Kiralamayı Bitir",
+                        label: "Finish Rental",
                         options: {
                             filter: false,
                             customHeadRender: (columnMeta: MUIDataTableColumn) => (

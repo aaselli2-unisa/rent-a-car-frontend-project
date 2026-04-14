@@ -18,6 +18,22 @@ class CustomerService {
         return axiosInstance.post<AddCustomerModel>("customers", newCustomer)
     }
 
+    signUp(newCustomer: AddCustomerModel) {
+        const payload = {
+            name: newCustomer.name,
+            surname: newCustomer.surname,
+            emailAddress: newCustomer.emailAddress,
+            password: newCustomer.password,
+            phoneNumber: newCustomer.phoneNumber,
+            drivingLicenseNumber: newCustomer.drivingLicenseNumber,
+            drivingLicenseTypeEntityId: newCustomer.drivingLicenseTypeEntityId,
+            authority: "CUSTOMER",
+            userImageEntityId: newCustomer.userImageEntityId ?? 4,
+        };
+
+        return axiosInstance.post("auth/signup", payload);
+    }
+
     update(updatedCustomer: UpdateCustomerModel) {
         return axiosInstance.put<GetAllCustomerModel>("customers", updatedCustomer)
     }

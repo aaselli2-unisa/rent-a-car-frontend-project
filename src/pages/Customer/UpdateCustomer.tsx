@@ -58,21 +58,21 @@ const UpdateCustomer = (props: Props) => {
   };
   const validationSchema = Yup.object().shape({
     name: Yup.string()
-      .matches(/^[a-zA-ZğüşıöçĞÜŞİÖÇ\s]+$/, 'İsim sadece harflerden oluşmalıdır')
-      .required('İsim '),
+      .matches(/^[a-zA-Z\s]+$/, 'Name can only contain letters')
+      .required('Name'),
     surname: Yup.string()
-      .matches(/^[a-zA-ZğüşıöçĞÜŞİÖÇ\s]+$/, 'Soyisim sadece harflerden oluşmalıdır')
-      .required('Soyisim '),
-    emailAddress: Yup.string().required('Mail Adresi '),
-    password: Yup.string().required('Şifre '),
+      .matches(/^[a-zA-Z\s]+$/, 'Surname can only contain letters')
+      .required('Surname'),
+    emailAddress: Yup.string().required('Email Address'),
+    password: Yup.string().required('Password'),
     phoneNumber: Yup.string()
-      .matches(/^[0-9]+$/, 'Telefon numarası sadece sayılardan oluşmalıdır')
-      .min(10, 'Telefon numarası 10 hane olmalıdır')
-      .max(10, 'Telefon numarası 10 hane olmalıdır')
-      .required('Telefon numarası '),
+      .matches(/^[0-9]+$/, 'Phone number can only contain digits')
+      .min(10, 'Phone number must be 10 digits')
+      .max(10, 'Phone number must be 10 digits')
+      .required('Phone number'),
     drivingLicenseNumber: Yup.number()
-      .required('Maaş '),
-    expectedMinDrivingLicenseTypeId:Yup.number().required('Ehliyet '),
+      .required('Driving license number'),
+    expectedMinDrivingLicenseTypeId:Yup.number().required('Driving license type'),
   })
 
   const initialValues = {
@@ -93,25 +93,25 @@ const UpdateCustomer = (props: Props) => {
   };
   const handleClick =async () => {
     if (!mail || !password || !newPassword) {
-      setErrorMessage('Lütfen tüm alanları doldurun.');
+      setErrorMessage('Please fill in all fields.');
     } else if (password === newPassword) {
-      setErrorMessage('Yeni şifre, eski şifre ile aynı olamaz.');
+      setErrorMessage('New password cannot be the same as the old password.');
     } else {
       const isUser = await dispatch(isUserTrue({email:mail,password:password}));
       if(isUser){
         try {
           const changePass = await dispatch(changePassword({ id: customerId, password: newPassword }));
-          // İstek başarılı olduysa
-          console.log(changePass); // Değişiklik ile ilgili bilgileri burada kullanabilirsiniz
-          // Başarılı mesajını set et
-          setSuccessMessage('Şifreniz başarıyla güncellendi.');
+          // If request succeeds
+          console.log(changePass); // You can use the change details here
+          // Set success message
+          setSuccessMessage('Your password has been updated successfully.');
           window.location.reload();
           
         } catch (error) {
-          // İstek başarısız olduysa
-          console.error('Şifre değiştirme işlemi başarısız:', error);
-          // Hata mesajını set et
-          setErrorMessage('Şifre değiştirme işlemi başarısız oldu.');
+          // If request fails
+          console.error('Password change failed:', error);
+          // Set error message
+          setErrorMessage('Password change failed.');
         }
       
       }
@@ -134,53 +134,53 @@ const UpdateCustomer = (props: Props) => {
 
       <div className="container-card">{/* <img src={walpaper} alt="Logo"/> */}
         <div className='form'>
-          <h2 className="h2-card">Bilgilerim</h2>
+          <h2 className="h2-card">My Information</h2>
           <Form style={{float:'inline-start',padding:"50px",borderRadius:"10px"}}>
             <div className="row">
                 <div id="select-block" className="col-md-6">
                   <div className="mb-2">
                     <FormikInput
                       name="name"
-                      label="İsim "
-                      placeHolder="İsim ."
+                      label="Name"
+                      placeHolder="Name"
                       type='text'
                     />
                   </div>
                   <div className="mb-2">
                     <FormikInput
                       name="surname"
-                      label="Soyisim "
-                      placeHolder="İsim ."
+                      label="Surname"
+                      placeHolder="Surname"
                       type='text'
                     />
                   </div>
                   <div className="mb-2">
                     <FormikInput
                       name="emailAddress"
-                      label="Mail Adresi "
-                      placeHolder="Mail Adresi ."
+                      label="Email Address"
+                      placeHolder="Email Address"
                       type='text'
                     />
                   </div>
                   <div className="mb-2">
                     <FormikInput
                       name="phoneNumber"
-                      label="Telefon Numarası "
-                      placeHolder="Telefon Numarası ."
+                      label="Phone Number"
+                      placeHolder="Phone Number"
                       type='text'
                     />
                   </div>
                   <div className="mb-2">
                     <FormikInput
                       name="drivingLicenseNumber"
-                      label="Ehliyet Numarası "
-                      placeHolder="Ehliyet Numarası ."
+                      label="Driving License Number"
+                      placeHolder="Driving License Number"
                       type='text'
                     />
                   </div>
                   <div className="mb-2">
                     <FormikSelect
-                      label="Ehliyet Tipi Seç"
+                      label="Select Driving License Type"
                       name="drivingLicenseTypeEntityId"
                       options={expectedMinDrivingLicenseTypeState.drivingLicenseTypes.map(
                         (drivingLicenseType: any) => ({
@@ -194,7 +194,7 @@ const UpdateCustomer = (props: Props) => {
               
             </div>
             <Button type="submit" className="btn btn-primary">
-              Güncelle
+              Update
             </Button>
           </Form>
           
@@ -204,38 +204,38 @@ const UpdateCustomer = (props: Props) => {
                 <div id="select-block" className="col-md-6">
                 
                   <div className="mb-2">
-                  <label className="form-label">Mail </label>
+                  <label className="form-label">Email </label>
                   <input
                       className='info'
                       type="text"
                       value={mail}
                       onChange={(e) => setMail(e.target.value)}
-                      placeholder="Mail Adresi "
+                      placeholder="Email Address "
                     />
                   </div>
                   <div className="mb-2">
-                  <label className="form-label">Eski Şifre </label>
+                  <label className="form-label">Old Password </label>
                     <input
                       className='info'
                       type="password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      placeholder="Şu Anki Şifre"
+                      placeholder="Current Password"
                     />
                   </div> 
                   <div className="mb-2">
-                  <label className="form-label">Yeni Şifre </label>
+                  <label className="form-label">New Password </label>
                     <input
                       className='info'
                       type="password"
                       value={newPassword}
                       onChange={(e) => setNewPassword(e.target.value)}
-                      placeholder="Yeni Şifre"
+                      placeholder="New Password"
                     />
                   </div> 
                 </div>
             </div>
-            <Button onClick={handleClick}>Güncelle</Button>
+            <Button onClick={handleClick}>Update</Button>
             {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
             {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
           </Form>

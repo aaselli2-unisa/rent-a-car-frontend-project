@@ -32,21 +32,21 @@ const AddCarModel = (props: Props) => {
   
       try {
         const response = await dispatch(addCarModel(values));
-        // İşlem başarılı olduğunda
-        setSuccessMessage("İşlem başarıyla tamamlandı");
+        // On successful operation
+        setSuccessMessage("Operation completed successfully");
         window.location.reload();
       } catch (error) {
         console.error("Error updating shift type: ", error);
-        // Hata durumunda
-        setErrorMessage("İşlem sırasında bir hata oluştu");
+        // In case of error
+        setErrorMessage("An error occurred during the operation");
       }
        
   };
   const validationSchema = Yup.object().shape({
     carModelEntityName: Yup.string()
-      .min(2, "Model en az 2 karakter olmalıdır")
-      .required("Model Giriniz"),
-    brandEntityId: Yup.number().required('Marka seçiniz'),
+      .min(2, "Model must be at least 2 characters")
+      .required("Enter model"),
+    brandEntityId: Yup.number().required('Select brand'),
   });
   const initialValues = {
     brandEntityId: "",
@@ -66,13 +66,13 @@ const AddCarModel = (props: Props) => {
     <SideBar>
         <div className="container-card">
         <div className="form">
-          <h2 className="h2-card">Model Ekleme</h2>
+          <h2 className="h2-card">Add Model</h2>
           <Form>
             <div className="row-add-carModel">
               <div id="select-block" className="col-md-6" style={{marginTop:'110px'}}>
                 <div className="mb-2">
                     <FormikSelect
-                      label="Marka "
+                      label="Brand"
                       name="brandEntityId"
                       options={brandState.brands.map((brands: any) => ({ value: brands.id, label: brands.name }))}
                     />
@@ -80,12 +80,12 @@ const AddCarModel = (props: Props) => {
                 <div className="mb-2">
                   <FormikInput
                     name="carModelEntityName"
-                    label="Model "
-                    placeHolder="Model Giriniz."
+                    label="Model"
+                    placeHolder="Enter model."
                     type="text"
                   />
                 </div>
-                <Button style={{marginTop:'30px', backgroundColor: "rgb(140,24,24)", color:"white", width:"200px" , borderRadius:"10px", marginLeft:"140px" }} type='submit'>Ekle</Button>
+                <Button style={{marginTop:'30px', backgroundColor: "rgb(140,24,24)", color:"white", width:"200px" , borderRadius:"10px", marginLeft:"140px" }} type='submit'>Add</Button>
               </div>
             </div>
           </Form>

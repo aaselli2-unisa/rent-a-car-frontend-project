@@ -101,7 +101,7 @@ const fuelTypeSlice = createSlice({
             state.fuelTypes.push(action.payload);
         });
         builder.addCase(addFuelType.rejected, (state, action) => {
-            state.error = action.error.message || "Bir hata oluştu.";
+            state.error = action.error.message || "An error occurred.";
         });
 
         /*------------------*/
@@ -130,7 +130,7 @@ const fuelTypeSlice = createSlice({
             state.fuelTypes = [];
         })
         builder.addCase(updateFuelType.rejected, (state, action) => {
-            state.error = action.error.message || "Bir hata oluştu.";
+            state.error = action.error.message || "An error occurred.";
         });
 
         /*----------------------*/

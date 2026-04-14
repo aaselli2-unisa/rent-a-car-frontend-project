@@ -5,8 +5,13 @@ import axiosInstance from '../utils/axiosInterceptors';
 
 
 class DrivingLicenseTypeModelService {
-  getAll() {
-    return axiosInstance.get<GetAllDrivingLicenseTypesModel>("drivingLicenseType")
+  async getAll() {
+    try {
+      // Some environments expose this endpoint in plural form.
+      return await axiosInstance.get<GetAllDrivingLicenseTypesModel>("drivingLicenseTypes");
+    } catch {
+      return axiosInstance.get<GetAllDrivingLicenseTypesModel>("drivingLicenseType");
+    }
   }
 
   getById(id: number){

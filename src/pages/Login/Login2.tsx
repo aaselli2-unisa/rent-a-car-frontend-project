@@ -15,12 +15,12 @@ const Login2: React.FC = () => {
 
     const handleLogin = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        // Login işlemleri
+        // Login actions
     };
 
     const handleSignUp = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        // Kayıt işlemleri
+        // Sign-up actions
     };
 
     return (

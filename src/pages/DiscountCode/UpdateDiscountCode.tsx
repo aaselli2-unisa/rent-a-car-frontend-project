@@ -43,13 +43,13 @@ const UpdateDiscountCode = () => {
 
   const validationSchema = Yup.object().shape({
     discountCode: Yup.string()
-        .matches(/^[a-zA-Z0-9]+$/, "Sadece harf ve rakamlardan oluşmalıdır")
-        .required("İndirim kodu gerekli"),
+        .matches(/^[a-zA-Z0-9]+$/, "Must contain only letters and numbers")
+        .required("Discount code is required"),
     discountPercentage: Yup.number()
-        .min(5, "İndirim oranı en az 5 olmalıdır")
-        .max(90, "İndirim oranı en fazla 90 olmalıdır")
-        .typeError("Sadece sayılar kabul edilir")
-        .required("İndirim oranı gerekli")
+        .min(5, "Discount rate must be at least 5")
+        .max(90, "Discount rate must be at most 90")
+        .typeError("Only numbers are accepted")
+        .required("Discount rate is required")
 });
 
 const initialValues = {
@@ -60,10 +60,10 @@ const initialValues = {
   const handleUpdateDiscountCode = async (values: any) => {
     try {
       const response = await dispatch(updateDiscountCode(values));
-      setSuccessMessage("İşlem başarıyla tamamlandı");
+      setSuccessMessage("Operation completed successfully");
     } catch (error) {
       console.error("Error updating discount code: ", error);
-      setErrorMessage("İşlem sırasında bir hata oluştu");
+      setErrorMessage("An error occurred during the operation");
     }
   };
   
@@ -72,7 +72,7 @@ const initialValues = {
     <SideBar>
     <div className="container-card">
       <div className="form">
-        <h2 className="h2-card">İndirim Kodu Güncelle</h2>
+        <h2 className="h2-card">Update Discount Code</h2>
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
@@ -93,16 +93,16 @@ const initialValues = {
                   <div className="mb-2">
                     <FormikInput
                       name="discountCode"
-                      label="İndirim Kodu"
-                      placeHolder="İndirim Kodu Giriniz."
+                      label="Discount Code"
+                      placeHolder="Enter discount code."
                       type="text"
                     />
                   </div>
                   <div className="mb-2">
                     <FormikInput
                       name="discountPercentage"
-                      label="İndirim Yüzdesi"
-                      placeHolder="İndirim Yüzdesi Giriniz"
+                      label="Discount Percentage"
+                      placeHolder="Enter discount percentage"
                       type="number"
                     />
                   </div>
@@ -117,7 +117,7 @@ const initialValues = {
                     }}
                     type="submit"
                   >
-                    Güncelle
+                    Update
                   </Button>
                 </div>
               </div>

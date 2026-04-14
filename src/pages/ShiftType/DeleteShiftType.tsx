@@ -33,7 +33,7 @@ const DeleteShiftType = (props: Props) => {
         <div id='select-block' className="col-md-6">
 
           <div className="mb-2">
-            <label htmlFor="selectShiftType">Vites Tipi Seç</label>
+            <label htmlFor="selectShiftType">Select Shift Type</label>
             <select className="form-select" id="shiftTypeSelect" value={selectedShiftType || ''} onChange={handleSelectChange}>
               <option value="" disabled>
 

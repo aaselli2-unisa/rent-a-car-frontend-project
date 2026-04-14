@@ -116,7 +116,7 @@ const discountCodeSlice = createSlice({
       state.discountCodes.push(action.payload);
     });
     builder.addCase(addDiscountCode.rejected, (state, action) => { 
-      state.error = action.error.message || "Bir hata oluştu.";
+      state.error = action.error.message || "An error occurred.";
     });
 
     /*-----------------*/
@@ -127,7 +127,7 @@ const discountCodeSlice = createSlice({
       state.discountCodes = [];
     });
     builder.addCase(updateDiscountCode.rejected, (state, action) => {
-      state.error = action.error.message || "Bir hata oluştu.";
+      state.error = action.error.message || "An error occurred.";
      });
 
     /*-----------------*/

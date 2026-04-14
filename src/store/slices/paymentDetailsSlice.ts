@@ -174,7 +174,7 @@ const paymentDetailsSlice = createSlice({
             state.paymentDetails = [];
         });
         builder.addCase(updatePaymentDetails.rejected, (state, action) => { 
-          state.error = action.error.message || "Bir hata oluştu.";
+          state.error = action.error.message || "An error occurred.";
         });
 
     }

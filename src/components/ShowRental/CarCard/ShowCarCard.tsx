@@ -23,7 +23,7 @@ const ShowCarCard: React.FC<{ carDTO: any }> = ({ carDTO }) => {
               color: "#A8A8A8"
             }}
           >
-            ARACINIZ
+            YOUR VEHICLE
           </div>
             <div className="card-image">
           <img
@@ -64,7 +64,7 @@ const ShowCarCard: React.FC<{ carDTO: any }> = ({ carDTO }) => {
           >
             <div style={{ marginBottom: 1.6 }}>
               <span style={{ fontSize: "1.25rem", fontWeight: "bold",color:"#FFFFFF" }}>
-                Araç Özellikleri
+                Vehicle Features
               </span>
             </div>
             <div className="mid-column">
@@ -73,7 +73,7 @@ const ShowCarCard: React.FC<{ carDTO: any }> = ({ carDTO }) => {
                 size={1}
                 className="iconClass"
               />
-              <span>{carDTO.seat} Kişi</span>
+              <span>{carDTO.seat} Persons</span>
             </div>
             <div className="mid-column">
               <Icon
@@ -81,7 +81,7 @@ const ShowCarCard: React.FC<{ carDTO: any }> = ({ carDTO }) => {
                 size={1}
                 className="iconClass"
               />
-              <span>{carDTO.luggage} Büyük Bavul</span>
+              <span>{carDTO.luggage} Large Suitcase</span>
             </div>
             <div className="mid-column">
               <Icon
@@ -104,7 +104,7 @@ const ShowCarCard: React.FC<{ carDTO: any }> = ({ carDTO }) => {
           <div style={{ paddingLeft: 3, width: "50%", color:"#A8A8A8"}}>
             <div style={{ marginBottom: 1.6, }}>
               <span style={{ fontSize: "1.25rem", fontWeight: "bold", color:"#FFFFFF"}}>
-                Kiralama Koşulları
+                Rental Terms
               </span>
             </div>
             <div className="mid-column">
@@ -113,7 +113,7 @@ const ShowCarCard: React.FC<{ carDTO: any }> = ({ carDTO }) => {
                 size={1}
                 className="iconClass"
               />
-              <span>21 Yaş Ve Üstü</span>
+              <span>Age 21 and Above</span>
             </div>
             <div className="mid-column">
               <Icon
@@ -121,7 +121,7 @@ const ShowCarCard: React.FC<{ carDTO: any }> = ({ carDTO }) => {
                 size={1}
                 className="iconClass"
               />
-              <span>Ehliyet Yılı 1 ve Üzeri</span>
+              <span>Driving License Year 1 and Above</span>
             </div>
             <div className="mid-column">
               <Icon
@@ -129,10 +129,10 @@ const ShowCarCard: React.FC<{ carDTO: any }> = ({ carDTO }) => {
                 size={1}
                 className="iconClass"
               />
-              <span>1 Kredi Kartı</span>
+              <span>1 Credit Card</span>
             </div>
             <div>
-              Minimum Ehliyet:{" "}
+              Minimum License: {" "}
               <span className="bold-text">
                 {carDTO.expectedMinDrivingLicenseTypeName}
               </span>

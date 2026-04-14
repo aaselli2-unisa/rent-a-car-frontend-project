@@ -53,14 +53,14 @@ const ShiftTypeTable: React.FC = () => {
     setPage(page);
     setIsLoading(false);
   };
-  const changeRowsPerPage = (rowsPerPage: number, page: number) => { // Satır sayısını değiştiren fonksiyonu ekledik
+  const changeRowsPerPage = (rowsPerPage: number, page: number) => { // Function to change row count
     setRowsPerPage(rowsPerPage);
     setPage(page);
   };
 
   const sort = (page: number, sortOrder: { name: string; direction: "asc" | "desc" }) => {
     setIsLoading(true);
-    // Tıklanan sütuna göre sıralama işlemini belirle
+    // Determine the sorting operation based on clicked column
     let columnName: string = "";
     switch (sortOrder.name) {
       case "id":
@@ -76,21 +76,21 @@ const ShiftTypeTable: React.FC = () => {
         break;
     }
 
-    // Sıralama işlemleri burada yapılacak
-    // Örnek bir sıralama işlemi:
+    // Sorting operations are performed here
+    // Example sorting logic:
     const sortedData = shiftTypeState.shiftTypes.slice().sort((a: any, b: any) => {
       if (sortOrder.direction === "asc") {
-        // Sıralama işlemini doğrudan dizge karşılaştırma operatörleriyle gerçekleştir
+        // Sort directly with string comparison operators
         return a[columnName] > b[columnName] ? 1 : -1;
       } else {
-        // Sıralama işlemini doğrudan dizge karşılaştırma operatörleriyle gerçekleştir
+        // Sort directly with string comparison operators
         return b[columnName] > a[columnName] ? 1 : -1;
       }
     });
 
-    // Sıralanmış verileri güncelle
+    // Update sorted data
     setData(sortedData.map((shiftType: any) => [shiftType.id, shiftType.name, shiftType.deleted ]));
-    // isLoading durumunu false olarak ayarla
+    // Set isLoading to false
     setIsLoading(false);
   };
   const handleRowSelectionChange = (currentRowsSelected: any[]) => {
@@ -160,7 +160,7 @@ const ShiftTypeTable: React.FC = () => {
 
   return (
     <div className="container-card">
-    <h2 className="h2-card">VİTES TİPİ</h2>
+    <h2 className="h2-card">SHIFT TYPE</h2>
     <div className="form">
       <MUIDataTable
         title={
@@ -190,7 +190,7 @@ const ShiftTypeTable: React.FC = () => {
           },
           {
             name: "name",
-            label: "VİTES TİPİ",
+            label: "SHIFT TYPE",
             options: {
               customHeadRender: (columnMeta: MUIDataTableColumn) => (
                 <th style={{ textAlign: "center", borderBottom: "1px solid rgba(224, 224, 224, 1)" }}>{columnMeta.label}</th>
@@ -202,7 +202,7 @@ const ShiftTypeTable: React.FC = () => {
           },
           {
             name: "deleted",
-            label: "SİLİNEN",
+            label: "DELETED",
             options: {
                 customHeadRender: (columnMeta: MUIDataTableColumn) => (
                     <th style={{ textAlign: "center", borderBottom: "1px solid rgba(224, 224, 224, 1)" }}>{columnMeta.label}</th>

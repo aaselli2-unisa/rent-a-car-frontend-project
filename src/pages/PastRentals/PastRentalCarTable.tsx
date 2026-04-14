@@ -40,12 +40,12 @@ const PastRentalCarTable = (props: Props) => {
     navigate(`/myRentalDetails/${id}`);
   };
   const formatDate = (date: string | Date | undefined): string => {
-    if (!date) return ""; // Eğer tarih yoksa boş bir dize döndür
+    if (!date) return ""; // Return empty string if date is missing
     if (typeof date === "string") {
-      // Eğer tarih bir string ise, Date nesnesine dönüştür
+      // Convert string dates to Date objects
       date = new Date(date);
     }
-    return new Intl.DateTimeFormat("tr-TR", {
+    return new Intl.DateTimeFormat("en-US", {
       year: "numeric",
       month: "numeric",
       day: "numeric",
@@ -58,31 +58,31 @@ const PastRentalCarTable = (props: Props) => {
       sx={{ backgroundColor: "transparent" }}
       className="custom-table-container"
     >
-      <h2 className="h2-card">Kiralama Geçmişim</h2>
+      <h2 className="h2-card">My Rental History</h2>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead sx={{backgroundColor: "#f5f5dc29"}}>
           <TableRow>
             <TableCell align="left" sx={{ color: "#ffc107", padding: "0px 50px 0px 50px" }}>
-                AD SOYAD
+                FULL NAME
             </TableCell>
             <TableCell align="left" sx={{ color: "#ffc107", padding: "0px 50px 0px 50px" }}>
-                BAŞLANGIÇ TARİHİ
+                START DATE
             </TableCell>
             <TableCell align="left" sx={{ color: "#ffc107", padding: "0px 50px 0px 50px" }}>
-                BİTİŞ TARİHİ
+                END DATE
             </TableCell>
             <TableCell align="left" sx={{ color: "#ffc107", padding: "0px 50px 0px 50px" }}>
-                DÖNÜŞ TARİHİ
+                RETURN DATE
             </TableCell>
             <TableCell align="left" sx={{ color: "#ffc107", padding: "0px 50px 0px 50px" }}>
-                DURUM
+                STATUS
             </TableCell>
             <TableCell align="left" sx={{ color: "#ffc107", padding: "0px 50px 0px 50px" }}>
-                TUTAR
+                AMOUNT
             </TableCell>
             <TableCell
               align="left"
-              sx={{ color: "#ffc107", padding: "0px 50px 0px 50px" }}>DETAY</TableCell>
+              sx={{ color: "#ffc107", padding: "0px 50px 0px 50px" }}>DETAIL</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

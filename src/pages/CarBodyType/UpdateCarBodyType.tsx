@@ -49,11 +49,11 @@ const UpdateCarBodyType = (props: Props) => {
     }
   };
   const validationSchema = Yup.object().shape({
-    id: Yup.number().required("Marka seçiniz"),
+    id: Yup.number().required("Select body type"),
     name: Yup.string()
-      .min(2, "Kasa Tipi en az 2 karakter olmalıdır")
-      .matches(/^[a-zA-ZğüşıöçĞÜŞİÖÇ\s]+$/, "Kasa Tipi sadece harflerden oluşmalıdır")
-      .required("Kasa Tipi Giriniz"),
+      .min(2, "Body type must be at least 2 characters")
+      .matches(/^[a-zA-Z\s]+$/, "Body type can only contain letters")
+      .required("Enter body type"),
   });
   const initialValues = {
     id: carBodyType?.id,
@@ -63,13 +63,13 @@ const UpdateCarBodyType = (props: Props) => {
   const handleUpdateCarModel = async (values: any) => {
     try {
       const response = await dispatch(updateCarBodyType(values));
-      // İşlem başarılı olduğunda
-      setSuccessMessage("İşlem başarıyla tamamlandı");
+      // On successful operation
+      setSuccessMessage("Operation completed successfully");
       window.location.reload();
     } catch (error) {
       console.error("Error updating shift type: ", error);
-      // Hata durumunda
-      setErrorMessage("İşlem sırasında bir hata oluştu");
+      // In case of error
+      setErrorMessage("An error occurred during the operation");
     }
   };
   return (
@@ -85,7 +85,7 @@ const UpdateCarBodyType = (props: Props) => {
       <SideBar>
         <div className="container-card">
           <div className="form">
-            <h2 className="h2-card">Kasan Tipi Güncelleme</h2>
+            <h2 className="h2-card">Update Body Type</h2>
             <Form>
               <div className="row-add-carModel">
                 <div
@@ -95,7 +95,7 @@ const UpdateCarBodyType = (props: Props) => {
                 >
                   <div className="mb-2">
                     <FormikSelect
-                      label="Kasa Tipi Seç"
+                      label="Select Body Type"
                       name="id"
                       options={carBodyTypeState.carBodyTypes.map(
                         (carBodyType: any) => ({
@@ -108,8 +108,8 @@ const UpdateCarBodyType = (props: Props) => {
                   <div className="mb-2">
                     <FormikInput
                       name="name"
-                      label="Kasa Tipi Giriniz"
-                      placeHolder="Kasa Tipi Giriniz."
+                      label="Body Type"
+                      placeHolder="Enter body type."
                       type="text"
                     />
                   </div>
@@ -124,7 +124,7 @@ const UpdateCarBodyType = (props: Props) => {
                     }}
                     type="submit"
                   >
-                    Güncelle
+                    Update
                   </Button>
                 </div>
               </div>

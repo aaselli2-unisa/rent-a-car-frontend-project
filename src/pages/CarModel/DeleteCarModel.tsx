@@ -33,7 +33,7 @@ const DeleteCarModel = (props: Props) => {
             <div id='select-block' className="col-md-6">
 
                 <div className="mb-2">
-                    <label htmlFor="selectCarModel">Model Seç</label>
+                    <label htmlFor="selectCarModel">Select Model</label>
                     <select className="form-select" id="carModelSelect" value={selectedCarModel || ''} onChange={handleCarModelChange}>
                         <option value="" disabled>
 

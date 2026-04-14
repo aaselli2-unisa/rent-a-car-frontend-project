@@ -1,51 +1,36 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { AddShowRentalResponse } from "../../models/Responses/Rental/AddShowRentalResponse";
 import { addShowRental } from "../../store/slices/showRentalSlice";
 import { AppDispatch } from "../../store/configureStore";
 import { useDispatch } from "react-redux";
-import { InputAdornment, OutlinedInput, TextField } from "@mui/material";
-import Button from "@mui/joy/Button";
-import Icon from "@mdi/react";
-
-import {
-  mdiAccountGroup,
-  mdiBagSuitcase,
-  mdiGasStationOutline,
-  mdiCarShiftPattern,
-  mdiCalendarAccountOutline,
-  mdiCarChildSeat,
-  mdiCreditCardMultipleOutline,
-} from "@mdi/js";
 import "./ShowRental.css";
 import "./DiscountInput.css";
 import ShowCarCard from "./CarCard/ShowCarCard";
 const ShowRental: React.FC<{
   response: AddShowRentalResponse | undefined;
   onPaymentProcessClick: () => void;
-}> = ({ response, onPaymentProcessClick }) => {
+  isLoading?: boolean;
+}> = ({ response, onPaymentProcessClick, isLoading }) => {
   const dispatch = useDispatch<AppDispatch>();
   const [discountCodeInput, setDiscountCodeInput] = useState("");
   const [calculatedAmount, setCalculatedAmount] = useState<number | undefined>(
     undefined
   );
 
-  const [rentalResponse, setRentalResponse] = useState<
-    AddShowRentalResponse | undefined
-  >();
 
   if (!response) {
-    return <div>Bilgiler yükleniyor...</div>;
+    return <div>{isLoading ? "Loading rental information..." : "No rental information available."}</div>;
   }
-  /* tarihi reformat etmek */
+  /* format date */
   const formatDate = (tarih: Date | string) => {
     const dateObject = new Date(tarih);
-    if (dateObject instanceof Date && !isNaN(dateObject.getTime())) {
+    if (!isNaN(dateObject.getTime())) {
       const gun = dateObject.getDate().toString().padStart(2, "0");
       const ay = (dateObject.getMonth() + 1).toString().padStart(2, "0");
       const yil = dateObject.getFullYear().toString();
       return `${gun}.${ay}.${yil}`;
     } else {
-      return "Geçersiz Tarih";
+      return "Invalid Date";
     }
   };
 
@@ -61,12 +46,10 @@ const ShowRental: React.FC<{
     );
     const endTime = Date.UTC(end.getFullYear(), end.getMonth(), end.getDate());
 
-    const dayDifference = Math.round(Math.abs((startTime - endTime) / oneDay));
-
-    return dayDifference;
+    return Math.round(Math.abs((startTime - endTime) / oneDay));
   };
 
-  const { customerDTO, carDTO, startDate, endDate, discountCode, amount } =
+  const { customerDTO, carDTO, startDate, endDate, amount } =
     response.response;
 
   const handleCalculateClick = async () => {
@@ -81,8 +64,7 @@ const ShowRental: React.FC<{
     );
 
     if (newAmountResponse.payload) {
-      setRentalResponse(newAmountResponse.payload as AddShowRentalResponse);
-      setCalculatedAmount(rentalResponse?.response.amount);
+      setCalculatedAmount((newAmountResponse.payload as AddShowRentalResponse)?.response.amount);
     }
   };
 
@@ -95,7 +77,7 @@ const ShowRental: React.FC<{
   return (
     <div className="show-rental-container mt-4">
       <div className="text-white firstHeaderText">
-        <h3>Macera Detayları</h3>
+        <h3>Rental Details</h3>
       </div>
       <div className="line"></div>
 
@@ -109,18 +91,18 @@ const ShowRental: React.FC<{
           </div>
         </div>
 
-        {/* Kiralama Detayları */}
+        {/* Rental Details */}
         <div className="col-md-6">
           <div className="text-white">
-            <h5 className="second-header">Müşteri Bilgileri:</h5>
+            <h5 className="second-header">Customer Information:</h5>
             <div className="customer-info-container">
               <div className="label-value-pair">
                 <div>
-                  <p>Ad:</p>
-                  <p>Soyad:</p>
-                  <p>Mail Adresi:</p>
-                  <p>İletişim Numarası:</p>
-                  <p>Ehliyet Tipi:</p>
+                  <p>Name:</p>
+                  <p>Surname:</p>
+                  <p>Email Address:</p>
+                  <p>Contact Number:</p>
+                  <p>License Type:</p>
                 </div>
               </div>
               <div className="customer-values text-grey">
@@ -134,13 +116,13 @@ const ShowRental: React.FC<{
               </div>
             </div>
 
-            <h5 className="second-header">Araç Bilgileri:</h5>
+            <h5 className="second-header">Vehicle Information:</h5>
             <div className="car-info-container">
               <div className="label-value-pair text-grey">
-                <p>Marka:</p>
+                <p>Brand:</p>
                 <p>Model:</p>
-                <p>Renk:</p>
-                <p>Yıl:</p>
+                <p>Color:</p>
+                <p>Year:</p>
               </div>
               <div className="car-info-values">
                 <div>
@@ -152,7 +134,7 @@ const ShowRental: React.FC<{
               </div>
             </div>
 
-            <h4 className="second-header-center">Macera Tarihleri</h4>
+            <h4 className="second-header-center">Rental Dates</h4>
             <div className="rental-dates-container">
               <div className="rental-date-values">
                 {formatDate(startDate)} - {formatDate(endDate)}
@@ -160,9 +142,9 @@ const ShowRental: React.FC<{
             </div>
           </div>
 
-          {/* İndirim Kodu ve Hesapla Butonu */}
+          {/* Discount code and calculate button */}
           <div className="mb-3 asd">
-            {/* Fiyat*/}
+            {/* Price*/}
             <div style={{ float: "left", marginTop:'auto'}}>
               <p style={{ color: "white" }}>
                 <strong
@@ -174,7 +156,7 @@ const ShowRental: React.FC<{
                 >
                   {calculateTotalDays(startDate, endDate)}
                 </strong>{" "}
-                Günlük fiyat:
+                Daily price:
                 <strong style={{ color: "white" , fontSize:'20px'}}>
                   {" "}
                   {calculatedAmount !== undefined
@@ -193,10 +175,10 @@ const ShowRental: React.FC<{
                   setDiscountCodeInput(e.target.value.toUpperCase().trim())
                 }
                 className="custom-input"
-                placeholder="indirim kodu"
+                placeholder="discount code"
                 style={{ width: "210px", height: "50px" }}
               ></input>
-              <button onClick={handleCalculateClick} className="discountButton">Uygula</button>
+              <button onClick={handleCalculateClick} className="discountButton">Apply</button>
             </div>
           </div>
           </div>
@@ -211,7 +193,7 @@ const ShowRental: React.FC<{
         onChange={handleCheckboxChange} */
                 className="checkbox-input"
               />
-              <label htmlFor="termsCheckbox" className="checkbox-label">
+                <label htmlFor="termsCheckbox" className="checkbox-label">
                 ExtendRent
                 <a
                   href="/link/to/terms"
@@ -219,9 +201,9 @@ const ShowRental: React.FC<{
                   rel="noopener noreferrer"
                 >
                   {" "}
-                  kullanım şartlarını
+                  terms of use
                 </a>{" "}
-                okudum, anladım, kabul ediyorum.
+                I have read, understood, and accept.
               </label>
             </div>
 
@@ -239,15 +221,15 @@ const ShowRental: React.FC<{
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Kiralama koşullarını
+                  Rental terms
                 </a>{" "}
-                okudum, anladım, kabul ediyorum.
+                I have read, understood, and accept.
               </label>
             </div>
           </div>
         </div>
         <button onClick={onPaymentProcessClick} className="mt-2 pay-button">
-          Ödemeye İlerle
+          Proceed to Payment
         </button>
       </div>
     </div>

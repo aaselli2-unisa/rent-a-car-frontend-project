@@ -101,11 +101,11 @@ const AdminCards = (props: Props) => {
             <div className="card order-card">
                 <div className="card-block">
                 <h4 style={{ textAlign: "center" }} className="m-b-20">
-                    Kullanıcılar
+                    Users
                 </h4>
                 <h6 className="m-b-20">
                 <i className="fa fa-user" style={{fontSize: "24px" ,color: '#8C1816'}}></i>{" "}
-                    Aktif Kullanıcılar : <span>{userCountIsDeleted}</span>
+                    Active Users : <span>{userCountIsDeleted}</span>
                 </h6>
                 <h6 className="m-b-20">
                     <i
@@ -113,7 +113,7 @@ const AdminCards = (props: Props) => {
                     aria-hidden="true"
                     style={{ fontSize: "24px" ,color: '#8C1816'}}
                     ></i>{" "}
-                    Silinen Kullanıcılar : <span>{userCountIsDeletedTrue}</span>
+                    Deleted Users : <span>{userCountIsDeletedTrue}</span>
                 </h6>
                 <br />
                 </div>
@@ -124,7 +124,7 @@ const AdminCards = (props: Props) => {
             <div className="card order-card">
                 <div className="card-block">
                 <h4 style={{ textAlign: "center" }} className="m-b-20">
-                    Müşteriler
+                    Customers
                 </h4>
                 <h6 className="m-b-20">
                     <i
@@ -132,7 +132,7 @@ const AdminCards = (props: Props) => {
                     aria-hidden="true"
                     style={{ fontSize: "24px", color: '#8C1816'}}
                     ></i>{" "}
-                    Onay Bekleyenler : <span>{customerPending}</span>
+                    Pending Approval : <span>{customerPending}</span>
                 </h6>
                 <h6 className="m-b-20">
                     <i
@@ -140,7 +140,7 @@ const AdminCards = (props: Props) => {
                     aria-hidden="true"
                     style={{ fontSize: "24px", color: '#8C1816' }}
                     ></i>{" "}
-                    Engellenenler : <span>{customerBlocked}</span>
+                    Blocked : <span>{customerBlocked}</span>
                 </h6>
                 <h6 className="m-b-20">
                     <i
@@ -148,7 +148,7 @@ const AdminCards = (props: Props) => {
                     aria-hidden="true"
                     style={{ fontSize: "24px", color: '#8C1816' }}
                     ></i>{" "}
-                    Mevcut : <span>{customerIsDeleted}</span>
+                    Existing : <span>{customerIsDeleted}</span>
                 </h6>
                 </div>
             </div>
@@ -157,7 +157,7 @@ const AdminCards = (props: Props) => {
             <div className="card order-card">
                 <div className="card-block">
                 <h4 style={{ textAlign: "center" }} className="m-b-20">
-                    Çalışanlar
+                    Employees
                 </h4>
                 <h6 className="m-b-20">
                     <i
@@ -165,7 +165,7 @@ const AdminCards = (props: Props) => {
                     aria-hidden="true"
                     style={{ fontSize: "24px", color: '#8C1816' }}
                     ></i>{" "}
-                    Aktif Kullanıcılar : <span>{employeeCountIsDeleted}</span>
+                    Active Users : <span>{employeeCountIsDeleted}</span>
                 </h6>
                 <h6 className="m-b-20">
                     <i
@@ -173,7 +173,7 @@ const AdminCards = (props: Props) => {
                     aria-hidden="true"
                     style={{ fontSize: "24px", color: '#8C1816' }}
                     ></i>{" "}
-                    Silinen Kullanıcılar : <span>{employeeCountIsDeletedTrue}</span>
+                    Deleted Users : <span>{employeeCountIsDeletedTrue}</span>
                 </h6>
                 <br />
                 </div>
@@ -193,7 +193,7 @@ const AdminCards = (props: Props) => {
                         aria-hidden="true"
                         style={{ fontSize: "24px", color: '#8C1816' }}
                     ></i>{" "}
-                    Aktif Kullanıcılar : <span>{adminCountIsDeleted}</span>
+                    Active Users : <span>{adminCountIsDeleted}</span>
                     </h6>
                     <h6 className="m-b-20">
                     <i
@@ -201,7 +201,7 @@ const AdminCards = (props: Props) => {
                         aria-hidden="true"
                         style={{ fontSize: "24px", color: '#8C1816' }}
                     ></i>{" "}
-                    Silinenler : <span>{adminCountIsDeletedTrue}</span>
+                    Deleted : <span>{adminCountIsDeletedTrue}</span>
                     </h6>
                     <br />
                     <br />
@@ -213,7 +213,7 @@ const AdminCards = (props: Props) => {
                 <div className="card order-card">
                 <div className="card-block">
                     <h4 style={{ textAlign: "center" }} className="m-b-20">
-                    Araba
+                    Car
                     </h4>
                     <h6 className="m-b-20">
                     <i
@@ -221,7 +221,7 @@ const AdminCards = (props: Props) => {
                         aria-hidden="true"
                         style={{ fontSize: "24px", color: '#8C1816' }}
                     ></i>{" "}
-                    Kullanımda : <span>{carInUse}</span>
+                    In Use : <span>{carInUse}</span>
                     </h6>
                     <h6 className="m-b-20">
                     <i
@@ -229,7 +229,7 @@ const AdminCards = (props: Props) => {
                         aria-hidden="true"
                         style={{ fontSize: "24px", color: '#8C1816' }}
                     ></i>{" "}
-                    Bakımda : <span>{carMaintenance}</span>
+                    In Maintenance : <span>{carMaintenance}</span>
                     </h6>
                     <h6 className="m-b-20">
                     <i
@@ -237,7 +237,7 @@ const AdminCards = (props: Props) => {
                         aria-hidden="true"
                         style={{ fontSize: "24px", color: '#8C1816' }}
                     ></i>{" "}
-                    Mevcut : <span>{carCountIsDeleted}</span>
+                    Existing : <span>{carCountIsDeleted}</span>
                     </h6>
                     <br />
                 </div>
@@ -248,7 +248,7 @@ const AdminCards = (props: Props) => {
                 <div className="card order-card">
                 <div className="card-block">
                     <h4 style={{ textAlign: "center"}} className="m-b-20">
-                    Kiralama
+                    Rental
                     </h4>
                     <h6 className="m-b-20">
                     <i
@@ -256,7 +256,7 @@ const AdminCards = (props: Props) => {
                         aria-hidden="true"
                         style={{ fontSize: "24px", color: '#8C1816' }}
                     ></i>{" "}
-                    Aktif : <span>{rentalActive}</span>
+                    Active : <span>{rentalActive}</span>
                     </h6>
                     <h6 className="m-b-20">
                     <i
@@ -264,7 +264,7 @@ const AdminCards = (props: Props) => {
                         aria-hidden="true"
                         style={{ fontSize: "24px", color: '#8C1816' }}
                     ></i>{" "}
-                    Tamamlanan : <span>{rentalFinished}</span>
+                    Completed : <span>{rentalFinished}</span>
                     </h6>
                     <h6 className="m-b-20">
                     <i
@@ -272,7 +272,7 @@ const AdminCards = (props: Props) => {
                         aria-hidden="true"
                         style={{ fontSize: "24px", color: '#8C1816'}}
                     ></i>{" "}
-                    Mevcut : <span>{rentalCountIsDeleted}</span>
+                    Existing : <span>{rentalCountIsDeleted}</span>
                     </h6>
                     <br />
                 </div>

@@ -138,7 +138,7 @@ const employeeSlice = createSlice({
             state.employees.push(action.payload);
         });
         builder.addCase(addEmployee.rejected, (state, action) => { 
-            state.error = action.error.message || "Bir hata oluştu.";
+            state.error = action.error.message || "An error occurred.";
         });
 
         /*-----------------*/
@@ -149,7 +149,7 @@ const employeeSlice = createSlice({
             state.employees = [];
         });
         builder.addCase(updateEmployee.rejected, (state, action) => {
-            state.error = action.error.message || "Bir hata oluştu.";
+            state.error = action.error.message || "An error occurred.";
          });
 
         /*-----------------*/

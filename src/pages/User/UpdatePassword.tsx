@@ -26,9 +26,9 @@ const UpdatePassword = (props: Props) => {
 
   const validationSchema = Yup.object().shape({
     password: Yup.string()
-    .min(8, "Şifre en az 8 hane olmalıdır")
-    .max(30, "Şifre en fazla 30 hane olmalıdır")
-    .required("Şifre giriniz"),
+    .min(8, "Password must be at least 8 characters")
+    .max(30, "Password must be at most 30 characters")
+    .required("Enter password"),
   })
 
   const initialValues = {
@@ -39,10 +39,10 @@ const UpdatePassword = (props: Props) => {
   const handleUpdateUser = async (values: any) => {
     try {
       const response = await dispatch(changePassword(values));
-      setSuccessMessage("İşlem başarıyla tamamlandı");
+      setSuccessMessage("Operation completed successfully");
     } catch (error) {
       console.error("Error updating discount code: ", error);
-      setErrorMessage("İşlem sırasında bir hata oluştu");
+      setErrorMessage("An error occurred during the operation");
     }
     window.location.href = "/adminPanel/users";
   };
@@ -51,7 +51,7 @@ const UpdatePassword = (props: Props) => {
     <SideBar>
     <div className="container-card">
       <div className="form">
-        <h2 className="h2-card">Şifre Güncelle</h2>
+        <h2 className="h2-card">Update Password</h2>
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
@@ -71,8 +71,8 @@ const UpdatePassword = (props: Props) => {
                   <div className="mb-2">
                     <FormikInput
                       name="password"
-                      label="Şifre"
-                      placeHolder="Şifre Giriniz."
+                      label="Password"
+                      placeHolder="Enter password."
                       type="text"
                     />
                   </div>
@@ -87,7 +87,7 @@ const UpdatePassword = (props: Props) => {
                     }}
                     type="submit"
                   >
-                    Güncelle
+                    Update
                   </Button>
                 </div>
               </div>

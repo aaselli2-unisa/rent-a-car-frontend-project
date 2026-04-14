@@ -43,9 +43,9 @@ const UpdateCarSegment = () => {
 
   const validationSchema = Yup.object().shape({
     name: Yup.string()
-      .required("Araç segmenti giriniz.")
-      .min(2, 'Araç segmenti en az 2 karakter olmalıdır')
-      .matches(/^[a-zA-ZğüşıöçĞÜŞİÖÇ\s]+$/, 'Araç segmenti sadece harflerden oluşmalıdır')
+      .required("Enter car segment.")
+      .min(2, 'Car segment must be at least 2 characters')
+      .matches(/^[a-zA-Z\s]+$/, 'Car segment can only contain letters')
   });
 
   const initialValues = {
@@ -56,12 +56,12 @@ const UpdateCarSegment = () => {
   const handleUpdateCarSegment = async (values: any) => {
     try {
       const response = await dispatch(updateCarSegment(values));
-      // İşlem başarılı olduğunda
-      setSuccessMessage("İşlem başarıyla tamamlandı");
+      // On successful operation
+      setSuccessMessage("Operation completed successfully");
     } catch (error) {
       console.error("Error updating car segment: ", error);
-      // Hata durumunda
-      setErrorMessage("İşlem sırasında bir hata oluştu");
+      // In case of error
+      setErrorMessage("An error occurred during the operation");
     }
   };
   
@@ -70,7 +70,7 @@ const UpdateCarSegment = () => {
     <SideBar>
     <div className="container-card">
       <div className="form">
-        <h2 className="h2-card">Araç Segmenti Güncelle</h2>
+        <h2 className="h2-card">Update Car Segment</h2>
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
@@ -91,8 +91,8 @@ const UpdateCarSegment = () => {
                   <div className="mb-2">
                     <FormikInput
                       name="name"
-                      label="Araç Segment"
-                      placeHolder="Araç Segmenti Giriniz."
+                      label="Car Segment"
+                      placeHolder="Enter car segment."
                       type="text"
                     />
                   </div>
@@ -107,7 +107,7 @@ const UpdateCarSegment = () => {
                     }}
                     type="submit"
                   >
-                    Güncelle
+                    Update
                   </Button>
                 </div>
               </div>

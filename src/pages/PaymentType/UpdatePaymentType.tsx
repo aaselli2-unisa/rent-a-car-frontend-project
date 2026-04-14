@@ -44,10 +44,10 @@ const UpdatePaymentType = () => {
 
   const validationSchema = Yup.object().shape({
     name: Yup.string()
-      .required("Ödeme tipi giriniz.")
-      .min(2, 'Ödeme tipi en az 2 karakter olmalıdır')
-      .max(20, 'Ödeme tipi en fazla 20 karakter olmalıdır')
-      .matches(/^[\sa-zA-ZğüşıöçĞÜŞİÖÇ]*$/, 'Ödeme tipi sadece harflerden oluşmalıdır'),
+      .required("Enter payment type.")
+      .min(2, 'Payment type must be at least 2 characters')
+      .max(20, 'Payment type must be at most 20 characters')
+      .matches(/^[\sa-zA-Z]*$/, 'Payment type can only contain letters'),
     active: Yup.boolean()
   });
 
@@ -60,11 +60,11 @@ const UpdatePaymentType = () => {
   const handleUpdatePaymentType = async (values: any) => {
     try {
       const response = await dispatch(updatePaymentType(values))
-      setSuccessMessage("İşlem başarıyla tamamlandı");
+      setSuccessMessage("Operation completed successfully");
     } catch (error) {
       console.error("Error updating shift type: ", error);
-      // Hata durumunda
-      setErrorMessage("İşlem sırasında bir hata oluştu");
+      // In case of error
+      setErrorMessage("An error occurred during the operation");
     }
   };
 
@@ -72,7 +72,7 @@ const UpdatePaymentType = () => {
     <SideBar>
       <div className="container-card">
         <div className="form">
-          <h2 className="h2-card">Ödeme Tipi Güncelle</h2>
+          <h2 className="h2-card">Update Payment Type</h2>
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
@@ -92,15 +92,15 @@ const UpdatePaymentType = () => {
                   <div className="mb-2">
                     <FormikInput
                       name="name"
-                      label="Ödeme Tipi"
-                      placeHolder="Ödeme Tipi Giriniz."
+                      label="Payment Type"
+                      placeHolder="Enter payment type."
                       type="text"
                     />
                   </div>
                   <div className="mb-2">
                     <FormikCheckbox
                       name="active"
-                      label="Ödeme Tipi Aktif mi?"
+                      label="Is Payment Type Active?"
                     />
                   </div>
                   <Button
@@ -114,7 +114,7 @@ const UpdatePaymentType = () => {
                     }}
                     type="submit"
                   >
-                    Güncelle
+                    Update
                   </Button>
                 </div>
               </div>

@@ -40,9 +40,9 @@ const ReturnRental = (props: Props) => {
   return (
     <div className="container-card return-rental-container">
         <div className="form return-rental-form">
-        <h2 className="h2-card">Kiralama Tamamla</h2>
+        <h2 className="h2-card">Complete Rental</h2>
         <div className="returnRental">
-            <p style={{textAlign:'center', marginTop:'100px'}}><label htmlFor="endDate">Bitiş Günü:</label></p>
+            <p style={{textAlign:'center', marginTop:'100px'}}><label htmlFor="endDate">End Date:</label></p>
             <input
                 type="date"
                 id="endDate"
@@ -53,7 +53,7 @@ const ReturnRental = (props: Props) => {
         
         
         <div className="returnRental">
-        <p style={{textAlign:'center', marginTop:'20px'}}><label htmlFor="endKilometer">Güncel km:</label></p>
+        <p style={{textAlign:'center', marginTop:'20px'}}><label htmlFor="endKilometer">Current km:</label></p>
             <input
                 type="number"
                 id="endKilometer"
@@ -62,8 +62,8 @@ const ReturnRental = (props: Props) => {
             />
         </div>
         <div className="form-actions return-rental-action">
-        <button className='return-button' onClick={handlePaymentTypeUpdateSuccess}>Kiralamayı Bitir</button>
-        <button className='return-button' onClick={handleCancelUpdate}>İptal</button>
+        <button className='return-button' onClick={handlePaymentTypeUpdateSuccess}>Finish Rental</button>
+        <button className='return-button' onClick={handleCancelUpdate}>Cancel</button>
         </div>
         </div>
     </div>

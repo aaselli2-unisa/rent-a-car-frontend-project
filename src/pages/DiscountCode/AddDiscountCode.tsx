@@ -25,13 +25,13 @@ const AddDiscountCode = (props: Props) => {
 }; 
 const validationSchema = Yup.object().shape({
     discountCode: Yup.string()
-        .matches(/^[a-zA-Z0-9]+$/, "Sadece harf ve rakamlardan oluşmalıdır")
-        .required("İndirim kodu gerekli"),
+        .matches(/^[a-zA-Z0-9]+$/, "Must contain only letters and numbers")
+        .required("Discount code is required"),
     discountPercentage: Yup.number()
-        .min(5, "İndirim oranı en az 5 olmalıdır")
-        .max(90, "İndirim oranı en fazla 90 olmalıdır")
-        .typeError("Sadece sayılar kabul edilir")
-        .required("İndirim oranı gerekli")
+        .min(5, "Discount rate must be at least 5")
+        .max(90, "Discount rate must be at most 90")
+        .typeError("Only numbers are accepted")
+        .required("Discount rate is required")
 });
 const initialValues = {
   discountCode: "",
@@ -51,24 +51,24 @@ const initialValues = {
     <SideBar>
       <div className="container-card">
       <div className="form">
-        <h2 className="h2-card">İndirim Kodu Ekleme</h2>
+        <h2 className="h2-card">Add Discount Code</h2>
         <Form>
           <div className="row-add-carModel">
             <div id="select-block" className="col-md-6" style={{marginTop:'110px'}}>
               <div className="mb-2">
                 <FormikInput
                   name="discountCode"
-                  label="İndirim Kodu "
-                  placeHolder="İndirim Kodu Giriniz"
+                  label="Discount Code"
+                  placeHolder="Enter discount code"
                   type="text"
                 />
                 <FormikInput
                   name="discountPercentage"
-                  label="İndirim Oranı "
-                  placeHolder="İndirim Oranı Giriniz."
+                  label="Discount Rate"
+                  placeHolder="Enter discount rate."
                   type="number"
                 />
-                 <Button style={{marginTop:'30px', backgroundColor: "rgb(140,24,24)", color:"white", width:"200px" , borderRadius:"10px", marginLeft:"140px" }} type='submit'>Ekle</Button>
+                 <Button style={{marginTop:'30px', backgroundColor: "rgb(140,24,24)", color:"white", width:"200px" , borderRadius:"10px", marginLeft:"140px" }} type='submit'>Add</Button>
               </div>
             </div>
           </div>

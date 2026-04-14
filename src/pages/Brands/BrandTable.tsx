@@ -28,7 +28,7 @@ const BrandTable: React.FC = () => {
   }, [page, rowsPerPage]);
 
   useEffect(() => {
-     // brandState'in bir dizi olup olmadığını kontrol ettik
+     // Ensure brandState.brands is iterable
      const tableData = brandState.brands.map((brand: any) => [
       brand.id,
       brand.name,
@@ -54,14 +54,14 @@ const BrandTable: React.FC = () => {
     setPage(page); 
     setIsLoading(false);
   };
-  const changeRowsPerPage = (rowsPerPage: number, page: number) => { // Satır sayısını değiştiren fonksiyonu ekledik
+  const changeRowsPerPage = (rowsPerPage: number, page: number) => { // Added function to change row count
     setRowsPerPage(rowsPerPage);
     setPage(page);
   };
 
   const sort = (page: number, sortOrder: { name: string; direction: "asc" | "desc" }) => {
     setIsLoading(true);
-    // Tıklanan sütuna göre sıralama işlemini belirle
+    // Determine sorting based on the clicked column
     let columnName: string = "";
     switch (sortOrder.name) {
       case "id":
@@ -77,28 +77,28 @@ const BrandTable: React.FC = () => {
         break;
     }
   
-    // Sıralama işlemleri burada yapılacak
-    // Örnek bir sıralama işlemi:
+    // Sorting operations are handled here
+    // Example sorting operation:
     const sortedData = brandState.brands.slice().sort((a: any, b: any) => {
       if (sortOrder.direction === "asc") {
-        // Sıralama işlemini doğrudan dizge karşılaştırma operatörleriyle gerçekleştir
+        // Perform sorting directly using string comparison operators
         return a[columnName] > b[columnName] ? 1 : -1;
       } else {
-        // Sıralama işlemini doğrudan dizge karşılaştırma operatörleriyle gerçekleştir
+        // Perform sorting directly using string comparison operators
         return b[columnName] > a[columnName] ? 1 : -1;
       }
     });
   
-    // Sıralanmış verileri güncelle
+    // Update sorted data
     setData(sortedData.map((brand: any) => [brand.id, brand.name, <img src={brand.logoImagePath} alt="Brand Logo" />]));
     // isLoading durumunu false olarak ayarla
     setIsLoading(false);
   };
   const handleRowSelectionChange = (currentRowsSelected: any[]) => {
     if (currentRowsSelected.length > 0) {
-      const selectedRow = data[currentRowsSelected[0].index]; // Seçilen ilk satırın verilerini al
-      const selectedId = selectedRow[0]; // ID, ilk sütunda olduğu varsayılarak alındı
-      //console.log("Seçilen satır ID'si: ", selectedId);
+      const selectedRow = data[currentRowsSelected[0].index]; // Get data from the first selected row
+      const selectedId = selectedRow[0]; // ID is assumed to be in the first column
+      //console.log("Selected row ID: ", selectedId);
       //dispatch(deleteBrand({ brandId: selectedId }))
     }
   };
@@ -126,7 +126,7 @@ const BrandTable: React.FC = () => {
         case 'changePage':
           changePage(tableState.page, tableState.sortOrder);
           break;
-        case 'changeRowsPerPage': // Yeni sayfa sayısını işlemek için case eklendi
+        case 'changeRowsPerPage': // Added case to handle new page size
           changeRowsPerPage(tableState.rowsPerPage, tableState.page);
           break;
         case 'sort':
@@ -163,7 +163,7 @@ const BrandTable: React.FC = () => {
 
   return (
     <div className="container-card">
-    <h2 className="h2-card">MARKALAR</h2>
+    <h2 className="h2-card">BRANDS</h2>
     <div className="form">
       <MUIDataTable
         title={
@@ -193,7 +193,7 @@ const BrandTable: React.FC = () => {
           },
           {
             name: "name",
-            label: "MARKA",
+            label: "BRAND",
             options: {
               customHeadRender: (columnMeta: MUIDataTableColumn) => (
                 <th style={{ textAlign: "center",borderBottom:"1px solid rgba(224, 224, 224, 1)" }}>{columnMeta.label}</th>

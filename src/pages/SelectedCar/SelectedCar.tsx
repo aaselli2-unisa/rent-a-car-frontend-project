@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Tabs, Tab } from "react-bootstrap";
 import "./SelectedCar.css";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch } from "../../store/configureStore";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../store/configureStore";
 import { addShowRental } from "../../store/slices/showRentalSlice";
 import { useLocation } from "react-router";
 import ShowRental from "../../components/ShowRental/ShowRental";
@@ -13,21 +14,25 @@ import CarCart from "../../components/CarCart/CarCart";
 import { AllGetByDateCarResponse } from "../../models/Responses/Car/AllGetByDateCarResponse";
 import Payment from "../../components/Payment/Payment";
 import RentalDetail from "../../components/RentalDetail/RentalDetail";
+import { Alert } from "@mui/material";
 
 const SelectedCar: React.FC<{
   response: AllGetByDateCarResponse | undefined;
 }> = ({ response }) => {
   const location = useLocation();
   const dispatch = useDispatch<AppDispatch>();
+  const carsFromStore = useSelector((state: RootState) => state.car.cars);
   const startDateString = location?.state?.startDate || "";
   const endDateString = location?.state?.endDate || "";
 
-  const { token, decodedToken, updateToken, clearToken } = useToken();
+  const { decodedToken } = useToken();
   const [activeTab, setActiveTab] = useState<string | null>(null);
   const [rentalResponse, setRentalResponse] = useState<
     AddShowRentalResponse | undefined
   >();
   const [lastAmount, setLastAmount] = useState<number>(0);
+  const [showRentalLoading, setShowRentalLoading] = useState(false);
+  const [showRentalError, setShowRentalError] = useState<string>("");
   const startDate = moment(startDateString).format("YYYY-MM-DD");
   const endDate = moment(endDateString).format("YYYY-MM-DD");
 
@@ -45,32 +50,81 @@ const SelectedCar: React.FC<{
     const endDateValue =
       endDate instanceof Date ? endDate.toISOString().split("T")[0] : endDate;
 
+    setShowRentalError("");
+    setShowRentalLoading(true);
     setActiveTab("tab2");
-    if (
-      customerEntityId !== undefined &&
-      typeof customerEntityId === "number"
-    ) {
-      try {
-        const response = await dispatch(
-          addShowRental({
-            discountCode,
-            carEntityId,
-            startDate: startDateValue,
-            endDate: endDateValue,
-            customerEntityId,
-          })
-        );
 
-        if (response.payload) {
-          setRentalResponse(response.payload as AddShowRentalResponse);
-        } else {
-          console.error(
-            "Error adding show rental: Response payload is undefined"
-          );
-        }
-      } catch (error) {
-        console.error("Error adding show rental:", error);
+    const availableCars = response?.response ?? carsFromStore ?? [];
+    const selectedCar = availableCars.find((car) => car.id === carEntityId);
+    if (selectedCar) {
+      setRentalResponse({
+        response: {
+          customerDTO: {
+            id: decodedToken?.id ?? -1,
+            phoneNumber: decodedToken?.phoneNumber ?? "",
+            drivingLicenseNumber: "",
+            drivingLicenseTypeEntityName: "",
+            name: decodedToken?.firstname ?? "",
+            surname: decodedToken?.lastname ?? "",
+            emailAddress: decodedToken?.emailAddress ?? "",
+            authorities: decodedToken?.role ?? [],
+          },
+          carDTO: {
+            id: selectedCar.id,
+            isLicenseTypeSuitable: selectedCar.isLicenseTypeSuitable,
+            carModelEntityBrandEntityName: selectedCar.carModelEntityBrandEntityName,
+            carModelEntityName: selectedCar.carModelEntityName,
+            colorEntityName: selectedCar.colorEntityName,
+            year: selectedCar.year,
+            carBodyTypeEntityName: selectedCar.carBodyTypeEntityName,
+            fuelTypeEntityName: selectedCar.fuelTypeEntityName,
+            shiftTypeEntityName: selectedCar.shiftTypeEntityName,
+            seat: selectedCar.seat,
+            luggage: selectedCar.luggage,
+            details: selectedCar.details,
+            rentalPrice: selectedCar.rentalPrice,
+            licensePlate: selectedCar.licensePlate,
+            kilometer: selectedCar.kilometer,
+            imageEntityImageUrl: selectedCar.imagesEntityImagePaths?.[0] || "",
+            availabilityDate: new Date(),
+            expectedMinDrivingLicenseTypeName: selectedCar.expectedDrivingLicenseTypes?.[0] || "",
+            vehicleStatusEntityName: selectedCar.vehicleStatusEntityName,
+          },
+          startDate: new Date(startDateValue),
+          endDate: new Date(endDateValue),
+          discountCode,
+          amount: selectedCar.rentalPrice,
+        },
+      });
+    }
+
+    try {
+      const showRentalPayload: any = {
+        discountCode,
+        carEntityId,
+        startDate: startDateValue,
+        endDate: endDateValue,
+      };
+
+      if (customerEntityId) {
+        showRentalPayload.customerEntityId = customerEntityId;
       }
+
+      const response = await dispatch(
+        addShowRental(showRentalPayload)
+      );
+
+      if (response.payload) {
+        setRentalResponse(response.payload as AddShowRentalResponse);
+        setShowRentalError("");
+      } else {
+        console.warn("Using local rental preview because backend returned no payload.");
+      }
+    } catch (error) {
+      console.error("Error adding show rental:", error);
+      setShowRentalError("Unable to load rental information from API. Showing preview instead.");
+    } finally {
+      setShowRentalLoading(false);
     }
   };
 
@@ -101,7 +155,7 @@ const SelectedCar: React.FC<{
               activeTab === "tab1" ? "tab-title active-tab" : "tab-title"
             }
           >
-            Aracınız
+            Your Vehicle
           </div>
         }
       >
@@ -127,7 +181,12 @@ const SelectedCar: React.FC<{
           endDate={endDate}
         />
       </Tab>
-      
+      {showRentalError && (
+        <Alert severity="error" style={{ marginTop: 12 }}>
+          {showRentalError}
+        </Alert>
+      )}
+
       <Tab
         eventKey="tab2"
         title={
@@ -136,7 +195,7 @@ const SelectedCar: React.FC<{
               activeTab === "tab2" ? "tab-title active-tab" : "tab-title "
             }
           >
-            Kiralama Detayları
+            Rental Details
           </div>
         }
         disabled={activeTab !== "tab2" && activeTab !== "tab3" && activeTab !== "tab4"}
@@ -146,6 +205,7 @@ const SelectedCar: React.FC<{
             key={JSON.stringify(rentalResponse)}
             response={rentalResponse}
             onPaymentProcessClick={handleRentDetailsButtonClick}
+            isLoading={showRentalLoading}
           />
         </div>
       </Tab>
@@ -157,7 +217,7 @@ const SelectedCar: React.FC<{
               activeTab === "tab3" ? "tab-title active-tab" : "tab-title "
             }
           >
-            Ödeme İşlemi
+            Payment Process
           </div>
         }
         disabled={activeTab !== "tab3" && activeTab !== "tab4"}
@@ -180,7 +240,7 @@ const SelectedCar: React.FC<{
               activeTab === "tab4" ? "tab-title active-tab" : "tab-title"
             }
           >
-            Ödeme Bilgileri
+            Payment Details
           </div>
         }
         disabled={activeTab !== "tab4"}

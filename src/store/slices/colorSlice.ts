@@ -120,7 +120,7 @@ const colorSlice = createSlice({
       state.colors.push(action.payload);
     });
     builder.addCase(addColor.rejected, (state, action) => { 
-      state.error = action.error.message || "Bir hata oluştu.";
+      state.error = action.error.message || "An error occurred.";
     });
 
     builder.addCase(updateColor.pending, (state) => { });
@@ -128,7 +128,7 @@ const colorSlice = createSlice({
       state.error = null;
       state.colors = [];
     });
-    builder.addCase(updateColor.rejected, (state, action) => {  state.error = action.error.message || "Bir hata oluştu."; });
+    builder.addCase(updateColor.rejected, (state, action) => {  state.error = action.error.message || "An error occurred."; });
     /*-----------------*/
 
     builder.addCase(deleteColor.pending, (state) => { });

@@ -41,7 +41,7 @@ const CarModels = (props: Props) => {
   const handleUpdateCarModel = () => {
     if (carModelName.trim() !== '' && selectedBrand !== null && selectedCarModel !== null) {
       dispatch(updateCarModel({ brandEntityId: selectedBrand, carModelEntityName: carModelName ,carModelEntityId:selectedCarModel})).then(() => {
-        // Güncelleme işlemi tamamlandığında tetiklenir
+        // Triggered when update operation completes
         handleCancelUpdate();
       });
     }
@@ -51,7 +51,7 @@ const CarModels = (props: Props) => {
     setSelectedBrand(null);
     setSelectedCarModel(null); 
     setCarModelName(''); 
-    // Markaları tekrar getir
+    // Fetch brands again
     dispatch(fetchCarModels());
   };
 

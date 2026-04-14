@@ -3,8 +3,12 @@ import { UpdatePaymentTypeModel } from "../models/Requests/PaymentType/UpdatePay
 import axiosInstance from "../utils/axiosInterceptors";
 
  class PaymentTypeService {
-    getAll() {
-        return axiosInstance.get<GetAllPaymentTypesModel>("paymentTypes")
+    async getAll() {
+        try {
+            return await axiosInstance.get<GetAllPaymentTypesModel>("paymentTypes");
+        } catch {
+            return axiosInstance.get<GetAllPaymentTypesModel>("paymentType");
+        }
     }
 
     update(updatedPaymentType: UpdatePaymentTypeModel){

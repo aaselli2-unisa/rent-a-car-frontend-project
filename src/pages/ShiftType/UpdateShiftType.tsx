@@ -43,9 +43,9 @@ const UpdateShiftType = () => {
 
   const validationSchema = Yup.object().shape({
     name: Yup.string()
-      .required("Vites tipi giriniz.")
-      .min(2, 'Vites tipi en az 2 karakter olmalıdır')
-      .matches(/^[a-zA-ZğüşıöçĞÜŞİÖÇ\s]+$/, 'Vites tipi sadece harflerden oluşmalıdır')
+      .required("Enter shift type.")
+      .min(2, 'Shift type must be at least 2 characters')
+      .matches(/^[a-zA-Z\s]+$/, 'Shift type can only contain letters')
   });
 
   const initialValues = {
@@ -56,12 +56,12 @@ const UpdateShiftType = () => {
   const handleUpdateShiftType = async (values: any) => {
     try {
       const response = await dispatch(updateShiftType(values));
-      // İşlem başarılı olduğunda
-      setSuccessMessage("İşlem başarıyla tamamlandı");
+      // On successful operation
+      setSuccessMessage("Operation completed successfully");
     } catch (error) {
       console.error("Error updating shift type: ", error);
-      // Hata durumunda
-      setErrorMessage("İşlem sırasında bir hata oluştu");
+      // In case of error
+      setErrorMessage("An error occurred during the operation");
     }
   };
   
@@ -70,7 +70,7 @@ const UpdateShiftType = () => {
     <SideBar>
     <div className="container-card">
       <div className="form">
-        <h2 className="h2-card">Vites Tipi Güncelle</h2>
+        <h2 className="h2-card">Update Shift Type</h2>
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
@@ -91,8 +91,8 @@ const UpdateShiftType = () => {
                   <div className="mb-2">
                     <FormikInput
                       name="name"
-                      label="Vites Tipi"
-                      placeHolder="Vites Tipi Giriniz."
+                      label="Shift Type"
+                      placeHolder="Enter shift type."
                       type="text"
                     />
                   </div>
@@ -107,7 +107,7 @@ const UpdateShiftType = () => {
                     }}
                     type="submit"
                   >
-                    Güncelle
+                    Update
                   </Button>
                 </div>
               </div>

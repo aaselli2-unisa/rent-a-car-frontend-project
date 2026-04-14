@@ -35,7 +35,7 @@ const DeleteAdmin = (props: Props) => {
         <div id='select-block' className="col-md-6">
   
           <div className="mb-2">
-            <label htmlFor="selectAdmin">Admin Seç</label>
+            <label htmlFor="selectAdmin">Select Admin</label>
             <select className="form-select" id="adminSelect" value={selectedAdmin || ''} onChange={handleAdminChange}>
               <option value="" disabled>
   

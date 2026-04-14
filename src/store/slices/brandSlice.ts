@@ -44,7 +44,7 @@ export const addBrand = createAsyncThunk(
   async (newBrandData: AddBrandModel, thunkAPI) => {
     try {
       const addedBrand = await brandService.add(newBrandData);
-      // Burada eklenen markayı geri dönebilirsiniz
+      // You can return the added brand here
       console.log(addedBrand);
       
       return addedBrand.data;
@@ -67,7 +67,7 @@ export const updateBrand = createAsyncThunk(
       }
       else{
         console.warn("Server response does not contain data.");
-        return null; // Veya başka bir değer dönebilirsiniz, bu size bağlı.
+        return null; // Or return another value, depending on your needs.
       }
     } catch (error: any) {
       if (error && error.response && error.response.data.response.errorCode === 2005) {
@@ -122,19 +122,19 @@ const brandSlice = createSlice({
       state.brands.push(action.payload);
     });
     builder.addCase(addBrand.rejected, (state, action) => {
-      state.error = action.error.message || "Bir hata oluştu.";
+      state.error = action.error.message || "An error occurred.";
     });
 
    /*-------------  */
 
     builder.addCase(updateBrand.pending, (state) => {});
     builder.addCase(updateBrand.fulfilled, (state, action) => {
-      // Marka güncelledikten sonra, mevcut marka listesini yeniden al
+      // After updating the brand, fetch the current brand list again
       state.error = null;
       state.brands = [];
     });
     builder.addCase(updateBrand.rejected, (state, action) => {
-      state.error = action.error.message || "Bir hata oluştu.";
+      state.error = action.error.message || "An error occurred.";
     });
       
 
@@ -143,7 +143,7 @@ const brandSlice = createSlice({
      
     builder.addCase(deleteBrand.pending, (state) => {});
     builder.addCase(deleteBrand.fulfilled, (state, action) => {
-      // Silinen markayı state'den kaldır
+      // Remove the deleted brand from state
       const deletedBrandId = action.payload.deletedBrandId;
       state.brands = state.brands.filter(brand => brand.id !== deletedBrandId);
     });

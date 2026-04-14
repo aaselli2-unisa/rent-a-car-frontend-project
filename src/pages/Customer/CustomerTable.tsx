@@ -57,7 +57,7 @@ const CustomerTable: React.FC = () => {
     setPage(page);
     setIsLoading(false);
   };
-  const changeRowsPerPage = (rowsPerPage: number, page: number) => { // Satır sayısını değiştiren fonksiyonu ekledik
+  const changeRowsPerPage = (rowsPerPage: number, page: number) => { // Added function to change row count
     setRowsPerPage(rowsPerPage);
     setPage(page);
   };
@@ -97,15 +97,15 @@ const CustomerTable: React.FC = () => {
 
     const sortedData = customerState.customers.slice().sort((a: any, b: any) => {
       if (sortOrder.direction === "asc") {
-        // Sıralama işlemini doğrudan dizge karşılaştırma operatörleriyle gerçekleştir
+        // Perform sorting directly using string comparison operators
         return a[columnName] > b[columnName] ? 1 : -1;
       } else {
-        // Sıralama işlemini doğrudan dizge karşılaştırma operatörleriyle gerçekleştir
+        // Perform sorting directly using string comparison operators
         return b[columnName] > a[columnName] ? 1 : -1;
       }
     });
 
-    // Sıralanmış verileri güncelle
+    // Update sorted data
     setData(sortedData.map((customer: any) => [
       customer.id,
       customer.phoneNumber,
@@ -116,7 +116,7 @@ const CustomerTable: React.FC = () => {
       customer.emailAddress,
       customer.userImageEntityImageUrl,
     ]));
-    // isLoading durumunu false olarak ayarla
+    // Set isLoading to false
     setIsLoading(false);
   };
   const handleRowSelectionChange = (currentRowsSelected: any[]) => {
@@ -158,7 +158,7 @@ const CustomerTable: React.FC = () => {
         case 'changePage':
           changePage(tableState.page, tableState.sortOrder);
           break;
-        case 'changeRowsPerPage': // Yeni sayfa sayısını işlemek için case eklendi
+        case 'changeRowsPerPage': // Added case to handle new page size
           changeRowsPerPage(tableState.rowsPerPage, tableState.page);
           break;
         case 'sort':
@@ -222,7 +222,7 @@ const CustomerTable: React.FC = () => {
 
   return (
     <div className="container-card">
-      <h2 className="h2-card">MÜŞTERİLER</h2>
+      <h2 className="h2-card">CUSTOMERS</h2>
       <div className="form">
         <MUIDataTable
           title={
@@ -263,7 +263,7 @@ const CustomerTable: React.FC = () => {
             },
             {
               name: "drivingLicenseNumber",
-              label: "EHLİYET NO",
+              label: "DRIVING LICENSE NO",
               options: {
                 customHeadRender: (columnMeta: MUIDataTableColumn) => (
                   <th style={{ textAlign: "center", borderBottom: "1px solid rgba(224, 224, 224, 1)" }}>{columnMeta.label}</th>
@@ -275,7 +275,7 @@ const CustomerTable: React.FC = () => {
             },
             {
               name: "drivingLicenseTypeEntityName",
-              label: "EHLİYET TİPİ",
+              label: "DRIVING LICENSE TYPE",
               options: {
                 customHeadRender: (columnMeta: MUIDataTableColumn) => (
                   <th style={{ textAlign: "center", borderBottom: "1px solid rgba(224, 224, 224, 1)" }}>{columnMeta.label}</th>
@@ -287,7 +287,7 @@ const CustomerTable: React.FC = () => {
             },
             {
               name: "name",
-              label: "AD",
+              label: "NAME",
               options: {
                 customHeadRender: (columnMeta: MUIDataTableColumn) => (
                   <th style={{ textAlign: "center", borderBottom: "1px solid rgba(224, 224, 224, 1)" }}>{columnMeta.label}</th>
@@ -299,7 +299,7 @@ const CustomerTable: React.FC = () => {
             },
             {
               name: "surname",
-              label: "SOYAD",
+              label: "SURNAME",
               options: {
                 customHeadRender: (columnMeta: MUIDataTableColumn) => (
                   <th style={{ textAlign: "center", borderBottom: "1px solid rgba(224, 224, 224, 1)" }}>{columnMeta.label}</th>

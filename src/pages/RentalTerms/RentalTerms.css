@@ -41,7 +41,7 @@
   background-color: #ffffff00;
   border-color: transparent;
 }
-/* Etkin collapse durumu için buton stil değişiklikleri */
+/* Button style changes for active collapse state */
 .collapsed .cardAccord-header button {
   color: #000;
   text-decoration: none;
@@ -57,7 +57,7 @@
   text-decoration: none;
 }
 
-/* Collapse bileşenlerinin konumlandırılması */
+/* Positioning of collapse components */
 #accordion {
   width: 100%;
   height:100%;

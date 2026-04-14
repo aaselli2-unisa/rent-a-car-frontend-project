@@ -11,7 +11,7 @@ interface CreditCardInfo {
   cardNumber: string;
   cardOwnerName: string;
   cardOwnerSurname: string;
-  expirationDate: Date; // Tarih nesnesi olarak ayarlayın
+  expirationDate: Date;
   cvc: string;
 }
 
@@ -34,11 +34,15 @@ const Payment: React.FC<{
   const paymentTypeState = useSelector((state: any) => state.paymentType);
   const [paymentResponse, setPaymentResponse] = useState<number | undefined>();
   const [selectedPaymentType, setSelectedPaymentType] = useState<number>(0);
+  const availablePaymentTypes =
+    paymentTypeState.paymentTypes.length > 0
+      ? paymentTypeState.paymentTypes
+      : [{ id: 1, name: "Credit Card" }];
   const [creditCardInfo, setCreditCardInfo] = useState<CreditCardInfo>({
     cardNumber: "",
     cardOwnerName: "",
     cardOwnerSurname: "",
-    expirationDate: new Date(), // Başlangıçta geçerli tarihle başlatın
+    expirationDate: new Date(),
     cvc: "",
   });
 
@@ -54,6 +58,13 @@ const Payment: React.FC<{
   const handleCreditCardChange = (creditCardInfo: CreditCardInfo) => {
     setCreditCardInfo(creditCardInfo);
   };
+
+  const selectedPaymentTypeModel = paymentTypeState.paymentTypes.find(
+    (paymentType: any) => paymentType.id === selectedPaymentType
+  );
+  const isCreditCardSelected =
+    selectedPaymentType === 1 ||
+    selectedPaymentTypeModel?.name?.toLowerCase().includes("credit");
 
   const handleCalculateClick = async () => {
     const formattedStartDate =
@@ -104,26 +115,32 @@ const Payment: React.FC<{
     <div className="form">
       <div className="credit-cart-form">
         <div className="py-4">
-          <h2>Fiyat: {lastAmount}</h2>
+          <h2>Price: {lastAmount}</h2>
         </div>
         <label htmlFor="paymentTypeSelect" className="form-label">
-          Ödeme Yöntemi
+          Payment Method
         </label>
         <select
+          id="paymentTypeSelect"
           className="credit-input"
-          value={selectedPaymentType || ""}
+          value={selectedPaymentType === 0 ? "" : selectedPaymentType}
           onChange={handleSelectChange}
         >
           <option value="" disabled>
-            Seçiniz
+            Select
           </option>
-          {paymentTypeState.paymentTypes.map((paymentType: any) => (
+          {availablePaymentTypes.map((paymentType: any) => (
             <option key={paymentType.id} value={paymentType.id}>
               {paymentType.name}
             </option>
           ))}
         </select>
-        {selectedPaymentType === 1 && (
+        {paymentTypeState.error ? (
+          <p className="text-warning mt-2">
+            {paymentTypeState.error} Using the default credit card option.
+          </p>
+        ) : null}
+        {isCreditCardSelected && (
           <CreditCardForm onCreditCardChange={handleCreditCardChange} />
         )}
 
@@ -131,14 +148,14 @@ const Payment: React.FC<{
           <button
             className="btn btn-dark"
             onClick={handleConfirmButtonClick}
-            disabled={selectedPaymentType !== 1}
+            disabled={!isCreditCardSelected}
           >
-            Ödeme
+            Pay
           </button>
         </div>
-        {selectedPaymentType !== 1 ? (
+        {selectedPaymentType !== 0 && !isCreditCardSelected ? (
           <p className="text-danger">
-            Sadece kredi kartı ile ödeme yapılabilir.
+            Payment can only be made by credit card.
           </p>
         ) : null}
       </div>

@@ -36,7 +36,7 @@ const DeleteBrand = (props: Props) => {
         >
           <div id="select-block" className="col-md-6">
             <div className="mb-2">
-              <label htmlFor="selectBrand">Marka Seç</label>
+              <label htmlFor="selectBrand">Select Brand</label>
               <select
                 className="form-select"
                 id="brandSelect"

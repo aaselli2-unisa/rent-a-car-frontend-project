@@ -80,43 +80,43 @@ const UpdateCar = (props: Props) => {
 
   const validationSchema = Yup.object().shape({
     year: Yup.number()
-      .min(2005, "Yıl en az 2005 olmalıdır")
-      .max(2024, "Yıl en fazla 2024 olmalıdır")
-      .required("Yıl giriniz"),
+      .min(2005, "Year must be at least 2005")
+      .max(2024, "Year must be at most 2024")
+      .required("Enter year"),
     details: Yup.string()
-      .max(500, "Açıklama en fazla 500 karakter olmalıdır")
-      .required("Detay giriniz"),
+      .max(500, "Description can be at most 500 characters")
+      .required("Enter details"),
     rentalPrice: Yup.number()
-      .min(110, "Kiralama ücreti en az 110 olmalıdır")
-      .required("Araç fiyatı giriniz"),
+      .min(110, "Rental price must be at least 110")
+      .required("Enter vehicle price"),
     licensePlate: Yup.string()
       .matches(
         /^(\d{2}[ ]?[A-Za-z]{1,3}[ ]?\d{2}|\d{2}[ ]?[A-Za-z]{2}[ ]?\d{3})$/,
-        "Geçerli bir plaka giriniz"
+        "Enter a valid license plate"
       )
-      .required("Plaka giriniz"),
+      .required("Enter license plate"),
     kilometer: Yup.number()
-      .min(1, "Kilometre en az 1 olmalıdır")
-      .required("Kilometre giriniz"),
+      .min(1, "Kilometer must be at least 1")
+      .required("Enter kilometer"),
     seat: Yup.number()
-      .min(1, "Koltuk sayısı en az 1 olmalıdır")
-      .max(15, "Koltuk sayısı en fazla 15 olmalıdır")
-      .required("Koltuk sayısı giriniz"),
+      .min(1, "Seat count must be at least 1")
+      .max(15, "Seat count must be at most 15")
+      .required("Enter seat count"),
     luggage: Yup.number()
-      .min(1, "Bagaj sayısı en az 1 olmalıdır")
-      .max(15, "Bagaj sayısı en fazla 15 olmalıdır")
-      .required("Bagaj sayısı giriniz"),
-    brandEntityId: Yup.number().required("Marka seçiniz"),
-    carModelEntityId: Yup.number().required("Araç modeli seçiniz"),
-    carBodyTypeEntityId: Yup.number().required("Kasa tipi seçiniz"),
-    colorEntityId: Yup.number().required("Renk seçiniz"),
-    vehicleStatusEntityId: Yup.number().required("Araç durumu seçiniz"),
-    shiftTypeEntityId: Yup.number().required("Vites tipi seçiniz"),
-    fuelTypeEntityId: Yup.number().required("Yakıt tipi seçiniz"),
+      .min(1, "Luggage count must be at least 1")
+      .max(15, "Luggage count must be at most 15")
+      .required("Enter luggage count"),
+    brandEntityId: Yup.number().required("Select brand"),
+    carModelEntityId: Yup.number().required("Select car model"),
+    carBodyTypeEntityId: Yup.number().required("Select body type"),
+    colorEntityId: Yup.number().required("Select color"),
+    vehicleStatusEntityId: Yup.number().required("Select vehicle status"),
+    shiftTypeEntityId: Yup.number().required("Select shift type"),
+    fuelTypeEntityId: Yup.number().required("Select fuel type"),
     expectedMinDrivingLicenseTypeId: Yup.number().required(
-      "Ehliyet tipi seçiniz"
+      "Select driving license type"
     ),
-    carSegmentEntityId: Yup.number().required("Segment seçiniz"),
+    carSegmentEntityId: Yup.number().required("Select segment"),
   });
 
   const initialValues = {
@@ -145,7 +145,7 @@ const UpdateCar = (props: Props) => {
       if (typeof file === "undefined") {
         const updatedValues = { ...values };
         const response = await dispatch(updateCar(updatedValues));
-        setSuccessMessage("İşlem başarıyla tamamlandı");
+        setSuccessMessage("Operation completed successfully");
       } else {
         const formData = new FormData();
 
@@ -159,13 +159,13 @@ const UpdateCar = (props: Props) => {
           const carImageEntityId = imageResponse.payload;
           const updatedValues = { ...values, carImageEntityId };
           const response = await dispatch(updateCar(updatedValues));
-          setSuccessMessage("İşlem başarıyla tamamlandı");
+          setSuccessMessage("Operation completed successfully");
         }
       }
     } catch (error) {
       console.error("Error : ", error);
-      // Hata durumunda
-      setErrorMessage("İşlem sırasında bir hata oluştu");
+      // In case of error
+      setErrorMessage("An error occurred during the operation");
     }
     window.location.href = "/adminPanel/cars";
   };
@@ -192,13 +192,13 @@ const UpdateCar = (props: Props) => {
       <SideBar>
         <div className="container-card">
           <div className="form">
-            <h2 className="h2-card">Araba Güncelleme</h2>
+            <h2 className="h2-card">Update Car</h2>
             <Form>
               <div className="row space">
                 <div id="select-block" className="col-md-6">
                   <div className="mb-2">
                     <FormikSelect
-                      label="Marka"
+                      label="Brand"
                       name="brandEntityId"
                       options={brandState.brands.map((brands: any) => ({
                         value: brands.id,
@@ -209,7 +209,7 @@ const UpdateCar = (props: Props) => {
 
                   <div className="mb-2">
                     <FormikSelect
-                      label="Araç Model"
+                      label="Car Model"
                       name="carModelEntityId"
                       options={carModelState.carModel.map((carModel: any) => ({
                         value: carModel.id,
@@ -220,7 +220,7 @@ const UpdateCar = (props: Props) => {
 
                   <div className="mb-2">
                     <FormikSelect
-                      label="Kasa Tipi"
+                      label="Body Type"
                       name="carBodyTypeEntityId"
                       options={carBodyTypeState.carBodyTypes.map(
                         (carBodyType: any) => ({
@@ -232,7 +232,7 @@ const UpdateCar = (props: Props) => {
                   </div>
                   <div className="mb-2">
                     <FormikSelect
-                      label="Renk"
+                      label="Color"
                       name="colorEntityId"
                       options={colorState.colors.map((color: any) => ({
                         value: color.id,
@@ -242,7 +242,7 @@ const UpdateCar = (props: Props) => {
                   </div>
                   <div className="mb-2">
                     <FormikSelect
-                      label="Araç Durumu"
+                      label="Vehicle Status"
                       name="vehicleStatusEntityId"
                       options={vehicleStatusState.vehicleStatuses.map(
                         (vehicleStatus: any) => ({
@@ -254,7 +254,7 @@ const UpdateCar = (props: Props) => {
                   </div>
                   <div className="mb-2">
                     <FormikSelect
-                      label="Vites Tipi"
+                      label="Shift Type"
                       name="shiftTypeEntityId"
                       options={shiftTypeState.shiftTypes.map(
                         (shiftType: any) => ({
@@ -266,7 +266,7 @@ const UpdateCar = (props: Props) => {
                   </div>
                   <div className="mb-2">
                     <FormikSelect
-                      label="Yakıt Tipi"
+                      label="Fuel Type"
                       name="fuelTypeEntityId"
                       options={fuelTypeState.fuelTypes.map((fuelType: any) => ({
                         value: fuelType.id,
@@ -276,7 +276,7 @@ const UpdateCar = (props: Props) => {
                   </div>
                   <div className="mb-2">
                     <FormikSelect
-                      label="Ehliyet Tipi"
+                      label="Driving License Type"
                       name="expectedMinDrivingLicenseTypeId"
                       options={expectedMinDrivingLicenseTypeState.drivingLicenseTypes.map(
                         (drivingLicenseType: any) => ({
@@ -303,56 +303,56 @@ const UpdateCar = (props: Props) => {
                   <div className="mb-2">
                     <FormikInput
                       name="year"
-                      label="Yıl"
-                      placeHolder="Yıl Giriniz."
+                      label="Year"
+                      placeHolder="Enter year."
                       type="number"
                     />
                   </div>
                   <div className="mb-2">
                     <FormikInput
                       name="details"
-                      label="Detay"
-                      placeHolder="Detay Giriniz."
+                      label="Details"
+                      placeHolder="Enter details."
                       type="text"
                     />
                   </div>
                   <div className="mb-2">
                     <FormikInput
                       name="rentalPrice"
-                      label="Araç Fiyatı"
-                      placeHolder="Araç Fiyatı Giriniz."
+                      label="Vehicle Price"
+                      placeHolder="Enter vehicle price."
                       type="number"
                     />
                   </div>
                   <div className="mb-2">
                     <FormikInput
                       name="licensePlate"
-                      label="Plaka"
-                      placeHolder="Plaka Giriniz."
+                      label="License Plate"
+                      placeHolder="Enter license plate."
                       type="text"
                     />
                   </div>
                   <div className="mb-2">
                     <FormikInput
                       name="kilometer"
-                      label="Kilometre"
-                      placeHolder="Kilometre Giriniz."
+                      label="Kilometer"
+                      placeHolder="Enter kilometer."
                       type="number"
                     />
                   </div>
                   <div className="mb-2">
                     <FormikInput
                       name="seat"
-                      label="Koltuk Sayısı"
-                      placeHolder="Koltuk Sayısı Giriniz."
+                      label="Seat Count"
+                      placeHolder="Enter seat count."
                       type="number"
                     />
                   </div>
                   <div className="mb-2">
                     <FormikInput
                       name="luggage"
-                      label="Bagaj Sayısı"
-                      placeHolder="Bagaj Sayısı Giriniz."
+                      label="Luggage Count"
+                      placeHolder="Enter luggage count."
                       type="number"
                     />
                   </div>
@@ -373,7 +373,7 @@ const UpdateCar = (props: Props) => {
                     type="submit"
                   >
                     {" "}
-                    Güncelle
+                    Update
                   </Button>
                   {errorCustom && <Alert severity="error">{errorCustom}</Alert>}
                   {!errorCustom && successMessage && (

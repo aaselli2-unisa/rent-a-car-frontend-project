@@ -43,9 +43,9 @@ const UpdateFuelType = () => {
 
   const validationSchema = Yup.object().shape({
     name: Yup.string()
-      .required("Yakıt tipi giriniz.")
-      .min(2, 'Yakıt tipi en az 2 karakter olmalıdır')
-      .matches(/^[a-zA-ZğüşıöçĞÜŞİÖÇ\s]+$/, 'Yakıt tipi sadece harflerden oluşmalıdır')
+      .required("Enter fuel type.")
+      .min(2, 'Fuel type must be at least 2 characters')
+      .matches(/^[a-zA-Z\s]+$/, 'Fuel type can only contain letters')
   });
 
   const initialValues = {
@@ -56,10 +56,10 @@ const UpdateFuelType = () => {
   const handleUpdateFuelType = async (values: any) => {
     try {
       const response = await dispatch(updateFuelType(values));
-      setSuccessMessage("İşlem başarıyla tamamlandı");
+      setSuccessMessage("Operation completed successfully");
     } catch (error) {
       console.error("Error updating fuel type: ", error);
-      setErrorMessage("İşlem sırasında bir hata oluştu");
+      setErrorMessage("An error occurred during the operation");
     }
   };
   
@@ -68,7 +68,7 @@ const UpdateFuelType = () => {
     <SideBar>
     <div className="container-card">
       <div className="form">
-        <h2 className="h2-card">Yakıt Tipi Güncelle</h2>
+        <h2 className="h2-card">Update Fuel Type</h2>
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
@@ -89,8 +89,8 @@ const UpdateFuelType = () => {
                   <div className="mb-2">
                     <FormikInput
                       name="name"
-                      label="Yakıt Tipi"
-                      placeHolder="Yakıt Tipi Giriniz."
+                      label="Fuel Type"
+                      placeHolder="Enter fuel type."
                       type="text"
                     />
                   </div>
@@ -105,7 +105,7 @@ const UpdateFuelType = () => {
                     }}
                     type="submit"
                   >
-                    Güncelle
+                    Update
                   </Button>
                 </div>
               </div>

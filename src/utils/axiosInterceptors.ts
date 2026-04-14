@@ -10,10 +10,21 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
 	(config) => {
-		
-	  let token = tokenService.getToken();
-	  if (token) config.headers.Authorization = `${token}`;
-	
+	  const method = (config.method || "get").toLowerCase();
+	  const url = config.url || "";
+	  const isPublicEndpoint =
+		url.startsWith("auth/") ||
+		url === "drivingLicenseType" ||
+		url === "drivingLicenseTypes" ||
+		(method === "post" && url === "customers");
+
+	  const token = tokenService.getToken();
+	  if (token && !isPublicEndpoint) {
+		config.headers.Authorization = token.startsWith("Bearer ")
+		  ? token
+		  : `Bearer ${token}`;
+	  }
+
 	  addRequest();
 	  return config;
 	}
@@ -30,7 +41,7 @@ axiosInstance.interceptors.request.use(
 		removeRequest();
 	   /*  if (error.response.data.response.details[0] == 'Bad credentials') {
 			
-			console.log("Hatalı giriş");
+			console.log("Invalid login");
 		} */
         //const errorCode= error.response.data.response.details[0];
 		

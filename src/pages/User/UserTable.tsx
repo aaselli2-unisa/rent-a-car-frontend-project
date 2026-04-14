@@ -41,7 +41,7 @@ const UserTable: React.FC = () => {
                 user.status,
                 user.deleted,
                 <IconButton onClick={() => handleUpdatePassword(user.id, user.password)}><EditIcon /></IconButton>,
-                <Button type="button" style={{backgroundColor:'rgba(140, 25, 25)'}} onClick={() => handleUserBlock(user.id)}>Blokla</Button>,
+                <Button type="button" style={{backgroundColor:'rgba(140, 25, 25)'}} onClick={() => handleUserBlock(user.id)}>Block</Button>,
             ]);
 
         setData(tableData);
@@ -68,7 +68,7 @@ const UserTable: React.FC = () => {
         setPage(page);
         setIsLoading(false);
     };
-    const changeSize = (page: number, size: number, ) => { // Satır sayısını değiştiren fonksiyonu ekledik
+    const changeSize = (page: number, size: number, ) => { // Added function to change row count
         setPage(page);
         setSize(size);
     };
@@ -109,15 +109,15 @@ const UserTable: React.FC = () => {
 
         const sortedData = userState.users.content.slice().sort((a: any, b: any) => {
             if (sortOrder.direction === "asc") {
-                // Sıralama işlemini doğrudan dizge karşılaştırma operatörleriyle gerçekleştir
+                // Perform sorting directly using string comparison operators
                 return a[columnName] > b[columnName] ? 1 : -1;
             } else {
-                // Sıralama işlemini doğrudan dizge karşılaştırma operatörleriyle gerçekleştir
+                // Perform sorting directly using string comparison operators
                 return b[columnName] > a[columnName] ? 1 : -1;
             }
         });
 
-        // Sıralanmış verileri güncelle
+        // Update sorted data
         setData(sortedData.map((user: any) => [user.id, user.name, user.surname, user.email, user.userImageEntityUrl,
         user.authority, user.status, user.deleted]));
         // isLoading durumunu false olarak ayarla
@@ -156,7 +156,7 @@ const UserTable: React.FC = () => {
                  case 'changePage':
                     changePage(tableState.page, tableState.sortOrder);
                     break;
-                case 'changeSize': // Yeni sayfa sayısını işlemek için case eklendi
+                case 'changeSize': // Added case to handle new page size
                     changeSize(tableState.page, tableState.tableSize);
                     break; 
                 case 'sort':
@@ -203,7 +203,7 @@ const UserTable: React.FC = () => {
 
     return (
         <div className="container-card">
-        <h2 className="h2-card">KULLANICILAR</h2>
+        <h2 className="h2-card">USERS</h2>
         <div className="form">
             <MUIDataTable
                 title={
@@ -233,7 +233,7 @@ const UserTable: React.FC = () => {
                     },
                     {
                         name: "name",
-                        label: "AD",
+                        label: "NAME",
                         options: {
                             customHeadRender: (columnMeta: MUIDataTableColumn) => (
                                 <th style={{ textAlign: "center", borderBottom: "1px solid rgba(224, 224, 224, 1)" }}>{columnMeta.label}</th>
@@ -245,7 +245,7 @@ const UserTable: React.FC = () => {
                     },
                     {
                         name: "surname",
-                        label: "SOYAD",
+                        label: "SURNAME",
                         options: {
                             customHeadRender: (columnMeta: MUIDataTableColumn) => (
                                 <th style={{ textAlign: "center", borderBottom: "1px solid rgba(224, 224, 224, 1)" }}>{columnMeta.label}</th>
@@ -269,7 +269,7 @@ const UserTable: React.FC = () => {
                     },
                     {
                         name: "userImageEntityUrl",
-                        label: "FOTO",
+                        label: "PHOTO",
                         options: {
                             customHeadRender: (columnMeta: MUIDataTableColumn) => (
                                 <th style={{ textAlign: "center", borderBottom: "1px solid rgba(224, 224, 224, 1)" }}>{columnMeta.label}</th>
@@ -281,7 +281,7 @@ const UserTable: React.FC = () => {
                     },
                     {
                         name: "authority",
-                        label: "YETKİ",
+                        label: "AUTHORITY",
                         options: {
                             customHeadRender: (columnMeta: MUIDataTableColumn) => (
                                 <th style={{ textAlign: "center", borderBottom: "1px solid rgba(224, 224, 224, 1)" }}>{columnMeta.label}</th>
@@ -293,7 +293,7 @@ const UserTable: React.FC = () => {
                     },
                     {
                         name: "status",
-                        label: "KULLANICI DURUMU",
+                        label: "USER STATUS",
                         options: {
                             customHeadRender: (columnMeta: MUIDataTableColumn) => (
                                 <th style={{ textAlign: "center", borderBottom: "1px solid rgba(224, 224, 224, 1)" }}>{columnMeta.label}</th>
@@ -305,7 +305,7 @@ const UserTable: React.FC = () => {
                     },
                     {
                         name: "deleted",
-                        label: "SİLİNMİŞ",
+                        label: "DELETED",
                         options: {
                             customHeadRender: (columnMeta: MUIDataTableColumn) => (
                                 <th style={{ textAlign: "center", borderBottom: "1px solid rgba(224, 224, 224, 1)" }}>{columnMeta.label}</th>

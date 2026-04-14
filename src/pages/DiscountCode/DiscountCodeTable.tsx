@@ -77,10 +77,10 @@ const DiscountCodeTable: React.FC = () => {
 
         const sortedData = discountCodeState.discountCodes.slice().sort((a: any, b: any) => {
             if (sortOrder.direction === "asc") {
-                // Sıralama işlemini doğrudan dizge karşılaştırma operatörleriyle gerçekleştir
+                // Perform sorting directly using string comparison operators
                 return a[columnName] > b[columnName] ? 1 : -1;
             } else {
-                // Sıralama işlemini doğrudan dizge karşılaştırma operatörleriyle gerçekleştir
+                // Perform sorting directly using string comparison operators
                 return b[columnName] > a[columnName] ? 1 : -1;
             }
         });
@@ -119,7 +119,7 @@ const DiscountCodeTable: React.FC = () => {
                 case 'changePage':
                     changePage(tableState.page, tableState.sortOrder);
                     break;
-                case 'changeRowsPerPage': // Yeni sayfa sayısını işlemek için case eklendi
+                case 'changeRowsPerPage': // Added case to handle new page size
                     changeRowsPerPage(tableState.rowsPerPage, tableState.page);
                     break;
                 case 'sort':
@@ -156,7 +156,7 @@ const DiscountCodeTable: React.FC = () => {
 
     return (
         <div className="container-card">
-    <h2 className="h2-card">INDIRIM KUPONLARI</h2>
+    <h2 className="h2-card">DISCOUNT COUPONS</h2>
     <div className="form">
             <MUIDataTable
                 title={
@@ -186,7 +186,7 @@ const DiscountCodeTable: React.FC = () => {
                     },
                     {
                         name: "discountCode",
-                        label: "iNDiRiM KODU",
+                        label: "DISCOUNT CODE",
                         options: {
                             customHeadRender: (columnMeta: MUIDataTableColumn) => (
                                 <th style={{ textAlign: "center", borderBottom: "1px solid rgba(224, 224, 224, 1)" }}>{columnMeta.label}</th>
@@ -198,7 +198,7 @@ const DiscountCodeTable: React.FC = () => {
                     },
                     {
                         name: "discountPercentage",
-                        label: "iNDiRiM YüZDESi ",
+                        label: "DISCOUNT PERCENTAGE",
                         options: {
                             customHeadRender: (columnMeta: MUIDataTableColumn) => (
                                 <th style={{ textAlign: "center", borderBottom: "1px solid rgba(224, 224, 224, 1)" }}>{columnMeta.label}</th>

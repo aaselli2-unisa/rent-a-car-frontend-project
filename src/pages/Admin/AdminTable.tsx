@@ -68,7 +68,7 @@ const AdminTable: React.FC = () => {
 
     const sort = (page: number, sortOrder: { name: string; direction: "asc" | "desc" }) => {
         setIsLoading(true);
-        // Tıklanan sütuna göre sıralama işlemini belirle
+        // Determine sorting based on the clicked column
         let columnName: string = "";
         switch (sortOrder.name) {
             case "id":
@@ -93,26 +93,26 @@ const AdminTable: React.FC = () => {
                 break;
         }
 
-        // Sıralama işlemleri burada yapılacak
-        // Örnek bir sıralama işlemi:
+        // Sorting operations are handled here
+        // Example sorting operation:
         const sortedData = adminState.admins.slice().sort((a: any, b: any) => {
             if (sortOrder.direction === "asc") {
-                // Sıralama işlemini doğrudan dizge karşılaştırma operatörleriyle gerçekleştir
+                // Perform sorting directly using string comparison operators
                 return a[columnName] > b[columnName] ? 1 : -1;
             } else {
-                // Sıralama işlemini doğrudan dizge karşılaştırma operatörleriyle gerçekleştir
+                // Perform sorting directly using string comparison operators
                 return b[columnName] > a[columnName] ? 1 : -1;
             }
         });
 
-        // Sıralanmış verileri güncelle
+        // Update sorted data
         setData(sortedData.map((admin: any) => [admin.id, admin.name, admin.surname, admin.email, admin.phoneNumber, admin.salary]));
         // isLoading durumunu false olarak ayarla
         setIsLoading(false);
     };
     const handleRowSelectionChange = (currentRowsSelected: any[]) => {
         if (currentRowsSelected.length > 0) {
-            const selectedRow = data[currentRowsSelected[0].index]; // Seçilen ilk satırın verilerini al
+            const selectedRow = data[currentRowsSelected[0].index]; // Get data from the first selected row
             const selectedId = selectedRow[0];
         }
     };
@@ -140,7 +140,7 @@ const AdminTable: React.FC = () => {
                 case 'changePage':
                     changePage(tableState.page, tableState.sortOrder);
                     break;
-                case 'changeRowsPerPage': // Yeni sayfa sayısını işlemek için case eklendi
+                case 'changeRowsPerPage': // Added case to handle new page size
                     changeRowsPerPage(tableState.rowsPerPage, tableState.page);
                     break;
                 case 'sort':
@@ -213,7 +213,7 @@ const AdminTable: React.FC = () => {
                     },
                     {
                         name: "name",
-                        label: "AD",
+                        label: "NAME",
                         options: {
                             customHeadRender: (columnMeta: MUIDataTableColumn) => (
                                 <th style={{ textAlign: "center", borderBottom: "1px solid rgba(224, 224, 224, 1)" }}>{columnMeta.label}</th>
@@ -225,7 +225,7 @@ const AdminTable: React.FC = () => {
                     },
                     {
                         name: "surname",
-                        label: "SOYAD",
+                        label: "SURNAME",
                         options: {
                             customHeadRender: (columnMeta: MUIDataTableColumn) => (
                                 <th style={{ textAlign: "center", borderBottom: "1px solid rgba(224, 224, 224, 1)" }}>{columnMeta.label}</th>
@@ -249,7 +249,7 @@ const AdminTable: React.FC = () => {
                     },
                     {
                         name: "phoneNumber",
-                        label: "TEL NO",
+                        label: "PHONE NO",
                         options: {
                             customHeadRender: (columnMeta: MUIDataTableColumn) => (
                                 <th style={{ textAlign: "center", borderBottom: "1px solid rgba(224, 224, 224, 1)" }}>{columnMeta.label}</th>
@@ -261,7 +261,7 @@ const AdminTable: React.FC = () => {
                     },
                     {
                         name: "salary",
-                        label: "MAAŞ",
+                        label: "SALARY",
                         options: {
                             customHeadRender: (columnMeta: MUIDataTableColumn) => (
                                 <th style={{ textAlign: "center", borderBottom: "1px solid rgba(224, 224, 224, 1)" }}>{columnMeta.label}</th>

@@ -118,7 +118,7 @@ const shiftTypeSlice = createSlice({
       state.shiftTypes.push(action.payload);
     });
     builder.addCase(addShiftType.rejected, (state, action) => { 
-      state.error = action.error.message || "Bir hata oluştu.";
+      state.error = action.error.message || "An error occurred.";
     });
 
     /*-----------------*/
@@ -129,7 +129,7 @@ const shiftTypeSlice = createSlice({
       state.shiftTypes = [];
     });
     builder.addCase(updateShiftType.rejected, (state, action) => { 
-      state.error = action.error.message || "Bir hata oluştu.";
+      state.error = action.error.message || "An error occurred.";
     });
 
     /*-----------------*/

@@ -33,7 +33,7 @@ const DeleteEmployee = (props: Props) => {
             <div id='select-block' className="col-md-6">
 
                 <div className="mb-2">
-                    <label htmlFor="selectShiftType">Vites Tipi Seç</label>
+                    <label htmlFor="selectShiftType">Select Employee</label>
                     <select className="form-select" id="shiftTypeSelect" value={selectedEmployee || ''} onChange={handleSelectChange}>
                         <option value="" disabled>
 

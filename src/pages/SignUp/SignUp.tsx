@@ -15,6 +15,18 @@ import { useNavigate } from "react-router-dom";
 import "./SignUp.css";
 import { fetchDrivingLicenseTypes } from "../../store/slices/drivingLicenseTypeSlice";
 import { Alert } from "@mui/material";
+import { RootState } from "../../store/configureStore";
+
+const DEFAULT_DRIVING_LICENSE_TYPES = [
+  { id: 1, name: "A1" },
+  { id: 2, name: "A2" },
+  { id: 3, name: "B" },
+  { id: 4, name: "BE" },
+  { id: 5, name: "C" },
+  { id: 6, name: "CE" },
+  { id: 7, name: "D" },
+  { id: 8, name: "DE" },
+];
 
 const Item = styled(Sheet)(({ theme }) => ({
   ...theme.typography["body-sm"],
@@ -37,17 +49,36 @@ export default function SignUp({}: Props) {
   const [emailAddress, setEmailAddress] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
-  const [drivingLicenseNumber, setDrivingLicenseNumber] = useState("");
+  const drivingLicenseNumber = phoneNumber;
   const [drivingLicenseTypeEntityId, setDrivingLicenseTypeEntityId] = useState<
     number | undefined
   >(undefined);
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [successMessage, setSuccessMessage] = useState<string>("");
   const drivingLicenseTypeState = useSelector(
-    (state: any) => state.drivingLicenseType
+    (state: RootState) => state.drivingLicenseType
   );
+  const apiDrivingLicenseTypeOptions = Array.isArray(
+    drivingLicenseTypeState.drivingLicenseTypes
+  )
+    ? drivingLicenseTypeState.drivingLicenseTypes
+    : [];
+  const drivingLicenseTypeOptions =
+    apiDrivingLicenseTypeOptions.length > 0
+      ? apiDrivingLicenseTypeOptions
+      : DEFAULT_DRIVING_LICENSE_TYPES;
   const handleSignUp = async () => {
     if (name && surname && emailAddress && phoneNumber && password) {
+        if (phoneNumber.length !== 10) {
+          setErrorMessage("Please enter a valid mobile phone number.");
+          return;
+        }
+
+        if (!drivingLicenseTypeEntityId) {
+          setErrorMessage("Please select a driving license type.");
+          return;
+        }
+
         try {
             const response = await dispatch(
                 addCustomer({
@@ -62,16 +93,14 @@ export default function SignUp({}: Props) {
                 })
             );
 
-            if ("error" in response) {
-                if (response.error.message && response.error.message.includes("1007")) {
-                setErrorMessage("Giriş başarısız.");
+            if (addCustomer.rejected.match(response)) {
+                const backendMessage = typeof response.payload === "string"
+                  ? response.payload
+                  : response.error.message;
+                setErrorMessage(backendMessage || "Sign up failed. Please try again.");
                 console.log(response);
-                } else {
-                setErrorMessage("Giriş başarısız. Lütfen tekrar .");
-                console.log(response);
-                }
             } else {
-                setSuccessMessage("Hoşgeldiniz! Giriş başarılı.");
+                setSuccessMessage("Welcome! Sign up successful.");
                 setTimeout(() => {
                 setSuccessMessage("");
                 window.location.reload();
@@ -81,16 +110,16 @@ export default function SignUp({}: Props) {
             }
         }
         catch (error) {
-            console.error("Redux action dispatch hatası:", error);
-            setErrorMessage("İşlem başarısız. Lütfen tekrar deneyin.");
+            console.error("Redux action dispatch error:", error);
+            setErrorMessage("Operation failed. Please try again.");
         }
       }
 
       
       
     else {
-      // Eksik bilgi varsa kullanıcıyı uyar
-      alert("Lütfen tüm alanları doldurun.");
+      // Warn the user if required information is missing
+      alert("Please fill in all fields.");
     }
   };
   const data =
@@ -101,6 +130,7 @@ export default function SignUp({}: Props) {
       : [];
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setDrivingLicenseTypeEntityId(parseInt(e.target.value, 10));
+    setErrorMessage("");
   };
   useEffect(() => {
     dispatch(fetchDrivingLicenseTypes());
@@ -108,7 +138,7 @@ export default function SignUp({}: Props) {
   return (
     <div className="container-card">
       <div className="form">
-        <h2 className="h2-card">Kayıt Ol</h2>
+        <h2 className="h2-card">Sign Up</h2>
         <Box sx={{ width: "100%", marginTop: 10 }}>
           <Grid container spacing={2} sx={{ flexGrow: 1 }}>
             <Grid
@@ -129,8 +159,8 @@ export default function SignUp({}: Props) {
                 <FormControl>
                   <TextInput
                     style={{ marginBottom: 20 }}
-                    placeholder="Adınız"
-                    label="Adınız"
+                    placeholder="Your name"
+                    label="Your name"
                     required
                     value={name}
                     onChange={(e) => setName(e.target.value)}
@@ -138,13 +168,13 @@ export default function SignUp({}: Props) {
                   <Autocomplete
                     value={emailAddress}
                     onChange={setEmailAddress}
-                    label="Email adresiniz"
-                    placeholder="Email adresiniz"
+                    label="Your email address"
+                    placeholder="Your email address"
                     data={data}
                   />
 
                   <FormLabel sx={{ marginBottom: 1, color: "white" }}>
-                    Cep telefonu *
+                    Mobile phone *
                   </FormLabel>
                   <InputMask
                     style={{
@@ -157,7 +187,7 @@ export default function SignUp({}: Props) {
                       width:'100%',
                       backgroundColor:'white'
                     }}
-                    placeholder="Cep telefonu"
+                    placeholder="Mobile phone"
                     mask="+90 (___) ___-__-__"
                     replacement={{ _: /\d/ }}
                     onChange={(e) => {
@@ -183,31 +213,34 @@ export default function SignUp({}: Props) {
                 <FormControl>
                   <TextInput
                     style={{ marginBottom: 20 }}
-                    placeholder="Soyadınız"
-                    label="Soyadınız"
+                    placeholder="Your surname"
+                    label="Your surname"
                     required
                     value={surname}
                     onChange={(e) => setSurname(e.target.value)}
                   />
                   {/* <PasswordStrength /> */}
                   <PasswordInput
-                    placeholder="Şifre"
-                    label="Şifre"
+                    placeholder="Password"
+                    label="Password"
                     required
                     onChange={(e) => setPassword(e.target.value)}
                   />
                   <label style={{color: "white" }}>
-                    Ehliyet Tipi *
+                    Driving License Type *
                   </label>
                   <select
                     value={drivingLicenseTypeEntityId || ""}
                     onChange={handleSelectChange}
-                    style={{ height: "51px", borderRadius: "5px"}}
+                    disabled={drivingLicenseTypeState.isLoading}
+                    style={{ height: "51px", borderRadius: "5px", width: "100%" }}
                     >
-                    <option value="" disabled hidden >
-                      Ehliyet Tipi Giriniz
+                    <option value="" disabled>
+                      {drivingLicenseTypeState.isLoading
+                        ? "Loading driving license types..."
+                        : "Select driving license type"}
                     </option>
-                    {drivingLicenseTypeState.drivingLicenseTypes.map(
+                    {drivingLicenseTypeOptions.map(
                       (drivingLicenseType: any) => (
                         <option
                           key={drivingLicenseType.id}
@@ -235,7 +268,7 @@ export default function SignUp({}: Props) {
                   className="button3"
                   onClick={handleSignUp}
                 >
-                  Üye ol
+                  Sign Up
                 </button>
               </Box>
               

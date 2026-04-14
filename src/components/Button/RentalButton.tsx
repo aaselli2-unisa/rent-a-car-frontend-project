@@ -6,7 +6,7 @@ const RentalButton = () => {
       <div className="mybuttoninner">
         <div className="mybuttoninner2">
           <ul>
-            <li>Hemen Kirala</li>
+            <li>Rent Now</li>
             <div className="mybuttoninnerline2">
               <div className="mybuttoninnerline"></div>
             </div>

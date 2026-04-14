@@ -53,11 +53,11 @@ const UpdateCarModel = (props: Props) => {
     }
   };
   const validationSchema = Yup.object().shape({
-    brandEntityId: Yup.number().required("Marka seçiniz"),
-    carModelEntityId: Yup.number().required("Model seçiniz"),
+    brandEntityId: Yup.number().required("Select brand"),
+    carModelEntityId: Yup.number().required("Select model"),
     carModelEntityName: Yup.string()
-      .min(2, "Model en az 2 karakter olmalıdır")
-      .required("Model Giriniz"),
+      .min(2, "Model must be at least 2 characters")
+      .required("Enter model"),
   });
   const initialValues = {
     brandEntityId: carModel?.brandEntityId,
@@ -69,13 +69,13 @@ const UpdateCarModel = (props: Props) => {
 
     try {
       const response = await dispatch(updateCarModel(values));
-      // İşlem başarılı olduğunda
-      setSuccessMessage("İşlem başarıyla tamamlandı");
+      // On successful operation
+      setSuccessMessage("Operation completed successfully");
       window.location.reload();
     } catch (error) {
       console.error("Error updating shift type: ", error);
-      // Hata durumunda
-      setErrorMessage("İşlem sırasında bir hata oluştu");
+      // In case of error
+      setErrorMessage("An error occurred during the operation");
     }
     
   };
@@ -93,7 +93,7 @@ const UpdateCarModel = (props: Props) => {
       <SideBar>
         <div className="container-card">
           <div className="form">
-            <h2 className="h2-card">Model Güncelleme</h2>
+            <h2 className="h2-card">Update Model</h2>
             <Form>
               <div className="row-add-carModel">
                 <div
@@ -103,7 +103,7 @@ const UpdateCarModel = (props: Props) => {
                 >
                   <div className="mb-2">
                     <FormikSelect
-                      label="Marka Seç"
+                      label="Select Brand"
                       name="brandEntityId"
                       options={brandState.brands.map((brands: any) => ({
                         value: brands.id,
@@ -113,7 +113,7 @@ const UpdateCarModel = (props: Props) => {
                   </div>
                   <div className="mb-2">
                     <FormikSelect
-                      label="Araç Model Seç"
+                      label="Select Car Model"
                       name="carModelEntityId"
                       options={carModelState.carModel.map((carModel: any) => ({
                         value: carModel.id,
@@ -124,8 +124,8 @@ const UpdateCarModel = (props: Props) => {
                   <div className="mb-2">
                     <FormikInput
                       name="carModelEntityName"
-                      label="Model Giriniz"
-                      placeHolder="Model Giriniz."
+                      label="Enter Model"
+                      placeHolder="Enter model."
                       type="text"
                     />
                   </div>
@@ -140,7 +140,7 @@ const UpdateCarModel = (props: Props) => {
                     }}
                     type="submit"
                   >
-                    Güncelle
+                    Update
                   </Button>
                 </div>
               </div>

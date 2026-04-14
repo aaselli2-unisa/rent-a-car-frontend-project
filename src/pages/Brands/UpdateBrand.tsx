@@ -47,7 +47,7 @@ const UpdateBrand = () => {
     }
   };
   const validationSchema = Yup.object().shape({
-    name: Yup.string().required("Marka Giriniz."),
+    name: Yup.string().required("Enter brand."),
   });
   const initialValues = {
     id: brandId,
@@ -60,7 +60,7 @@ const UpdateBrand = () => {
       if (typeof file === "undefined") {
         const updatedValues = { ...values };
         const response = await dispatch(updateBrand(updatedValues));
-        setSuccessMessage("İşlem başarıyla tamamlandı");
+        setSuccessMessage("Operation completed successfully");
       } else {
         const formData = new FormData();
 
@@ -74,13 +74,13 @@ const UpdateBrand = () => {
           const brandImageEntityId = imageResponse.payload;
           const updatedValues = { ...values, brandImageEntityId };
           const response = await dispatch(updateBrand(updatedValues));
-          setSuccessMessage("İşlem başarıyla tamamlandı");
+          setSuccessMessage("Operation completed successfully");
         }
       }
       window.location.href = "/adminPanel/brands";
     } catch (error) {
       console.error("Error : ", error);
-      setErrorMessage("İşlem sırasında bir hata oluştu");
+      setErrorMessage("An error occurred during the operation");
     }
   };
   const handleOnChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -97,7 +97,7 @@ const UpdateBrand = () => {
     <SideBar>
       <div className="container-card">
         <div className="form">
-          <h2 className="h2-card">Marka Güncelle</h2>
+          <h2 className="h2-card">Update Brand</h2>
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
@@ -116,8 +116,8 @@ const UpdateBrand = () => {
                   <div className="mb-2">
                     <FormikInput
                       name="name"
-                      label="Marka"
-                      placeHolder="Marka Giriniz."
+                      label="Brand"
+                      placeHolder="Enter brand."
                       type="text"
                     />
                   </div>
@@ -137,7 +137,7 @@ const UpdateBrand = () => {
                     }}
                     type="submit"
                   >
-                    Güncelle
+                    Update
                   </Button>
                 </div>
               </div>

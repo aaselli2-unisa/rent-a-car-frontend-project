@@ -52,81 +52,81 @@ const AdminPanel2: React.FC = () => {
     <div style={{ display: 'flex' }}>
       <div style={{ width: '33%' }}>
       <div className="sidenav">
-          <button className="dropdown-btn" onClick={() => handleDropdownClick(0)}>Araç
+          <button className="dropdown-btn" onClick={() => handleDropdownClick(0)}>Car
             <i className="fa fa-caret-down"></i>
           </button>
           <div className="dropdown-container">
-            <button onClick={() => setSelectedAction('AddCar')}>Araç Ekle</button>
-            <button onClick={() => setSelectedAction('UpdateCar')}>Araç Güncelle</button>
-            <button onClick={() => setSelectedAction('DeleteCar')}>Araç Sil</button>
+            <button onClick={() => setSelectedAction('AddCar')}>Add Car</button>
+            <button onClick={() => setSelectedAction('UpdateCar')}>Update Car</button>
+            <button onClick={() => setSelectedAction('DeleteCar')}>Delete Car</button>
           </div>
-          <button className="dropdown-btn" onClick={() => handleDropdownClick(1)}>Marka
+          <button className="dropdown-btn" onClick={() => handleDropdownClick(1)}>Brand
             <i className="fa fa-caret-down"></i>
           </button>
           <div className="dropdown-container">
-            <button onClick={() => setSelectedAction('AddBrand')}>Marka Ekle</button>
-            <button onClick={() => setSelectedAction('UpdateBrand')}>Marka Güncelle</button>
-            <button onClick={() => setSelectedAction('DeleteBrand')}>Marka Sil</button>
+            <button onClick={() => setSelectedAction('AddBrand')}>Add Brand</button>
+            <button onClick={() => setSelectedAction('UpdateBrand')}>Update Brand</button>
+            <button onClick={() => setSelectedAction('DeleteBrand')}>Delete Brand</button>
           </div>
         </div>
         
 
 
         {/* <li>
-            <button onClick={() => setSelectedAction('AddCar')}>Araç Ekle</button>
-            <button onClick={() => setSelectedAction('UpdateCar')}>Araç Güncelle</button>
-            <button onClick={() => setSelectedAction('DeleteCar')}>Araç Sil</button>
-          </li> 
-          <li>
-            <button onClick={() => setSelectedAction('AddBrand')}>Marka Ekle</button>
-            <button onClick={() => setSelectedAction('UpdateBrand')}>Marka Güncelle</button>
-            <button onClick={() => setSelectedAction('DeleteBrand')}>Marka Sil</button>
+            <button onClick={() => setSelectedAction('AddCar')}>Add Car</button>
+            <button onClick={() => setSelectedAction('UpdateCar')}>Update Car</button>
+            <button onClick={() => setSelectedAction('DeleteCar')}>Delete Car</button>
           </li>
           <li>
-            <button onClick={() => setSelectedAction('AddCarBodyType')}>Araç Tipi Ekle</button>
-            <button onClick={() => setSelectedAction('UpdateCarBodyType')}>Araç Tipi Güncelle</button>
-            <button onClick={() => setSelectedAction('DeleteCarBodyType')}>Araç Tipi Sil</button>
+            <button onClick={() => setSelectedAction('AddBrand')}>Add Brand</button>
+            <button onClick={() => setSelectedAction('UpdateBrand')}>Update Brand</button>
+            <button onClick={() => setSelectedAction('DeleteBrand')}>Delete Brand</button>
           </li>
           <li>
-            <button onClick={() => setSelectedAction('AddCarModel')}>Model Ekle</button>
-            <button onClick={() => setSelectedAction('UpdateCarModel')}>Model Güncelle</button>
-            <button onClick={() => setSelectedAction('DeleteCarModel')}>Model Sil</button>
+            <button onClick={() => setSelectedAction('AddCarBodyType')}>Add Car Type</button>
+            <button onClick={() => setSelectedAction('UpdateCarBodyType')}>Update Car Type</button>
+            <button onClick={() => setSelectedAction('DeleteCarBodyType')}>Delete Car Type</button>
           </li>
           <li>
-            <button onClick={() => setSelectedAction('AddColor')}>Renk Ekle</button>
-            <button onClick={() => setSelectedAction('UpdateColor')}>Renk Güncelle</button>
-            <button onClick={() => setSelectedAction('DeleteColor')}>Renk Sil</button>
+            <button onClick={() => setSelectedAction('AddCarModel')}>Add Model</button>
+            <button onClick={() => setSelectedAction('UpdateCarModel')}>Update Model</button>
+            <button onClick={() => setSelectedAction('DeleteCarModel')}>Delete Model</button>
           </li>
           <li>
-            <button onClick={() => setSelectedAction('AddDiscountCode')}>İndirim Kuponu Ekle</button>
-            <button onClick={() => setSelectedAction('UpdateDiscountCode')}>İndirim Kuponu Güncelle</button>
-            <button onClick={() => setSelectedAction('DeleteDiscountCode')}>İndirim Kuponu Sil</button>
+            <button onClick={() => setSelectedAction('AddColor')}>Add Color</button>
+            <button onClick={() => setSelectedAction('UpdateColor')}>Update Color</button>
+            <button onClick={() => setSelectedAction('DeleteColor')}>Delete Color</button>
           </li>
           <li>
-            <button onClick={() => setSelectedAction('AddDrivingLicenseType')}>Ehliyet Tipi Ekle</button>
-            <button onClick={() => setSelectedAction('UpdateDrivingLicenseType')}>Ehliyet Tipi Güncelle</button>
-            <button onClick={() => setSelectedAction('DeleteDrivingLicenseType')}>Ehliyet Tipi Sil</button>
+            <button onClick={() => setSelectedAction('AddDiscountCode')}>Add Discount Code</button>
+            <button onClick={() => setSelectedAction('UpdateDiscountCode')}>Update Discount Code</button>
+            <button onClick={() => setSelectedAction('DeleteDiscountCode')}>Delete Discount Code</button>
           </li>
           <li>
-            <button onClick={() => setSelectedAction('AddEmployee')}>Çalışan Ekle</button>
-            <button onClick={() => setSelectedAction('UpdateEmployee')}>Çalışan Güncelle</button>
-            <button onClick={() => setSelectedAction('DeleteEmployee')}>Çalışan Sil</button>
+            <button onClick={() => setSelectedAction('AddDrivingLicenseType')}>Add Driving License Type</button>
+            <button onClick={() => setSelectedAction('UpdateDrivingLicenseType')}>Update Driving License Type</button>
+            <button onClick={() => setSelectedAction('DeleteDrivingLicenseType')}>Delete Driving License Type</button>
           </li>
           <li>
-            <button onClick={() => setSelectedAction('AddFuelType')}>Yakıt Tipi Ekle</button>
-            <button onClick={() => setSelectedAction('UpdateFuelType')}>Yakıt Tipi Güncelle</button>
-            <button onClick={() => setSelectedAction('DeleteFuelType')}>Yakıt Tipi Sil</button>
+            <button onClick={() => setSelectedAction('AddEmployee')}>Add Employee</button>
+            <button onClick={() => setSelectedAction('UpdateEmployee')}>Update Employee</button>
+            <button onClick={() => setSelectedAction('DeleteEmployee')}>Delete Employee</button>
           </li>
           <li>
-            <button onClick={() => setSelectedAction('UpdatePaymentType')}>Ödeme Tipi Güncelle</button>
+            <button onClick={() => setSelectedAction('AddFuelType')}>Add Fuel Type</button>
+            <button onClick={() => setSelectedAction('UpdateFuelType')}>Update Fuel Type</button>
+            <button onClick={() => setSelectedAction('DeleteFuelType')}>Delete Fuel Type</button>
           </li>
           <li>
-            <button onClick={() => setSelectedAction('AddShiftType')}>Vites Tipi Ekle</button>
-            <button onClick={() => setSelectedAction('UpdateShiftType')}>Vites Tipi Güncelle</button>
-            <button onClick={() => setSelectedAction('DeleteShiftType')}>Vites Tipi Sil</button>
+            <button onClick={() => setSelectedAction('UpdatePaymentType')}>Update Payment Type</button>
           </li>
           <li>
-            <button onClick={() => setSelectedAction('UpdateVehicleStatus')}>Araç Durumu Güncelle</button>
+            <button onClick={() => setSelectedAction('AddShiftType')}>Add Shift Type</button>
+            <button onClick={() => setSelectedAction('UpdateShiftType')}>Update Shift Type</button>
+            <button onClick={() => setSelectedAction('DeleteShiftType')}>Delete Shift Type</button>
+          </li>
+          <li>
+            <button onClick={() => setSelectedAction('UpdateVehicleStatus')}>Update Vehicle Status</button>
           </li>
            */}
 

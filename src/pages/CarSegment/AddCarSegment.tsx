@@ -23,19 +23,19 @@ const AddCarSegment = (props: Props) => {
   const handleAddCarSegment = (values: any) => {
     try {
       dispatch(addCarSegment(values));
-      setSuccessMessage("İşlem başarıyla tamamlandı");
+      setSuccessMessage("Operation completed successfully");
     } catch (error) {
       console.error("Error updating car segment: ", error);
-      // Hata durumunda
-      setErrorMessage("İşlem sırasında bir hata oluştu");
+      // In case of error
+      setErrorMessage("An error occurred during the operation");
     }
   };
 
   const validationSchema = Yup.object().shape({
     name: Yup.string()
-      .min(2, "Segment en az 2 karakter olmalıdır")
-      .matches(/^[a-zA-ZğüşıöçĞÜŞİÖÇ\s]+$/, "Segment sadece harflerden oluşmalıdır")
-      .required("Segment Giriniz"),
+      .min(2, "Segment must be at least 2 characters")
+      .matches(/^[a-zA-Z\s]+$/, "Segment can only contain letters")
+      .required("Enter segment"),
   });
 
   const initialValues = {
@@ -54,18 +54,18 @@ const AddCarSegment = (props: Props) => {
       <SideBar>
         <div className="container-card">
           <div className="form">
-            <h2 className="h2-card">Segment Ekleme</h2>
+            <h2 className="h2-card">Add Segment</h2>
             <Form>
               <div className="row-add-carSegment">
                 <div id="select-block" className="col-md-6" style={{ marginTop: '110px' }}>
                   <div className="mb-2">
                     <FormikInput
                       name="name"
-                      label="Segment "
-                      placeHolder="Segment Giriniz."
+                      label="Segment"
+                      placeHolder="Enter segment."
                       type="text"
                     />
-                    <Button style={{ marginTop: '30px', backgroundColor: "rgb(140,24,24)", color: "white", width: "200px", borderRadius: "10px", marginLeft: "140px" }} type='submit'>Ekle</Button>
+                    <Button style={{ marginTop: '30px', backgroundColor: "rgb(140,24,24)", color: "white", width: "200px", borderRadius: "10px", marginLeft: "140px" }} type='submit'>Add</Button>
                   </div>
                 </div>
               </div>

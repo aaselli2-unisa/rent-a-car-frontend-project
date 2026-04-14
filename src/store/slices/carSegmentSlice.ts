@@ -121,7 +121,7 @@ const carSegmentSlice = createSlice({
       state.carSegments.push(action.payload);
     });
     builder.addCase(addCarSegment.rejected, (state, action) => {
-      state.error = action.error.message || "Bir hata oluştu.";
+      state.error = action.error.message || "An error occurred.";
      });
 
     /*----------------*/
@@ -132,7 +132,7 @@ const carSegmentSlice = createSlice({
       state.carSegments = [];
     });
     builder.addCase(updateCarSegment.rejected, (state, action) => {
-      state.error = action.error.message || "Bir hata oluştu.";
+      state.error = action.error.message || "An error occurred.";
     });
 
     /*----------------*/

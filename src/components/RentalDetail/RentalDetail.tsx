@@ -25,7 +25,7 @@ const RentalDetail: React.FC<{
           gutterBottom
           style={{ textAlign: "center", marginBottom: "20px", color: "black" }}
         >
-          Sipariş Detayları
+          Order Details
         </Typography>
         {response ? (
           <Grid container spacing={3} justifyContent="center">
@@ -35,29 +35,29 @@ const RentalDetail: React.FC<{
                 gutterBottom
                 style={{ color: "#009688" }}
               >
-                Müşteri Bilgileri:
+                Customer Information:
               </Typography>
               <Typography
                 variant="body1"
                 gutterBottom
                 style={{ color: "black" }}
               >
-                <strong>Ad:</strong>{" "}
+                <strong>Name:</strong>{" "}
                 <span style={{ color: "black" }}>
                   {response.response.customerDTO?.name}
                 </span>
                 <br />
-                <strong>Soyad:</strong>{" "}
+                <strong>Surname:</strong>{" "}
                 <span style={{ color: "black" }}>
                   {response.response.customerDTO?.surname}
                 </span>
                 <br />
-                <strong>Mail Adresi:</strong>{" "}
+                <strong>Email Address:</strong>{" "}
                 <span style={{ color: "black" }}>
                   {response.response.customerDTO?.emailAddress}
                 </span>
                 <br />
-                <strong>Telefon Numarası:</strong>{" "}
+                <strong>Phone Number:</strong>{" "}
                 <span style={{ color: "black" }}>
                   {response.response.customerDTO?.phoneNumber}
                 </span>
@@ -70,18 +70,18 @@ const RentalDetail: React.FC<{
                 gutterBottom
                 style={{ color: "#009688" }}
               >
-                Araç Bilgileri:
+                Car Information:
               </Typography>
               <Typography variant="body1" gutterBottom>
-                <strong>Marka:</strong>{" "}
+                <strong>Brand:</strong>{" "}
                 {response.response.carDTO?.carModelEntityBrandEntityName} <br />
                 <strong>Model:</strong>{" "}
                 {response.response.carDTO?.carModelEntityName} <br />
-                <strong>Tip:</strong>{" "}
+                <strong>Type:</strong>{" "}
                 {response.response.carDTO?.carBodyTypeEntityName} <br />
-                <strong>Renk:</strong>{" "}
+                <strong>Color:</strong>{" "}
                 {response.response.carDTO?.colorEntityName} <br />
-                <strong>Yakıt Tipi:</strong>{" "}
+                <strong>Fuel Type:</strong>{" "}
                 {response.response.carDTO?.fuelTypeEntityName} <br />
               </Typography>
             </Grid>
@@ -91,12 +91,12 @@ const RentalDetail: React.FC<{
                 gutterBottom
                 style={{ color: "#009688" }}
               >
-                Kiralama Tarihleri:
+                Rental Dates:
               </Typography>
               <Typography variant="body1" gutterBottom>
-                <strong>Başlangıç Tarihi:</strong>{" "}
+                <strong>Start Date:</strong>{" "}
                 {response.response.startDate?.toString()} <br />
-                <strong>Bitiş Tarihi:</strong>{" "}
+                <strong>End Date:</strong>{" "}
                 {response.response.endDate?.toString()} <br />
               </Typography>
             </Grid>
@@ -106,7 +106,7 @@ const RentalDetail: React.FC<{
                 gutterBottom
                 style={{ color: "#009688" }}
               >
-                Toplam Tutar:
+                Total Amount:
               </Typography>
               <Typography
                 variant="body1"
@@ -126,7 +126,7 @@ const RentalDetail: React.FC<{
                 gutterBottom
                 style={{ marginTop: "20px", color: "#333" }}
               >
-                Teşekkür ederiz. İyi yolculuklar!
+                Thank you. Have a safe trip!
               </Typography>
               <Link to="/">
                 <Button
@@ -137,13 +137,13 @@ const RentalDetail: React.FC<{
                     backgroundColor: "#009688",
                   }}
                 >
-                  AnaSayfa'ya Dön
+                  Back to Homepage
                 </Button>
               </Link>
             </Grid>
           </Grid>
         ) : (
-          <Typography variant="body1">Bilgiler yükleniyor...</Typography>
+          <Typography variant="body1">Loading information...</Typography>
         )}
       </Box>
     </div>

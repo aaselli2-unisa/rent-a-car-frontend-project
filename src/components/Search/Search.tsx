@@ -39,7 +39,7 @@ const Search: React.FC = () => {
           const { startDate, endDate } = values;
           try {
             if (!endDate) {
-              setErrorMessage("Bitiş tarihini seçiniz.");
+              setErrorMessage("Please select an end date.");
               return;
             }
         
@@ -47,7 +47,9 @@ const Search: React.FC = () => {
             const parsedEndDate = new Date(endDate);
         
             if (parsedEndDate < parsedStartDate) {
-              setErrorMessage("Başlangıç tarihinden önce bir tarih seçemezsiniz.");
+              setErrorMessage(
+                "End date cannot be earlier than start date."
+              );
               return;
             }
         
@@ -75,8 +77,8 @@ const Search: React.FC = () => {
               state: { startDate: startDateValue, endDate: endDateValue },
             });
           } catch (error) {
-            console.error("Redux action dispatch hatası:", error);
-            setErrorMessage("İşlem başarısız. Lütfen tekrar deneyin.");
+            console.error("Redux action dispatch error:", error);
+            setErrorMessage("Operation failed. Please try again.");
           }
         }}
       >
@@ -87,7 +89,7 @@ const Search: React.FC = () => {
                 htmlFor="startDate"
                 className="form-label text-white fs-2 text-fadeInUpFast"
               >
-                Başlama Tarihi
+                Start Date
               </label>
 
               <Field
@@ -103,7 +105,7 @@ const Search: React.FC = () => {
                 htmlFor="endDate"
                 className="form-label custom-label text-white fs-2 text-fadeInUpFast"
               >
-                Dönüş Tarihi
+                Return Date
               </label>
               <Field
                 type="date"
@@ -115,7 +117,7 @@ const Search: React.FC = () => {
 
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               <button type="submit" className="button3">
-                Tarihe Göre Ara
+                Search by Date
                 <img className="wheelIcon" src={wheelIcon} alt="wheel" />
               </button>
             </div>

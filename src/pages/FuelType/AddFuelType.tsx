@@ -21,22 +21,22 @@ const AddFuelType = (props: Props) => {
   const handleAddFuelType = (values: any) => {
     try{
       dispatch(addFuelType(values));
-      setSuccessMessage("İşlem başarıyla tamamlandı");
+      setSuccessMessage("Operation completed successfully");
     } catch (error) {
       console.error("Error updating fuelType: ", error);
-      // Hata durumunda
-      setErrorMessage("İşlem sırasında bir hata oluştu");
+      // In case of error
+      setErrorMessage("An error occurred during the operation");
     }
     
   };
   const validationSchema = Yup.object().shape({
     name: Yup.string()
-      .min(2, "Yakıt Tipi en az 2 karakter olmalıdır")
+      .min(2, "Fuel type must be at least 2 characters")
       .matches(
-        /^[a-zA-ZğüşıöçĞÜŞİÖÇ\s]+$/,
-        "Vites Tipi sadece harflerden oluşmalıdır"
+        /^[a-zA-Z\s]+$/,
+        "Fuel type can only contain letters"
       )
-      .required("Yakıt Tipi Giriniz"),
+      .required("Enter fuel type"),
   });
   const initialValues = {
     name: "",
@@ -53,18 +53,18 @@ const AddFuelType = (props: Props) => {
       <SideBar>
         <div className="container-card">
         <div className="form">
-          <h2 className="h2-card">Yakıt Tipi Ekleme</h2>
+          <h2 className="h2-card">Add Fuel Type</h2>
           <Form>
             <div className="row-add-carModel">
               <div id="select-block" className="col-md-6" style={{marginTop:'110px'}}>
                 <div className="mb-2">
                   <FormikInput
                     name="name"
-                    label="Yakıt Tipi "
-                    placeHolder="Yakıt Tipi Giriniz."
+                    label="Fuel Type"
+                    placeHolder="Enter fuel type."
                     type="text"
                   />
-                   <Button style={{marginTop:'30px', backgroundColor: "rgb(140,24,24)", color:"white", width:"200px" , borderRadius:"10px", marginLeft:"140px" }} type='submit'>Ekle</Button>
+                   <Button style={{marginTop:'30px', backgroundColor: "rgb(140,24,24)", color:"white", width:"200px" , borderRadius:"10px", marginLeft:"140px" }} type='submit'>Add</Button>
                 </div>
               </div>
             </div>

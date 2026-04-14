@@ -149,8 +149,8 @@ export default function CarCart({
     try {
       dispatch(getByAllFilteredCars(filterData));
     } catch (error) {
-      console.error("Redux action dispatch hatası:", error);
-      setErrorMessage("İşlem başarısız. Lütfen tekrar deneyin.");
+      console.error("Redux action dispatch error:", error);
+      setErrorMessage("Operation failed. Please try again.");
     }
   };
   const handleMouseEnter = () => {
@@ -170,7 +170,7 @@ export default function CarCart({
             htmlFor="startDate"
             className="form-label"
           >
-            Başlama Tarihi
+            Start Date
           </label>
           <input
             type="date"
@@ -187,7 +187,7 @@ export default function CarCart({
             htmlFor="endDate"
             className="form-label"
           >
-            Dönüş Tarihi
+            Return Date
           </label>
           <input
             type="date"
@@ -200,7 +200,7 @@ export default function CarCart({
         </div>
         <div className="mb-3">
           <label htmlFor="brandSelect" className="form-label">
-            Marka Seçiniz
+            Select Brand
           </label>
           <select
             className="select-filter"
@@ -208,7 +208,7 @@ export default function CarCart({
             value={selectedBrand || ""}
             onChange={changeBrand}
           >
-            <option value="">Marka seçiniz</option>
+            <option value="">Select brand</option>
             {brandState.brands.map((brand: any) => (
               <option key={brand.id} value={brand.id}>
                 {brand.name}
@@ -220,7 +220,7 @@ export default function CarCart({
         {selectedBrand !== null && carModelState.carModel.length > 0 && (
           <div className="mb-3">
             <label htmlFor="carModelSelect" className="form-label">
-              Araba Modeli Seçiniz
+              Select Car Model
             </label>
             <select
               className="select-filter"
@@ -228,7 +228,7 @@ export default function CarCart({
               value={selectedCarModel || ""}
               onChange={changeModel}
             >
-              <option value="">Model seçiniz</option>
+              <option value="">Select model</option>
               {carModelState.carModel.map((carModel: any) => (
                 <option key={carModel.id} value={carModel.id}>
                   {carModel.name}
@@ -239,7 +239,7 @@ export default function CarCart({
         )}
         <div className="mb-3">
           <label htmlFor="colorSelect" className="form-label">
-            Renk Seçiniz
+            Select Color
           </label>
           <select
             className="select-filter"
@@ -247,7 +247,7 @@ export default function CarCart({
             value={selectedColor || ""}
             onChange={changeColor}
           >
-            <option value="">Renk seçiniz</option>
+            <option value="">Select color</option>
             {colorState.colors.map((color: any) => (
               <option key={color.id} value={color.id}>
                 {color.name}
@@ -258,7 +258,7 @@ export default function CarCart({
 
         <div className="mb-3">
           <label htmlFor="fuelTypeSelect" className="form-label">
-            Yakıt Tipi Seçiniz
+            Select Fuel Type
           </label>
           <select
             className="select-filter"
@@ -266,7 +266,7 @@ export default function CarCart({
             value={selectedFuelType || ""}
             onChange={changeFuelType}
           >
-            <option value="">Yakıt Tipi Seçiniz</option>
+            <option value="">Select fuel type</option>
             {fuelTypeState.fuelTypes.map((fuelType: any) => (
               <option key={fuelType.id} value={fuelType.id}>
                 {fuelType.name}
@@ -277,7 +277,7 @@ export default function CarCart({
 
         <div className="mb-3">
           <label htmlFor="shiftTypeSelect" className="form-label">
-            Vites Tipi Seçiniz
+            Select Transmission Type
           </label>
           <select
             className="select-filter"
@@ -285,7 +285,7 @@ export default function CarCart({
             value={selectedShiftType || ""}
             onChange={changeShiftType}
           >
-            <option value="">Vites Tipi Seçiniz</option>
+            <option value="">Select transmission type</option>
             {shiftTypeState.shiftTypes.map((shiftType: any) => (
               <option key={shiftType.id} value={shiftType.id}>
                 {shiftType.name}
@@ -295,7 +295,7 @@ export default function CarCart({
         </div>
         <div className="mb-3">
           <label htmlFor="licenseTypeSuitableCheckbox" className="form-label">
-            Ehliyetime uygun olanları göster
+            Show vehicles suitable for my license
           </label>
           <input
             type="checkbox"
@@ -310,7 +310,7 @@ export default function CarCart({
           className="btn btn-primary"
           onClick={handleFiltred}
         >
-          Filtrele
+          Filter
         </button>
       </div>
       {errorCustom && <Alert severity="error">{errorCustom}</Alert>}
@@ -373,7 +373,7 @@ export default function CarCart({
                       }}
                     >
                       <Typography level="title-lg" sx={{ marginBottom: 1.6 ,color:'white'}}>
-                        Araç Özellikleri
+                        Vehicle Features
                       </Typography>
                       <div className="mid-column">
                         <Icon
@@ -381,7 +381,7 @@ export default function CarCart({
                           size={1}
                           className="iconClass"
                         />
-                        <Typography level="body-sm" sx={{ color:' #c1c0c0;'}}>{car.seat} Kişi</Typography>
+                        <Typography level="body-sm" sx={{ color:' #c1c0c0;'}}>{car.seat} People</Typography>
                       </div>
                       <div className="mid-column">
                         <Icon
@@ -390,7 +390,7 @@ export default function CarCart({
                           className="iconClass"
                         />
                         <Typography level="body-sm"  sx={{ color:' #c1c0c0;'}}>
-                          {car.luggage} Büyük Bavul
+                          {car.luggage} Large Suitcase
                         </Typography>
                       </div>
                       {/* <div className="mid-column">
@@ -420,7 +420,7 @@ export default function CarCart({
                     </Grid>
                     <Grid xs={6} sx={{ paddingLeft: 3 }}>
                       <Typography level="title-lg" sx={{ marginBottom: 1.6,color:'white' }}>
-                        Kiralama Koşulları
+                        Rental Conditions
                       </Typography>
                       <div className="mid-column">
                         <Icon
@@ -428,7 +428,7 @@ export default function CarCart({
                           size={1}
                           className="iconClass"
                         />
-                        <Typography level="body-sm"  sx={{ color:' #c1c0c0;'}}>21 Yaş Ve Üstü</Typography>
+                        <Typography level="body-sm"  sx={{ color:' #c1c0c0;'}}>21 years and older</Typography>
                       </div>
                       <div className="mid-column">
                         <Icon
@@ -437,7 +437,7 @@ export default function CarCart({
                           className="iconClass"
                         />
                         <Typography level="body-sm"  sx={{ color:' #c1c0c0;'}}>
-                          Ehliyet Yaşı 1 ve Üzeri
+                          License age 1 year and above
                         </Typography>
                       </div>
                       <div className="mid-column">
@@ -446,7 +446,7 @@ export default function CarCart({
                           size={1}
                           className="iconClass"
                         />
-                        <Typography level="body-sm"  sx={{ color:' #c1c0c0;'}}>1 Kredi Kartı</Typography>
+                        <Typography level="body-sm"  sx={{ color:' #c1c0c0;'}}>1 Credit Card</Typography>
                       </div>
                       <div className="mid-column"></div>
                     </Grid>
@@ -459,7 +459,7 @@ export default function CarCart({
                     size="lg"
                     onClick={() => onButtonClick(car.id,startDateFilter, endDateFilter)}
                   >
-                    Hemen Kirala
+                    Rent Now
                   </Button>
                 </CardOverflow>
               </Card>

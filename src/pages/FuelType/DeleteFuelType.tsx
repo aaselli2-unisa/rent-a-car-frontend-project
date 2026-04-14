@@ -35,7 +35,7 @@ const DeleteFuelType = (props: Props) => {
         <div id='select-block' className="col-md-6">
 
           <div className="mb-2">
-            <label htmlFor="selectFuelType">Yakıt Tipi Seç</label>
+            <label htmlFor="selectFuelType">Select Fuel Type</label>
             <select className="form-select" id="fuelTypeSelect"  value={selectedFuelType || ''} onChange={handleSelectChange}>
               <option value="" disabled>
 

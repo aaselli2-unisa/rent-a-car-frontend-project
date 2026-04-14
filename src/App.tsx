@@ -23,8 +23,6 @@ import Employees from './pages/Employee/Employees';
 import AddEmployee from './pages/Employee/AddEmployee';
 import SelectedCar from './pages/SelectedCar/SelectedCar';
 import OverlayLoader from './components/OverlayLoader/OverlayLoader';
-import { useState } from 'react';
-import { AllGetByDateCarResponse } from './models/Responses/Car/AllGetByDateCarResponse';
 import FuelTypes from './pages/FuelType/FuelTypes';
 import AddFuelType from './pages/FuelType/AddFuelType';
 import ShiftTypes from './pages/ShiftType/ShiftTypes';
@@ -44,7 +42,6 @@ import DeleteFuelType from './pages/FuelType/DeleteFuelType';
 import DeleteAdmin from './pages/Admin/DeleteAdmin';
 import DeleteEmployee from './pages/Employee/DeleteEmployee';
 import DeleteDrivingLicenseType from './pages/DrivingLicenseType/DeleteDrivingLicenseType';
-import AdminRoutes from './pages/AdminRoutes/AdminRoutes';
 import PaymentDetails from './pages/PaymentDetails/PaymentDetails';
 import Navbar from './components/Navbar/Navbar';
 import PastRentals from './pages/PastRentals/PastRentals';
@@ -78,14 +75,11 @@ import Contacts from './pages/ContactUs/Contacts';
 import AboutUs from './pages/AboutUs/AboutUs';
 import RentalTerms from './pages/RentalTerms/RentalTerms';
 import UpdateCarSegment from './pages/CarSegment/UpdateCarSegment';
-import UpdateUser from './pages/User/UpdatePassword';
 import UpdatePassword from './pages/User/UpdatePassword';
 
   
 
 function App() {
-
-  const [searchCarResponse, setSearchCarResponse] = useState<AllGetByDateCarResponse | undefined>({} as AllGetByDateCarResponse);
   return (
     <>
       <OverlayLoader />
@@ -183,7 +177,7 @@ function App() {
         <Route path="/adminPanel/users" element={<Users />}></Route>
         <Route path="/adminPanel/users/updatePassword/:id" element={<UpdatePassword />}></Route>
 
-        <Route path="/selectedCar" element={<SelectedCar response={searchCarResponse} />} />
+        <Route path="/selectedCar" element={<SelectedCar response={undefined} />} />
         <Route path="/adminPanel/paymentDetails" element={<PaymentDetails />}></Route>
         <Route path="/adminPanel/updatePaymentDetails/:id" element={<UpdatePaymentDetails />}></Route>
         <Route path="/allMyRentals/:id" element={<PastRentals />}></Route>

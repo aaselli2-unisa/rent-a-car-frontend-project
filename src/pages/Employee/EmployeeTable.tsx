@@ -55,7 +55,7 @@ const EmployeeTable: React.FC = () => {
         setPage(page);
         setIsLoading(false);
     };
-    const changeRowsPerPage = (rowsPerPage: number, page: number) => { // Satır sayısını değiştiren fonksiyonu ekledik
+    const changeRowsPerPage = (rowsPerPage: number, page: number) => { // Added function to change row count
         setRowsPerPage(rowsPerPage);
         setPage(page);
     };
@@ -85,17 +85,17 @@ const EmployeeTable: React.FC = () => {
 
         const sortedData = employeeState.employees.slice().sort((a: any, b: any) => {
             if (sortOrder.direction === "asc") {
-                // Sıralama işlemini doğrudan dizge karşılaştırma operatörleriyle gerçekleştir
+                // Sort directly with string comparison operators
                 return a[columnName] > b[columnName] ? 1 : -1;
             } else {
-                // Sıralama işlemini doğrudan dizge karşılaştırma operatörleriyle gerçekleştir
+                // Sort directly with string comparison operators
                 return b[columnName] > a[columnName] ? 1 : -1;
             }
         });
 
-        // Sıralanmış verileri güncelle
+        // Update sorted data
         setData(sortedData.map((employee: any) => [employee.id, employee.name, employee.surname, employee.email, employee.salary]));
-        // isLoading durumunu false olarak ayarla
+        // Set isLoading to false
         setIsLoading(false);
     };
     const handleRowSelectionChange = (currentRowsSelected: any[]) => {
@@ -128,7 +128,7 @@ const EmployeeTable: React.FC = () => {
                 case 'changePage':
                     changePage(tableState.page, tableState.sortOrder);
                     break;
-                case 'changeRowsPerPage': // Yeni sayfa sayısını işlemek için case eklendi
+                case 'changeRowsPerPage': // Added case to handle new page size
                     changeRowsPerPage(tableState.rowsPerPage, tableState.page);
                     break;
                 case 'sort':
@@ -169,7 +169,7 @@ const EmployeeTable: React.FC = () => {
 
     return (
         <div className="container-card">
-        <h2 className="h2-card">ÇALIŞANLAR</h2>
+        <h2 className="h2-card">EMPLOYEES</h2>
         <div className="form">
             <MUIDataTable
                 title={
@@ -198,7 +198,7 @@ const EmployeeTable: React.FC = () => {
                     },
                     {
                         name: "name",
-                        label: "AD",
+                        label: "NAME",
                         options: {
                             customHeadRender: (columnMeta: MUIDataTableColumn) => (
                                 <th style={{ textAlign: "center", borderBottom: "1px solid rgba(224, 224, 224, 1)" }}>{columnMeta.label}</th>
@@ -210,7 +210,7 @@ const EmployeeTable: React.FC = () => {
                     },
                     {
                         name: "surname",
-                        label: "SOYAD",
+                        label: "SURNAME",
                         options: {
                             customHeadRender: (columnMeta: MUIDataTableColumn) => (
                                 <th style={{ textAlign: "center", borderBottom: "1px solid rgba(224, 224, 224, 1)" }}>{columnMeta.label}</th>

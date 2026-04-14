@@ -33,7 +33,7 @@ const DeleteDrivingLicenseType = (props: Props) => {
         <div id='select-block' className="col-md-6">
   
           <div className="mb-2">
-            <label htmlFor="selectDrivingLicenseType">Ehliyet Tipi Seç</label>
+            <label htmlFor="selectDrivingLicenseType">Select Driving License Type</label>
             <select className="form-select" id="drivingLicenseTypeSelect" value={selectedDrivingLicenseType || ''} onChange={handleDrivingLicenseTypeChange}>
               <option value="" disabled>
   
