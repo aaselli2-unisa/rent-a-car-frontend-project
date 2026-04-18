@@ -1,52 +1,32 @@
-import { ErrorMessage } from 'formik';
 import { addRequest, removeRequest } from './../store/slices/loadingSlice';
 import axios from "axios";
 import config from '../data/config.json';
-import tokenService from "../services/tokenService";
 
+// V-02: withCredentials = true so the browser sends the HttpOnly accessToken cookie
+// on every cross-origin request to the backend (required for cookie-based auth)
 const axiosInstance = axios.create({
 	baseURL: config.apiBaseUrl,
+	withCredentials: true,
 });
 
 axiosInstance.interceptors.request.use(
 	(config) => {
-	  const method = (config.method || "get").toLowerCase();
-	  const url = config.url || "";
-	  const isPublicEndpoint =
-		url.startsWith("auth/") ||
-		url === "drivingLicenseType" ||
-		url === "drivingLicenseTypes" ||
-		(method === "post" && url === "customers");
-
-	  const token = tokenService.getToken();
-	  if (token && !isPublicEndpoint) {
-		config.headers.Authorization = token.startsWith("Bearer ")
-		  ? token
-		  : `Bearer ${token}`;
-	  }
-
 	  addRequest();
+	  // V-02: Authorization header removed — token is in HttpOnly cookie, handled by browser
 	  return config;
 	}
-  );
-  
-  axiosInstance.interceptors.response.use(
+);
+
+axiosInstance.interceptors.response.use(
 	(response) => {
 	  removeRequest();
-	  console.log(response);
-	  
+	  // V-07: console.log(response) removed — logged full responses including auth data in prod
 	  return response;
 	},
 	(error) => {
 		removeRequest();
-	   /*  if (error.response.data.response.details[0] == 'Bad credentials') {
-			
-			console.log("Invalid login");
-		} */
-        //const errorCode= error.response.data.response.details[0];
-		
 		return Promise.reject(error);
 	}
-  );
-  
-  export default axiosInstance;
+);
+
+export default axiosInstance;

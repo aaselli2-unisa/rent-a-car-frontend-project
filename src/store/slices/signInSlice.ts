@@ -17,8 +17,8 @@ export const addSignIn = createAsyncThunk(
       try {
           const service: SignInService = new SignInService();
           const addedSignIn = await service.add(addSignInData);
-          const token = addedSignIn.data.response.token;
-          localStorage.setItem("token", token);
+          // V-02: token is delivered via HttpOnly cookie set by the backend — do NOT
+          // store it in localStorage (XSS-readable). Browser handles the cookie automatically.
           return addedSignIn.data.response; // Return the response directly
       }
       catch (error: any) {
