@@ -12,7 +12,8 @@ export default class SignInService {
    add(newAuth: SignInModel){
         return axiosInstance.post<SignInResponse>("auth/signin", newAuth)
    }
+   // V-01: POST with body — credentials must never appear in URL query string (logs, history, Referer)
    isUserTrue(param:{email : string,password:string}){
-      return axiosInstance.get<AxiosResponse<boolean>>("auth/isUserTrue",{params: param});
+      return axiosInstance.post<AxiosResponse<boolean>>("auth/isUserTrue", param);
   }
 }
