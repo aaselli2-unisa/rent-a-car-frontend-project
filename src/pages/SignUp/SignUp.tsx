@@ -10,7 +10,7 @@ import { InputMask } from "@react-input/mask";
 import { Autocomplete, Button, PasswordInput, TextInput } from "@mantine/core";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../store/configureStore";
-import { addCustomer } from "../../store/slices/customerSlice";
+import { signUpCustomer } from "../../store/slices/customerSlice";
 import { useNavigate } from "react-router-dom";
 import "./SignUp.css";
 import { fetchDrivingLicenseTypes } from "../../store/slices/drivingLicenseTypeSlice";
@@ -81,7 +81,7 @@ export default function SignUp({}: Props) {
 
         try {
             const response = await dispatch(
-                addCustomer({
+                signUpCustomer({
                 name,
                 surname,
                 emailAddress,
@@ -93,7 +93,7 @@ export default function SignUp({}: Props) {
                 })
             );
 
-            if (addCustomer.rejected.match(response)) {
+            if (signUpCustomer.rejected.match(response)) {
                 const backendMessage = typeof response.payload === "string"
                   ? response.payload
                   : response.error.message;

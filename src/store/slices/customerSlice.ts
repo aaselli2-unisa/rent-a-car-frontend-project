@@ -77,28 +77,12 @@ export const getRentalsByCustomer = createAsyncThunk(
 
 export const addCustomer = createAsyncThunk(
   "customers/addCustomer",
-  async (addCustomerData: AddCustomerModel
-    , thunkAPI) => {
+  async (addCustomerData: AddCustomerModel, thunkAPI) => {
     try {
       const addedCustomer = await customerService.add(addCustomerData);
       return addedCustomer.data;
     } catch (error: any) {
       console.error("Error adding customer:", error);
-      const statusCode = error?.response?.status;
-
-      if (statusCode === 401) {
-        try {
-          const signedUpCustomer = await customerService.signUp(addCustomerData);
-          return signedUpCustomer.data;
-        } catch (signUpError: any) {
-          const signUpDetails = signUpError?.response?.data?.response?.details;
-          const signUpMessage = Array.isArray(signUpDetails) && signUpDetails.length > 0
-            ? String(signUpDetails[0])
-            : signUpError?.response?.data?.response?.message || "Registrazione non riuscita su auth/signup.";
-          return thunkAPI.rejectWithValue(signUpMessage);
-        }
-      }
-
       const details = error?.response?.data?.response?.details;
       const message = Array.isArray(details) && details.length > 0
         ? String(details[0])
@@ -106,6 +90,23 @@ export const addCustomer = createAsyncThunk(
           (!error?.response
             ? "Nessuna risposta dal server. Controlla backend/CORS e riprova."
             : "Registrazione non riuscita. Riprova.");
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+export const signUpCustomer = createAsyncThunk(
+  "customers/signUpCustomer",
+  async (signUpData: AddCustomerModel, thunkAPI) => {
+    try {
+      const result = await customerService.signUp(signUpData);
+      return result.data;
+    } catch (error: any) {
+      console.error("Error signing up:", error);
+      const details = error?.response?.data?.response?.details;
+      const message = Array.isArray(details) && details.length > 0
+        ? String(details[0])
+        : error?.response?.data?.response?.message || "Registrazione non riuscita su auth/signup.";
       return thunkAPI.rejectWithValue(message);
     }
   }
