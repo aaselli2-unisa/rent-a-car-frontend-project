@@ -19,23 +19,21 @@ const useToken = () => {
   const storedTokenRef = useRef<string | null>(null);
 
   useEffect(() => {
-    const storedToken = localStorage.getItem('token');
-    storedTokenRef.current = storedToken ?? '';
-    setToken(storedTokenRef.current);
+    const syncFromStorage = () => {
+      const storedToken = localStorage.getItem('token');
+      storedTokenRef.current = storedToken ?? '';
+      setToken(storedTokenRef.current);
+      if (storedToken) {
+        setDecodedToken(parseJwt(storedToken));
+      } else {
+        setDecodedToken(null);
+      }
+    };
 
-    if (storedToken) {
-      const decodedToken = parseJwt(storedToken);
-      setDecodedToken(decodedToken);
-    }
+    syncFromStorage();
+    window.addEventListener('storage', syncFromStorage);
+    return () => window.removeEventListener('storage', syncFromStorage);
   }, []);
-
-  useEffect(() => {
-    const token = storedTokenRef.current;
-    if (token) {
-      const decodedToken = parseJwt(token);
-      setDecodedToken(decodedToken);
-    }
-  }, [storedTokenRef]);
 
   const updateToken = (newToken: string) => {
     localStorage.setItem('token', newToken);

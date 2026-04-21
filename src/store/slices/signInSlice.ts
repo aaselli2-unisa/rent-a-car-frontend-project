@@ -60,8 +60,12 @@ const signInSlice = createSlice({
   
       builder.addCase(addSignIn.pending, (state) => {});
       builder.addCase(addSignIn.fulfilled, (state, action) => {
-        state.error=null;
+        state.error = null;
         state.signIn.push(action.payload);
+        if (action.payload?.token) {
+          localStorage.setItem('token', action.payload.token);
+          window.dispatchEvent(new Event('storage'));
+        }
       });
       builder.addCase(addSignIn.rejected, (state, action) => {
       

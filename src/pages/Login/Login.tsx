@@ -43,17 +43,16 @@ const Login: React.FC = () => {
   if (isLogged) {
     window.location.href = "/";
   } */
-  const handleSubmit =  (values: { email: string; password: string }) => {
-    
+  const handleSubmit = async (values: { email: string; password: string }) => {
     try {
-      dispatch(
+      const result = await dispatch(
         addSignIn({ email: values.email, password: values.password })
       );
-      navigate('/');
+      if (addSignIn.fulfilled.match(result)) {
+        navigate('/');
+      }
     } catch (error) {
-      // Catch errors when login fails
       console.error("Login failed: ", error);
-      // Set error message
       setErrorMessage("Login failed. Please check your credentials.");
     }
   };
