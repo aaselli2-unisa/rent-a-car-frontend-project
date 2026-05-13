@@ -122,7 +122,7 @@ jobs:
         run: curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin
 
       - name: Trivy — genera SARIF (tutte le severità)
-        run: trivy image --format sarif --output trivy-results.sarif --exit-code 0 ${{ env.IMAGE }}:latest
+        run: trivy image --format sarif --output trivy-results.sarif --exit-code 0 --ignore-unfixed ${{ env.IMAGE }}:latest
 
       - name: Upload Trivy SARIF al tab Security di GitHub
         uses: github/codeql-action/upload-sarif@v4
@@ -155,6 +155,8 @@ jobs:
           image: local://${{ env.IMAGE }}:latest
           sarif-file: scout-results.sarif
           exit-code: false
+          ignore-base: true
+          only-fixed: true
 
       - name: Upload Scout SARIF al tab Security di GitHub
         uses: github/codeql-action/upload-sarif@v4

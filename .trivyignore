@@ -1,0 +1,21 @@
+# CVE unfixable nel base image nginx:1.27-alpine (nessuna patch Alpine upstream)
+# Tutti rilevati in /.../db/installed = OS packages base layer
+# Aggiornare quando Alpine rilascia patch
+
+CVE-2026-41989
+CVE-2026-3784
+CVE-2026-1965
+CVE-2025-60876
+CVE-2025-14017
+CVE-2026-34085
+CVE-2025-13034
+CVE-2026-3783
+CVE-2026-23865
+CVE-2025-15079
+CVE-2025-14819
+CVE-2025-14524
+CVE-2026-27456
+CVE-2025-48175
+CVE-2025-48174
+CVE-2025-10966
+CVE-2025-15224
