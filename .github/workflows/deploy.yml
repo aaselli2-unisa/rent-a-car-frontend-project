@@ -1,0 +1,211 @@
+name: Deploy Frontend
+
+# Quando gira:
+#   - pubblicazione di una release GitHub (UI: Releases → New Release → Publish)
+#   - workflow_dispatch: deploy manuale dalla UI GitHub (es. rollback)
+
+# Flusso di lavoro:
+#   1. Si sviluppa su master-dev → merge su master
+#   2. Quando si vuole deployare: creare una Release su GitHub (Releases → New Release)
+#   3. Questo workflow parte: Build → Scan → Push (tre job separati, sequenziali)
+
+# Non c'è un CI separato per il frontend
+# Se in futuro si aggiungono test (Jest, Cypress), aggiungere un job CI separato.
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+
+  
+  # JOB 1: build
+  # Builda l'immagine Docker localmente (no push) e la salva come artifact.
+  # Il push avviene solo dopo che entrambi i gate di sicurezza (job scan) passano.
+  build:
+    name: Build Docker Image
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+
+    env:
+      IMAGE: ${{ secrets.DOCKERHUB_USERNAME }}/rentacar-frontend
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: docker/setup-buildx-action@v4
+
+      - name: Login su Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      # Calcola tag: IMAGE:VERSION + IMAGE:latest
+      # Esempio: Release "v1.2.3" → username/rentacar-frontend:1.2.3,username/rentacar-frontend:latest
+      # workflow_dispatch senza release → solo :latest
+      - name: Prepara tag immagine
+        id: meta
+        run: |
+          IMAGE="${{ secrets.DOCKERHUB_USERNAME }}/rentacar-frontend"
+          TAG="${{ github.event.release.tag_name }}"
+          if [ -n "$TAG" ]; then
+            VERSION="${TAG#v}"
+            echo "tags=${IMAGE}:${VERSION},${IMAGE}:latest" >> "$GITHUB_OUTPUT"
+          else
+            echo "tags=${IMAGE}:latest" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Build immagine Docker (locale, no push)
+        uses: docker/build-push-action@v7
+        with:
+          context: .
+          push: false
+          load: true
+          tags: ${{ steps.meta.outputs.tags }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Salva immagine come artifact
+        env:
+          TAGS: ${{ steps.meta.outputs.tags }}
+        run: docker save $(echo "$TAGS" | tr ',' ' ') -o /tmp/image.tar
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: docker-image
+          path: /tmp/image.tar
+          retention-days: 1
+
+
+  
+  # JOB 2: scan
+  # Carica l'immagine buildata e la scansiona con Trivy e Docker Scout.
+  # Blocca il workflow se trova CVE CRITICAL/HIGH con fix disponibile.
+  # Risultati visibili nel tab Security → Code scanning del repo.
+  scan:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    needs: build
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      security-events: write
+
+    env:
+      IMAGE: ${{ secrets.DOCKERHUB_USERNAME }}/rentacar-frontend
+
+    steps:
+      # Checkout necessario per rendere disponibile .trivyignore sul runner.
+      # Trivy legge automaticamente .trivyignore dalla directory corrente.
+      - uses: actions/checkout@v6
+
+      - name: Download immagine
+        uses: actions/download-artifact@v4
+        with:
+          name: docker-image
+          path: /tmp
+
+      - name: Load immagine Docker
+        run: docker load -i /tmp/image.tar
+
+      # === TRIVY ===
+      # Scanner open-source per vulnerabilità CVE (OS + dipendenze npm).
+
+      - name: Install Trivy
+        run: curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin
+
+      - name: Trivy — genera SARIF (tutte le severità)
+        run: trivy image --format sarif --output trivy-results.sarif --exit-code 0 ${{ env.IMAGE }}:latest
+
+      - name: Upload Trivy SARIF al tab Security di GitHub
+        uses: github/codeql-action/upload-sarif@v4
+        if: always()
+        with:
+          sarif_file: trivy-results.sarif
+          category: trivy
+
+      - name: Trivy — gate CRITICAL/HIGH con fix disponibile
+        run: trivy image --severity CRITICAL,HIGH --ignore-unfixed --exit-code 1 ${{ env.IMAGE }}:latest
+
+      # === DOCKER SCOUT ===
+      # Scanner nativo Docker Hub per vulnerabilità CVE.
+
+      # if: always() su Login e generate perché Trivy gate (step precedente) può fallire
+      # con exit-code 1 — senza if: always() questi step verrebbero saltati e
+      # scout-results.sarif non esisterebbe, causando il fallimento dell'upload.
+      - name: Login su Docker Hub (richiesto da Scout)
+        if: always()
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Docker Scout — genera SARIF (tutte le severità)
+        if: always()
+        uses: docker/scout-action@v1
+        with:
+          command: cves
+          image: local://${{ env.IMAGE }}:latest
+          sarif-file: scout-results.sarif
+          exit-code: false
+
+      - name: Upload Scout SARIF al tab Security di GitHub
+        uses: github/codeql-action/upload-sarif@v4
+        if: always()
+        with:
+          sarif_file: scout-results.sarif
+
+      - name: Docker Scout — gate CRITICAL/HIGH
+        uses: docker/scout-action@v1
+        with:
+          command: cves
+          image: local://${{ env.IMAGE }}:latest
+          only-severities: critical,high
+          only-fixed: true
+          exit-code: true
+          # ignore-base: ignora CVE nei layer dell'immagine base (nginx:alpine).
+          # CVE nel base image non sono codice nostro — Scout distingue i layer.
+          ignore-base: true
+
+
+  
+  # JOB 3: push
+  # Push su Docker Hub solo se entrambi i gate (Trivy + Scout) passano.
+  # Carica l'immagine dall'artifact del job build e fa push di tutti i tag.
+  
+  push:
+    name: Push su Docker Hub
+    runs-on: ubuntu-latest
+    needs: [build, scan]
+    timeout-minutes: 10
+    permissions:
+      contents: read
+
+    env:
+      IMAGE: ${{ secrets.DOCKERHUB_USERNAME }}/rentacar-frontend
+
+    steps:
+      - name: Download immagine
+        uses: actions/download-artifact@v4
+        with:
+          name: docker-image
+          path: /tmp
+
+      - name: Load immagine Docker
+        run: docker load -i /tmp/image.tar
+
+      - name: Login su Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Push immagine su Docker Hub
+        run: docker push --all-tags ${{ env.IMAGE }}
