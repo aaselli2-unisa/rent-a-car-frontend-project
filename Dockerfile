@@ -14,6 +14,9 @@ RUN CI=false npm run build
 FROM nginx:1.27-alpine
 WORKDIR /usr/share/nginx/html
 
+# Patch tutti i pacchetti OS Alpine (riduce CVE OS-level)
+RUN apk update && apk upgrade --no-cache && rm -rf /var/cache/apk/*
+
 # Rimuovi config di default nginx
 RUN rm -rf ./*
 
